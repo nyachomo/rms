@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ICT Club — Techsphere Digital Skills Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy: #081f4e; --red: #fe730c; --text: #4b5563; --light: #f7f9fc; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; }
+
+    /* ── PAGE BANNER ── */
+    .page-banner {
+      margin-top: 128px;
+      background: linear-gradient(135deg, #081f4e 0%, #0d2d6b 60%, #1a1a4e 100%);
+      padding: 36px 0 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1588072432836-e10032774350?w=1600&q=60') center/cover no-repeat;
+      opacity: 0.08;
+    }
+    .page-banner-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      display: grid; grid-template-columns: 1fr 420px;
+      align-items: center; gap: 60px;
+    }
+    @media(max-width:960px){ .page-banner-inner { grid-template-columns:1fr; } .banner-carousel-wrap { display:none; } }
+    /* ── Banner Carousel ── */
+    .banner-carousel-wrap { position: relative; }
+    .banner-carousel { position: relative; overflow: hidden; border-radius: 20px; }
+    .banner-slide {
+      display: none;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 20px;
+      padding: 28px 28px 24px;
+      animation: bSlideIn .5s ease;
+    }
+    .banner-slide.active { display: block; }
+    @keyframes bSlideIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .bs-top-row { display:flex; align-items:center; gap:18px; margin-bottom:14px; }
+    .bs-icon { width:56px; height:56px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:#fff; flex-shrink:0; }
+    .bs-icon.teal   { background: linear-gradient(135deg,#0ea5e9,#06b6d4); }
+    .bs-icon.orange { background: linear-gradient(135deg,#fe730c,#f59e0b); }
+    .bs-icon.green  { background: linear-gradient(135deg,#10b981,#059669); }
+    .bs-icon.purple { background: linear-gradient(135deg,#8b5cf6,#a855f7); }
+    .bs-number { font-family:'Poppins',sans-serif; font-size:2.6rem; font-weight:900; color:#fff; line-height:1; margin-bottom:6px; }
+    .bs-number span { color: var(--red); }
+    .banner-slide h3 { font-family:'Poppins',sans-serif; font-size:1.2rem; font-weight:800; color:#fff; margin:0 0 10px; }
+    .banner-slide p { color:rgba(255,255,255,.68); font-size:0.9rem; line-height:1.65; max-width:100%; margin:0; }
+    .bs-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+    .bs-tag { background:rgba(255,255,255,.12); color:rgba(255,255,255,.85); font-family:'Poppins',sans-serif; font-size:0.75rem; font-weight:600; padding:4px 12px; border-radius:20px; border:1px solid rgba(255,255,255,.18); }
+    .banner-dots { display:flex; gap:8px; justify-content:center; margin-top:18px; }
+    .banner-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.3); border:none; cursor:pointer; transition:all .3s; padding:0; }
+    .banner-dot.active { background:var(--red); width:24px; border-radius:4px; }
+    .bs-progress { height:3px; background:rgba(255,255,255,.1); border-radius:2px; margin-top:20px; overflow:hidden; }
+    .bs-progress-bar { height:100%; background:linear-gradient(90deg,var(--red),#f59e0b); border-radius:2px; width:0%; transition:width linear; }
+    /* Breadcrumb & left text */
+    .breadcrumb { display:flex; align-items:center; gap:8px; font-family:'Poppins',sans-serif; font-size:0.82rem; color:rgba(255,255,255,.55); margin-bottom:18px; }
+    .breadcrumb a { color:rgba(255,255,255,.55); text-decoration:none; transition:color .2s; }
+    .breadcrumb a:hover { color:var(--red); }
+    .breadcrumb i { font-size:0.65rem; color:rgba(255,255,255,.3); }
+    .breadcrumb span { color:var(--red); font-weight:600; }
+    .page-banner h1 { font-family:'Poppins',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:800; color:#fff; line-height:1.2; margin-bottom:14px; }
+    .page-banner h1 span { color:var(--red); }
+    .page-banner .banner-desc { color:rgba(255,255,255,.72); font-size:1.02rem; max-width:520px; line-height:1.72; }
+    .banner-stats { display:flex; gap:36px; margin-top:28px; flex-wrap:wrap; }
+    .banner-stat { display:flex; align-items:center; gap:12px; font-family:'Poppins',sans-serif; }
+    .banner-stat i { width:36px; height:36px; background:rgba(254,115,12,.15); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--red); font-size:1rem; flex-shrink:0; }
+    .banner-stat strong { display:block; color:#fff; font-size:1rem; font-weight:700; }
+    .banner-stat small { color:rgba(255,255,255,.55); font-size:0.75rem; }
+
+    /* ── Banner Buttons ── */
+    .btn-register-ict {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--red); color: #fff; border: none; cursor: pointer;
+      font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 700;
+      padding: 13px 26px; border-radius: 50px; text-decoration: none;
+      transition: all .3s; box-shadow: 0 6px 22px rgba(254,115,12,0.45);
+    }
+    .btn-register-ict:hover { background: #e5640a; transform: translateY(-2px); }
+    .btn-register-ict-outline {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: rgba(255,255,255,0.1); color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 600;
+      padding: 12px 24px; border-radius: 50px; text-decoration: none;
+      transition: all .3s;
+    }
+    .btn-register-ict-outline:hover { background: rgba(255,255,255,0.18); }
+
+    /* ── Registration Modal ── */
+    .reg-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9998;
+      background: rgba(5,15,50,0.72); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .reg-modal-overlay.open { display: flex; }
+    .reg-modal {
+      background: #fff; border-radius: 20px;
+      width: 100%; max-width: 560px;
+      max-height: 90vh; overflow-y: auto;
+      padding: 36px 36px 32px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+      animation: zoomIn .3s cubic-bezier(0.34,1.56,0.64,1);
+      position: relative;
+    }
+    @keyframes zoomIn { from { opacity:0; transform:scale(0.82); } to { opacity:1; transform:scale(1); } }
+    .reg-modal-close {
+      position: absolute; top: 16px; right: 18px;
+      background: #f3f4f6; border: none; width: 34px; height: 34px;
+      border-radius: 50%; cursor: pointer; font-size: 1rem; color: #6b7280;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
+    }
+    .reg-modal-close:hover { background: var(--red); color: #fff; }
+    .reg-modal-head { margin-bottom: 22px; }
+    .reg-modal-head .modal-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(254,115,12,0.1); color: var(--red);
+      font-family: 'Poppins', sans-serif; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 13px; border-radius: 50px; margin-bottom: 10px;
+    }
+    .reg-modal-head h3 {
+      font-family: 'Poppins', sans-serif; font-size: 1.45rem; font-weight: 800;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .reg-modal-head p { font-size: 0.88rem; color: #6b7280; line-height: 1.6; }
+    .reg-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .reg-form .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .reg-form label { font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--navy); }
+    .reg-form input, .reg-form select, .reg-form textarea {
+      border: 1.5px solid #e2e5ec; border-radius: 10px;
+      padding: 10px 14px; font-size: 0.88rem; font-family: 'Inter', sans-serif;
+      color: #374151; background: #fafafa; transition: border-color .2s;
+      width: 100%;
+    }
+    .reg-form input:focus, .reg-form select:focus, .reg-form textarea:focus {
+      outline: none; border-color: var(--red); background: #fff;
+    }
+    .reg-form textarea { resize: vertical; min-height: 80px; }
+    .reg-form .btn-submit {
+      width: 100%; padding: 13px; background: var(--red); color: #fff; border: none;
+      border-radius: 50px; font-family: 'Poppins', sans-serif; font-size: 0.95rem;
+      font-weight: 700; cursor: pointer; transition: all .3s; margin-top: 6px;
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      box-shadow: 0 6px 20px rgba(254,115,12,0.35);
+    }
+    .reg-form .btn-submit:hover { background: #e5640a; transform: translateY(-1px); }
+    .reg-success {
+      display: none; text-align: center; padding: 24px 0 8px;
+    }
+    .reg-success i { font-size: 3rem; color: #22c55e; margin-bottom: 14px; display: block; }
+    .reg-success h4 { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+    .reg-success p { font-size: 0.9rem; color: #6b7280; }
+    @media(max-width:500px) { .reg-form .form-row { grid-template-columns: 1fr; } .reg-modal { padding: 28px 20px; } }
+
+    /* ── SECTION COMMONS ── */
+    .section { padding: 72px 0; }
+    .section-alt { background: var(--light); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .sec-label {
+      display: inline-block; font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--red);
+      background: rgba(254,115,12,0.1); border-radius: 50px;
+      padding: 5px 14px; margin-bottom: 12px;
+    }
+    .sec-title {
+      font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 800;
+      color: var(--navy); line-height: 1.25; margin-bottom: 14px;
+    }
+    .sec-title span { color: var(--red); }
+    .sec-desc { font-size: 1rem; color: #6b7280; line-height: 1.75; max-width: 600px; }
+
+    /* ── ABOUT SECTION ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .about-img-wrap {
+      position: relative; border-radius: 20px; overflow: hidden;
+    }
+    .about-img-wrap img {
+      width: 100%; height: 420px; object-fit: cover; display: block;
+      border-radius: 20px;
+    }
+    .about-img-badge {
+      position: absolute; bottom: 24px; left: 24px;
+      background: var(--red); color: #fff;
+      font-family: 'Poppins', sans-serif; font-size: 0.82rem; font-weight: 700;
+      padding: 10px 18px; border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(254,115,12,0.4);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .about-text { display: flex; flex-direction: column; gap: 20px; }
+    .about-text p { font-size: 0.96rem; color: #4b5563; line-height: 1.8; }
+    .about-feats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px;
+    }
+    .about-feat {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 600;
+      color: var(--navy);
+    }
+    .about-feat i { color: var(--red); font-size: 0.9rem; }
+
+    /* ── HOW IT WORKS ── */
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 48px;
+    }
+    .step-card {
+      background: #fff; border-radius: 16px;
+      border: 1.5px solid #e8edf5;
+      padding: 28px 22px; text-align: center;
+      transition: all .3s;
+    }
+    .step-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(8,31,78,0.1); border-color: var(--red); }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), #ff9a5c);
+      color: #fff; font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px; box-shadow: 0 6px 18px rgba(254,115,12,0.35);
+    }
+    .step-card h4 {
+      font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 10px;
+    }
+    .step-card p { font-size: 0.86rem; color: #6b7280; line-height: 1.65; }
+
+    /* ── WHAT STUDENTS LEARN ── */
+    .curriculum-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
+    }
+    .curriculum-card {
+      background: #fff; border-radius: 16px;
+      border: 1.5px solid #e8edf5;
+      padding: 28px 24px;
+      transition: all .3s;
+    }
+    .curriculum-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(8,31,78,0.09); }
+    .curriculum-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(254,115,12,0.12), rgba(254,115,12,0.05));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: var(--red); margin-bottom: 16px;
+      border: 1.5px solid rgba(254,115,12,0.2);
+    }
+    .curriculum-card h4 {
+      font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 10px;
+    }
+    .curriculum-card p { font-size: 0.87rem; color: #6b7280; line-height: 1.7; }
+    .curriculum-card ul {
+      list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 7px;
+    }
+    .curriculum-card ul li {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.84rem; color: #4b5563;
+    }
+    .curriculum-card ul li i { color: var(--red); font-size: 0.75rem; }
+
+    /* ── IMPACT / STATS ── */
+    .impact-strip {
+      background: linear-gradient(135deg, var(--navy) 0%, #0d2a6e 100%);
+      padding: 60px 0;
+    }
+    .impact-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center;
+    }
+    .impact-item {}
+    .impact-num {
+      font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 800;
+      color: var(--red); display: block; line-height: 1;
+    }
+    .impact-label { font-size: 0.88rem; color: rgba(255,255,255,0.7); margin-top: 8px; display: block; }
+
+    /* ── BENEFITS ── */
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px;
+    }
+    .benefit-card {
+      display: flex; align-items: flex-start; gap: 18px;
+      background: #fff; border-radius: 14px;
+      border: 1.5px solid #e8edf5; padding: 24px;
+      transition: all .3s;
+    }
+    .benefit-card:hover { box-shadow: 0 10px 32px rgba(8,31,78,0.08); border-color: rgba(254,115,12,0.3); }
+    .benefit-icon {
+      width: 50px; height: 50px; border-radius: 12px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--red), #ff9a5c);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.1rem;
+      box-shadow: 0 4px 14px rgba(254,115,12,0.3);
+    }
+    .benefit-text h4 {
+      font-family: 'Poppins', sans-serif; font-size: 0.97rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .benefit-text p { font-size: 0.87rem; color: #6b7280; line-height: 1.65; }
+
+    /* ── PARTNER CTA ── */
+    .partner-cta {
+      background: linear-gradient(135deg, #081f4e 0%, #0e2d7a 100%);
+      border-radius: 24px; padding: 60px 56px;
+      display: flex; align-items: center; justify-content: space-between; gap: 40px;
+      position: relative; overflow: hidden;
+    }
+    .partner-cta::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(254,115,12,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .partner-cta-text { position: relative; z-index: 1; }
+    .partner-cta-text h3 {
+      font-family: 'Poppins', sans-serif; font-size: 1.7rem; font-weight: 800;
+      color: #fff; margin-bottom: 12px; line-height: 1.3;
+    }
+    .partner-cta-text h3 span { color: var(--red); }
+    .partner-cta-text p { color: rgba(255,255,255,0.72); font-size: 0.95rem; line-height: 1.7; max-width: 480px; }
+    .partner-cta-btns {
+      display: flex; flex-direction: column; gap: 12px;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .btn-cta-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--red); color: #fff;
+      font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 700;
+      padding: 14px 28px; border-radius: 50px; text-decoration: none;
+      transition: all .3s; white-space: nowrap;
+      box-shadow: 0 6px 24px rgba(254,115,12,0.4);
+    }
+    .btn-cta-primary:hover { background: #e5640a; transform: translateY(-2px); }
+    .btn-cta-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.1); color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 600;
+      padding: 13px 28px; border-radius: 50px; text-decoration: none;
+      transition: all .3s; white-space: nowrap;
+    }
+    .btn-cta-secondary:hover { background: rgba(255,255,255,0.18); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .curriculum-grid { grid-template-columns: repeat(2, 1fr); }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .partner-cta { flex-direction: column; padding: 40px 28px; }
+    }
+    @media (max-width: 600px) {
+      .steps-grid, .curriculum-grid { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .page-banner { height: 220px; }
+      .page-banner-title { font-size: 1.7rem; }
+      .container { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0d1f3c;color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:0.88rem;box-shadow:0 -4px 24px rgba(0,0,0,.3);">
+  <p style="margin:0;">🍪 We use cookies to improve your experience. <a href="#" style="color:var(--red);text-decoration:underline;">Cookie Policy</a>.</p>
+  <div style="display:flex;gap:10px;">
+    <button onclick="document.getElementById('cookie-banner').style.display='none'" style="background:var(--red);color:#fff;border:none;padding:8px 20px;border-radius:50px;font-weight:600;cursor:pointer;font-size:0.85rem;">Accept</button>
+    <button onclick="document.getElementById('cookie-banner').style.display='none'" style="background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:8px 20px;border-radius:50px;font-weight:600;cursor:pointer;font-size:0.85rem;">Decline</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a>
+        <a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a>
+      </div>
+      <div class="top-bar-right">
+        <div class="top-bar-tagline"><i class="fas fa-map-marker-alt"></i> Excellence in Global Consulting</div>
+        <div class="top-social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-nav">
+    <div class="main-nav-inner">
+      <a href="index.html" class="logo">
+        <img src="logo/Logo.jpeg" alt="Techsphere Digital Skills Academy Logo" style="height:82px;width:82px;object-fit:contain;border-radius:50%;"/>
+        <div class="logo-text">
+          <span class="logo-title">TECHSPHERE</span>
+          <small>Digital Skills Academy</small>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li class="has-dropdown">
+          <a href="courses.html"><i class="fas fa-graduation-cap"></i> Courses <i class="fas fa-chevron-down chevron"></i></a>
+          <ul class="dropdown">
+            <li><a href="courses.html"><i class="fas fa-th-large"></i> All Courses</a></li>
+            <div class="dropdown-divider"></div>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-seedling"></i> Foundational <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-marketing"><i class="fas fa-bullhorn"></i> Digital Marketing</a></li>
+                <li><a href="course-detail.html?course=uiux-design"><i class="fas fa-pencil-ruler"></i> UI/UX Design</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-chart-line"></i> Proficiency <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=web-development"><i class="fas fa-code"></i> Web Development</a></li>
+                <li><a href="course-detail.html?course=data-analysis"><i class="fas fa-chart-bar"></i> Data Analysis</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-trophy"></i> Mastery <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=cybersecurity"><i class="fas fa-shield-alt"></i> Cybersecurity</a></li>
+                <li><a href="course-detail.html?course=ai-ml"><i class="fas fa-robot"></i> AI &amp; Machine Learning</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-building"></i> Corporate Training <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-transformation"><i class="fas fa-sync-alt"></i> Digital Transformation</a></li>
+                <li><a href="course-detail.html?course=data-leadership"><i class="fas fa-user-tie"></i> Data Leadership</a></li>
+                <li><a href="course-detail.html?course=cyber-awareness"><i class="fas fa-eye"></i> Cyber Awareness</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="ict-club.html" class="active"><i class="fas fa-laptop-code"></i> ICT Club</a></li>
+        <li><a href="contact_us.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="tel:+254748800500" class="btn-callus"><i class="fas fa-phone-alt"></i> Call us</a>
+        <div class="hamburger" onclick="toggleMenu()" id="ham"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="closeMenu()"><i class="fas fa-home"></i> Home</a>
+  <a href="index.html#about" onclick="closeMenu()"><i class="fas fa-info-circle"></i> About</a>
+  <a href="courses.html" onclick="closeMenu()"><i class="fas fa-graduation-cap"></i> Courses</a>
+  <a href="ict-club.html" onclick="closeMenu()"><i class="fas fa-laptop-code"></i> ICT Club</a>
+  <a href="contact_us.html" onclick="closeMenu()"><i class="fas fa-envelope"></i> Contact</a>
+</div>
+
+<!-- PAGE BANNER -->
+<div class="page-banner">
+  <div class="page-banner-inner">
+
+    <!-- LEFT: Text -->
+    <div class="banner-left">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>ICT Club</span>
+      </div>
+      <h1>Techsphere <span>ICT Club</span></h1>
+      <p class="banner-desc">Bringing coding to high school students through structured, hands-on ICT club sessions — shaping the next generation of tech innovators.</p>
+      <div class="banner-stats">
+        <div class="banner-stat">
+          <i class="fas fa-school"></i>
+          <div><strong>20+</strong><small>Partner Schools</small></div>
+        </div>
+        <div class="banner-stat">
+          <i class="fas fa-users"></i>
+          <div><strong>500+</strong><small>Students Trained</small></div>
+        </div>
+        <div class="banner-stat">
+          <i class="fas fa-map-marker-alt"></i>
+          <div><strong>3</strong><small>Counties Reached</small></div>
+        </div>
+      </div>
+      <div style="margin-top:28px; display:flex; gap:14px; flex-wrap:wrap;">
+        <button onclick="openRegModal()" class="btn-register-ict"><i class="fas fa-user-plus"></i> Register Your School</button>
+        <a href="contact_us.html" class="btn-register-ict-outline"><i class="fas fa-phone-alt"></i> Talk to Us</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Carousel -->
+    <div class="banner-carousel-wrap">
+      <div class="banner-carousel" id="bannerCarousel">
+
+        <div class="banner-slide active">
+          <div class="bs-top-row">
+            <div class="bs-icon teal"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div><div class="bs-number">20<span>+</span></div><h3>Partner Schools</h3></div>
+          </div>
+          <p>We have partnered with over 20 high schools across Kenya, bringing certified coding trainers directly to students on ICT Club days.</p>
+          <div class="bs-tags">
+            <span class="bs-tag">Nairobi</span>
+            <span class="bs-tag">Kiambu</span>
+            <span class="bs-tag">Machakos</span>
+          </div>
+          <div class="bs-progress"><div class="bs-progress-bar"></div></div>
+        </div>
+
+        <div class="banner-slide">
+          <div class="bs-top-row">
+            <div class="bs-icon orange"><i class="fas fa-code"></i></div>
+            <div><div class="bs-number">100<span>%</span></div><h3>Hands-On Coding</h3></div>
+          </div>
+          <p>Every session is practical — students write real code, build web pages, and create projects they can proudly showcase to parents and teachers.</p>
+          <div class="bs-tags">
+            <span class="bs-tag">HTML & CSS</span>
+            <span class="bs-tag">Python</span>
+            <span class="bs-tag">Scratch</span>
+          </div>
+          <div class="bs-progress"><div class="bs-progress-bar"></div></div>
+        </div>
+
+        <div class="banner-slide">
+          <div class="bs-top-row">
+            <div class="bs-icon green"><i class="fas fa-certificate"></i></div>
+            <div><div class="bs-number">500<span>+</span></div><h3>Certified Students</h3></div>
+          </div>
+          <p>Students who complete the programme receive an official Techsphere certificate — a valuable addition to university applications and future careers.</p>
+          <div class="bs-tags">
+            <span class="bs-tag">Recognised</span>
+            <span class="bs-tag">Verifiable</span>
+            <span class="bs-tag">Portfolio Ready</span>
+          </div>
+          <div class="bs-progress"><div class="bs-progress-bar"></div></div>
+        </div>
+
+        <div class="banner-slide">
+          <div class="bs-top-row">
+            <div class="bs-icon purple"><i class="fas fa-rocket"></i></div>
+            <div><div class="bs-number">3<span> Terms</span></div><h3>Structured Programme</h3></div>
+          </div>
+          <p>Our 3-term curriculum takes students from digital basics to building real web projects — designed specifically for Form 1–4 high school students.</p>
+          <div class="bs-tags">
+            <span class="bs-tag">Foundations</span>
+            <span class="bs-tag">Coding</span>
+            <span class="bs-tag">Build & Showcase</span>
+          </div>
+          <div class="bs-progress"><div class="bs-progress-bar"></div></div>
+        </div>
+
+      </div><!-- /banner-carousel -->
+
+      <div class="banner-dots" id="bannerDots">
+        <button class="banner-dot active" onclick="goToBannerSlide(0)"></button>
+        <button class="banner-dot" onclick="goToBannerSlide(1)"></button>
+        <button class="banner-dot" onclick="goToBannerSlide(2)"></button>
+        <button class="banner-dot" onclick="goToBannerSlide(3)"></button>
+      </div>
+    </div><!-- /banner-carousel-wrap -->
+
+  </div>
+</div>
+
+<!-- ABOUT PROGRAMME -->
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&q=80" alt="Students coding in ICT club"/>
+        <div class="about-img-badge"><i class="fas fa-laptop-code"></i> Coding for Every Student</div>
+      </div>
+      <div class="about-text">
+        <div>
+          <span class="sec-label">Our Mission</span>
+          <h2 class="sec-title">Empowering High School Students Through <span>Code</span></h2>
+        </div>
+        <p>Techsphere Digital Skills Academy has partnered with high schools across Kenya to establish structured <strong>ICT Clubs</strong> — dedicated spaces where students learn to code, build digital solutions, and discover the world of technology during their weekly ICT club sessions.</p>
+        <p>Our certified trainers visit partner schools on designated ICT Club days, delivering age-appropriate, curriculum-aligned coding lessons that spark curiosity, build problem-solving skills, and open doors to future careers in technology.</p>
+        <div class="about-feats">
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Certified Trainers</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Structured Curriculum</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Hands-On Projects</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Progress Certificates</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Weekly Club Sessions</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> No Equipment Needed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-alt">
+  <div class="container">
+    <div style="text-align:center;">
+      <span class="sec-label">The Process</span>
+      <h2 class="sec-title" style="margin:0 auto 8px;">How the <span>ICT Club</span> Works</h2>
+      <p class="sec-desc" style="margin:0 auto; text-align:center;">From onboarding your school to running weekly sessions, here is how our partnership unfolds.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h4>School Partnership</h4>
+        <p>Your school signs a partnership agreement with Techsphere to establish an official ICT Club, open to all Form 1–4 students.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h4>Club Registration</h4>
+        <p>Interested students are registered as ICT Club members. We provide registration forms, membership cards, and a welcome kit.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h4>Weekly Sessions</h4>
+        <p>Our trainers visit on the school's designated ICT club day to deliver structured, practical coding lessons aligned to each term.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h4>Certification</h4>
+        <p>Students who complete the programme receive a Techsphere-certified completion certificate, recognised for university applications.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT STUDENTS LEARN -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:0;">
+      <span class="sec-label">Curriculum</span>
+      <h2 class="sec-title" style="margin:0 auto 8px;">What Students <span>Learn</span></h2>
+      <p class="sec-desc" style="margin:0 auto; text-align:center;">Our ICT Club curriculum is designed for beginners, progressing term by term from foundational concepts to real projects.</p>
+    </div>
+    <div class="curriculum-grid">
+      <div class="curriculum-card">
+        <div class="curriculum-icon"><i class="fas fa-paint-brush"></i></div>
+        <h4>Term 1 — Digital Foundations</h4>
+        <p>Students get introduced to computers, the internet, and the basics of building web pages.</p>
+        <ul>
+          <li><i class="fas fa-arrow-right"></i> Computer basics & digital literacy</li>
+          <li><i class="fas fa-arrow-right"></i> Introduction to HTML & CSS</li>
+          <li><i class="fas fa-arrow-right"></i> Building a simple personal webpage</li>
+          <li><i class="fas fa-arrow-right"></i> Internet safety & responsible use</li>
+        </ul>
+      </div>
+      <div class="curriculum-card">
+        <div class="curriculum-icon"><i class="fas fa-code"></i></div>
+        <h4>Term 2 — Introduction to Coding</h4>
+        <p>Students begin writing real code using Scratch and Python, developing logic and problem-solving skills.</p>
+        <ul>
+          <li><i class="fas fa-arrow-right"></i> Block-based coding with Scratch</li>
+          <li><i class="fas fa-arrow-right"></i> Python basics — variables & loops</li>
+          <li><i class="fas fa-arrow-right"></i> Simple game & animation projects</li>
+          <li><i class="fas fa-arrow-right"></i> Debugging & computational thinking</li>
+        </ul>
+      </div>
+      <div class="curriculum-card">
+        <div class="curriculum-icon"><i class="fas fa-rocket"></i></div>
+        <h4>Term 3 — Build & Showcase</h4>
+        <p>Students apply everything learned to build a real project and present it at the end-of-year ICT Club Showcase.</p>
+        <ul>
+          <li><i class="fas fa-arrow-right"></i> Designing a mini web application</li>
+          <li><i class="fas fa-arrow-right"></i> Introduction to UI/UX thinking</li>
+          <li><i class="fas fa-arrow-right"></i> Team project development</li>
+          <li><i class="fas fa-arrow-right"></i> Project presentation & showcase</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT STATS -->
+<section class="impact-strip">
+  <div class="container">
+    <div class="impact-grid">
+      <div class="impact-item">
+        <span class="impact-num">20+</span>
+        <span class="impact-label">Partner Schools</span>
+      </div>
+      <div class="impact-item">
+        <span class="impact-num">500+</span>
+        <span class="impact-label">Students Trained</span>
+      </div>
+      <div class="impact-item">
+        <span class="impact-num">3</span>
+        <span class="impact-label">Counties Reached</span>
+      </div>
+      <div class="impact-item">
+        <span class="impact-num">95%</span>
+        <span class="impact-label">Student Satisfaction</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section section-alt">
+  <div class="container">
+    <div style="text-align:center;">
+      <span class="sec-label">Why Join</span>
+      <h2 class="sec-title" style="margin:0 auto 8px;">Benefits for <span>Students & Schools</span></h2>
+      <p class="sec-desc" style="margin:0 auto; text-align:center;">The ICT Club programme delivers lasting value — from individual student growth to whole-school digital transformation.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="fas fa-user-graduate"></i></div>
+        <div class="benefit-text">
+          <h4>Career Head Start</h4>
+          <p>Students gain practical coding skills early, giving them a competitive edge in STEM university applications and future tech careers.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="fas fa-certificate"></i></div>
+        <div class="benefit-text">
+          <h4>Recognised Certification</h4>
+          <p>Graduates receive an official Techsphere Digital Skills Academy certificate, adding credibility to their academic portfolios.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="fas fa-brain"></i></div>
+        <div class="benefit-text">
+          <h4>Critical Thinking & Problem Solving</h4>
+          <p>Coding teaches students to break complex problems into steps — a skill that improves performance across all school subjects.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="fas fa-school"></i></div>
+        <div class="benefit-text">
+          <h4>School Digital Prestige</h4>
+          <p>Partner schools are listed as Techsphere ICT Club schools, enhancing their digital reputation and appeal to prospective students.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="fas fa-users"></i></div>
+        <div class="benefit-text">
+          <h4>Community & Peer Learning</h4>
+          <p>The ICT Club creates a community of like-minded tech enthusiasts who motivate each other, collaborate on projects, and grow together.</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><i class="fas fa-globe-africa"></i></div>
+        <div class="benefit-text">
+          <h4>Real-World Project Experience</h4>
+          <p>Students don't just learn theory — they build actual websites and mini-apps they can proudly show parents, teachers, and future employers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER CTA -->
+<section class="section">
+  <div class="container">
+    <div class="partner-cta">
+      <div class="partner-cta-text">
+        <h3>Is Your School Ready to <span>Join the ICT Club?</span></h3>
+        <p>Partner with Techsphere Digital Skills Academy today and bring structured coding education to your students. We handle the curriculum, the trainers, and the materials — your school just opens the door.</p>
+      </div>
+      <div class="partner-cta-btns">
+        <a href="contact_us.html" class="btn-cta-primary"><i class="fas fa-handshake"></i> Partner With Us</a>
+        <a href="tel:+254748800500" class="btn-cta-secondary"><i class="fas fa-phone-alt"></i> Call Us Today</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRATION MODAL -->
+<div class="reg-modal-overlay" id="regModalOverlay" onclick="closeRegModal(event)">
+  <div class="reg-modal" id="regModal">
+    <button class="reg-modal-close" onclick="closeRegModal()"><i class="fas fa-times"></i></button>
+
+    <div class="reg-modal-head">
+      <div class="modal-badge"><i class="fas fa-laptop-code"></i> ICT Club Registration</div>
+      <h3>Register Your School</h3>
+      <p>Fill in the form below and our team will reach out to onboard your school into the Techsphere ICT Club programme.</p>
+    </div>
+
+    <form class="reg-form" id="regForm" onsubmit="submitRegForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>School Name <span style="color:var(--red)">*</span></label>
+          <input type="text" placeholder="e.g. Nairobi High School" required/>
+        </div>
+        <div class="form-group">
+          <label>County <span style="color:var(--red)">*</span></label>
+          <select required>
+            <option value="">Select county...</option>
+            <option>Nairobi</option>
+            <option>Kiambu</option>
+            <option>Machakos</option>
+            <option>Kajiado</option>
+            <option>Muranga</option>
+            <option>Mombasa</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Contact Person <span style="color:var(--red)">*</span></label>
+          <input type="text" placeholder="Teacher / Principal name" required/>
+        </div>
+        <div class="form-group">
+          <label>Role</label>
+          <select>
+            <option value="">Select role...</option>
+            <option>Principal</option>
+            <option>ICT Teacher</option>
+            <option>Deputy Principal</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number <span style="color:var(--red)">*</span></label>
+          <input type="tel" placeholder="+254 700 000 000" required/>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="school@example.com"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Estimated Number of Students</label>
+        <select>
+          <option value="">Select range...</option>
+          <option>1 – 20 students</option>
+          <option>21 – 50 students</option>
+          <option>51 – 100 students</option>
+          <option>100+ students</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Additional Message</label>
+        <textarea placeholder="Any questions or specific requirements..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Submit Registration</button>
+    </form>
+
+    <div class="reg-success" id="regSuccess">
+      <i class="fas fa-check-circle"></i>
+      <h4>Registration Received!</h4>
+      <p>Thank you! Our team will contact you within 24–48 hours to begin onboarding your school into the ICT Club programme.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="align-items:center;">
+          <img src="logo/Logo.jpeg" alt="Techsphere Logo" style="height:52px;width:52px;object-fit:contain;border-radius:50%;"/>
+          <div class="logo-text" style="color:#fff;">
+            <span class="logo-title">TECHSPHERE</span>
+            <small style="color:var(--red);">Digital Skills Academy</small>
+          </div>
+        </a>
+        <p>Providing expert holistic HR solutions to businesses, institutions, government and non-profit organizations. Excellence in every engagement.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Courses</h4><ul><li><a href="course-detail.html?course=data-analysis"><i class="fas fa-chevron-right"></i> Data Analysis</a></li><li><a href="course-detail.html?course=web-development"><i class="fas fa-chevron-right"></i> Web Development</a></li><li><a href="course-detail.html?course=cybersecurity"><i class="fas fa-chevron-right"></i> Cybersecurity</a></li><li><a href="course-detail.html?course=digital-marketing"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li><li><a href="course-detail.html?course=ai-ml"><i class="fas fa-chevron-right"></i> AI &amp; Machine Learning</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a></li><li><a href="ict-club.html"><i class="fas fa-chevron-right"></i> ICT Club</a></li><li><a href="contact_us.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fas fa-map-marker-alt"></i> Garden Estate, Nairobi</a></li><li><a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a></li><li><a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 <span>Techsphere Digital Skills Academy</span>. All rights reserved. Excellence in every engagement.</p>
+      <p><a href="#" style="color:rgba(255,255,255,.4); text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp; <a href="#" style="color:rgba(255,255,255,.4); text-decoration:none;">Terms of Service</a></p>
+    </div>
+  </div>
+</footer>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+
+<script>
+  function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+  function openRegModal() {
+    document.getElementById('regModalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeRegModal(e) {
+    if (e && e.target !== document.getElementById('regModalOverlay')) return;
+    document.getElementById('regModalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('regModalOverlay').classList.remove('open'); document.body.style.overflow = ''; } });
+
+  function submitRegForm(e) {
+    e.preventDefault();
+    document.getElementById('regForm').style.display = 'none';
+    document.getElementById('regSuccess').style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('regModalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+      document.getElementById('regForm').style.display = 'block';
+      document.getElementById('regSuccess').style.display = 'none';
+      e.target.reset();
+    }, 4000);
+  }
+
+  // Banner carousel
+  let bsCurrent = 0;
+  const bsDuration = 4000;
+  let bsTimer = null;
+
+  function goToBannerSlide(index) {
+    const slides = document.querySelectorAll('.banner-slide');
+    const dots   = document.querySelectorAll('.banner-dot');
+    slides[bsCurrent].classList.remove('active');
+    dots[bsCurrent].classList.remove('active');
+    bsCurrent = (index + slides.length) % slides.length;
+    slides[bsCurrent].classList.add('active');
+    dots[bsCurrent].classList.add('active');
+    startBsProgress();
+  }
+
+  function startBsProgress() {
+    document.querySelectorAll('.bs-progress-bar').forEach(b => {
+      b.style.transition = 'none';
+      b.style.width = '0%';
+    });
+    const activeBar = document.querySelector('.banner-slide.active .bs-progress-bar');
+    if (!activeBar) return;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      activeBar.style.transition = `width ${bsDuration}ms linear`;
+      activeBar.style.width = '100%';
+    }));
+  }
+
+  function startBsAuto() {
+    clearInterval(bsTimer);
+    bsTimer = setInterval(() => goToBannerSlide(bsCurrent + 1), bsDuration);
+  }
+
+  document.getElementById('bannerCarousel').addEventListener('mouseenter', () => clearInterval(bsTimer));
+  document.getElementById('bannerCarousel').addEventListener('mouseleave', startBsAuto);
+  startBsProgress();
+  startBsAuto();
+</script>
+</body>
+</html>

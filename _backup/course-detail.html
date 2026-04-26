@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Course Details – Techsphere Digital Skills Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* ── Course Hero ── */
+    .course-hero {
+      margin-top: 128px;
+      position: relative;
+      overflow: hidden;
+      padding: 60px 0 50px;
+    }
+    .course-hero-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      filter: brightness(.22);
+    }
+    .course-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(8,31,78,.9) 0%, rgba(26,26,78,.8) 100%);
+    }
+    .course-hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1fr 360px; gap: 60px; align-items: start;
+    }
+    @media(max-width:900px){ .course-hero-inner { grid-template-columns:1fr; } .hero-enroll-card { display:none; } }
+    .breadcrumb { display:flex; align-items:center; gap:8px; font-family:'Poppins',sans-serif; font-size:0.8rem; color:rgba(255,255,255,.5); margin-bottom:16px; flex-wrap:wrap; }
+    .breadcrumb a { color:rgba(255,255,255,.5); text-decoration:none; } .breadcrumb a:hover { color:var(--red); }
+    .breadcrumb i { font-size:0.6rem; color:rgba(255,255,255,.25); }
+    .breadcrumb span { color:var(--red); font-weight:600; }
+    .course-cat-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 14px; border-radius: 50px; font-family:'Poppins',sans-serif;
+      font-size: 0.75rem; font-weight: 700; margin-bottom: 14px;
+      background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.2);
+    }
+    .course-hero h1 {
+      font-family:'Poppins',sans-serif; font-size:clamp(1.8rem,3.5vw,2.8rem);
+      font-weight: 800; color:#fff; line-height:1.2; margin-bottom:14px;
+    }
+    .course-hero-desc { color:rgba(255,255,255,.75); font-size:1rem; line-height:1.75; max-width:600px; margin-bottom:24px; }
+    .hero-meta-pills { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50px; padding: 6px 14px;
+      font-family:'Poppins',sans-serif; font-size:0.8rem; color:rgba(255,255,255,.85);
+    }
+    .hero-pill i { color:var(--red); font-size:0.75rem; }
+    .hero-stars { display:flex; align-items:center; gap:6px; font-family:'Poppins',sans-serif; font-size:0.85rem; color:rgba(255,255,255,.7); }
+    .hero-stars i { color:#f59e0b; font-size:0.85rem; }
+    .hero-stars strong { color:#fff; }
+
+    /* Hero Enroll Card (desktop right) */
+    .hero-enroll-card {
+      background: #fff; border-radius: 20px;
+      overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,.35);
+      position: sticky; top: 148px;
+    }
+    .hero-enroll-img { width:100%; height:180px; object-fit:cover; display:block; }
+    .hero-enroll-body { padding: 24px; }
+    .hero-enroll-price {
+      font-family:'Poppins',sans-serif; font-size:2rem; font-weight:900;
+      background: linear-gradient(90deg,var(--red),#0891b2);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      margin-bottom: 4px;
+    }
+    .hero-enroll-price small { font-size:0.8rem; color:#aaa; -webkit-text-fill-color:#aaa; display:block; font-weight:400; }
+    .btn-enroll-big {
+      display:flex; align-items:center; justify-content:center; gap:9px;
+      width:100%; padding:14px; border-radius:10px; border:none; cursor:pointer;
+      background: linear-gradient(135deg,var(--red),#f59e0b);
+      color:#fff; font-family:'Poppins',sans-serif; font-weight:700; font-size:1rem;
+      text-decoration:none; transition:opacity .25s, transform .25s; margin-bottom:12px;
+    }
+    .btn-enroll-big:hover { opacity:.88; transform:translateY(-2px); }
+    .btn-brochure {
+      display:flex; align-items:center; justify-content:center; gap:9px;
+      width:100%; padding:12px; border-radius:10px; border:2px solid #e2e5ec; cursor:pointer;
+      background:#fff; color:var(--navy); font-family:'Poppins',sans-serif; font-weight:600; font-size:0.9rem;
+      text-decoration:none; transition:all .25s; margin-bottom:20px;
+    }
+    .btn-brochure:hover { background:#f7f9fc; border-color:var(--navy); }
+    .enroll-features { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px; border-top:1px solid #f0f0f0; padding-top:16px; }
+    .enroll-features li { display:flex; align-items:center; gap:10px; font-family:'Poppins',sans-serif; font-size:0.82rem; color:#555; }
+    .enroll-features li i { color:var(--red); width:16px; text-align:center; }
+
+    /* Main Content */
+    .course-content-section { background:#f7f9fc; padding: 56px 0 80px; }
+    .course-content-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start;
+    }
+    @media(max-width:900px){ .course-content-inner { grid-template-columns:1fr; } .sidebar-card { display:none; } }
+
+    /* Content Blocks */
+    .content-block {
+      background:#fff; border-radius:16px; padding:32px;
+      box-shadow:0 2px 12px rgba(0,0,0,.06); margin-bottom:24px;
+    }
+    .content-block h2 {
+      font-family:'Poppins',sans-serif; font-size:1.15rem; font-weight:800;
+      color:var(--navy); margin-bottom:20px; padding-bottom:12px;
+      border-bottom:2px solid #f0f0f0; display:flex; align-items:center; gap:10px;
+    }
+    .content-block h2 i { color:var(--red); font-size:1rem; }
+
+    /* Outcomes grid */
+    .outcomes-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    @media(max-width:580px){ .outcomes-grid { grid-template-columns:1fr; } }
+    .outcome-item {
+      display:flex; align-items:flex-start; gap:10px;
+      font-family:'Poppins',sans-serif; font-size:0.85rem; color:#444; line-height:1.55;
+    }
+    .outcome-item i { color:#10b981; font-size:0.8rem; margin-top:3px; flex-shrink:0; }
+
+    /* Curriculum */
+    .curriculum-week {
+      border:1px solid #eee; border-radius:10px; overflow:hidden; margin-bottom:8px;
+    }
+    .curriculum-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px; background:#f9fafb; cursor:pointer;
+      font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:700; color:var(--navy);
+      transition:background .2s;
+    }
+    .curriculum-header:hover { background:#f0f3ff; }
+    .curriculum-header i { color:var(--red); font-size:0.75rem; transition:transform .25s; }
+    .curriculum-header.open i { transform:rotate(180deg); }
+    .curriculum-body {
+      display:none; padding:14px 18px;
+      font-family:'Poppins',sans-serif; font-size:0.83rem; color:#666; line-height:1.65;
+      border-top:1px solid #eee; background:#fff;
+    }
+    .curriculum-body.open { display:block; }
+    .curriculum-topic { display:flex; align-items:flex-start; gap:9px; margin-bottom:6px; }
+    .curriculum-topic i { color:var(--red); margin-top:3px; font-size:0.72rem; flex-shrink:0; }
+
+    /* Tags */
+    .detail-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .detail-tag { font-family:'Poppins',sans-serif; font-size:0.75rem; font-weight:600; padding:5px 14px; border-radius:50px; background:#f3f4f6; color:#555; border:1px solid #e5e7eb; }
+
+    /* Instructor */
+    .instructor-card { display:flex; align-items:center; gap:20px; }
+    .instructor-avatar {
+      width:72px; height:72px; border-radius:50%; background:linear-gradient(135deg,var(--navy),#1e40af);
+      display:flex; align-items:center; justify-content:center; font-size:1.8rem; color:#fff; flex-shrink:0;
+    }
+    .instructor-card h3 { font-family:'Poppins',sans-serif; font-size:1rem; font-weight:700; color:var(--navy); margin:0 0 3px; }
+    .instructor-card p { font-family:'Poppins',sans-serif; font-size:0.82rem; color:#888; margin:0 0 6px; }
+    .instructor-exp { display:inline-flex; align-items:center; gap:5px; font-family:'Poppins',sans-serif; font-size:0.78rem; color:var(--red); font-weight:600; }
+
+    /* Sidebar */
+    .sidebar-card { position:sticky; top:148px; }
+    .sidebar-inner {
+      background:#fff; border-radius:16px; padding:28px;
+      box-shadow:0 4px 20px rgba(0,0,0,.08);
+    }
+    .sidebar-price { font-family:'Poppins',sans-serif; font-size:1.9rem; font-weight:900; background:linear-gradient(90deg,var(--red),#0891b2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:4px; }
+    .sidebar-price small { font-size:0.78rem; -webkit-text-fill-color:#aaa; color:#aaa; font-weight:400; display:block; }
+    .sidebar-features { list-style:none; padding:0; margin:16px 0; display:flex; flex-direction:column; gap:9px; }
+    .sidebar-features li { display:flex; align-items:center; gap:10px; font-family:'Poppins',sans-serif; font-size:0.82rem; color:#555; }
+    .sidebar-features li i { color:var(--red); width:16px; text-align:center; }
+    .sidebar-btn-enroll { display:flex; align-items:center; justify-content:center; gap:9px; width:100%; padding:13px; border-radius:10px; border:none; cursor:pointer; background:linear-gradient(135deg,var(--red),#f59e0b); color:#fff; font-family:'Poppins',sans-serif; font-weight:700; font-size:0.95rem; text-decoration:none; transition:opacity .25s, transform .25s; margin-bottom:10px; }
+    .sidebar-btn-enroll:hover { opacity:.88; transform:translateY(-2px); }
+    .sidebar-btn-outline { display:flex; align-items:center; justify-content:center; gap:9px; width:100%; padding:11px; border-radius:10px; border:2px solid #e2e5ec; background:#fff; color:var(--navy); font-family:'Poppins',sans-serif; font-weight:600; font-size:0.88rem; text-decoration:none; transition:all .25s; cursor:pointer; }
+    .sidebar-btn-outline:hover { background:#f7f9fc; border-color:var(--navy); }
+
+    /* Related courses */
+    .related-section { background:#fff; padding:56px 0; }
+    .related-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:32px; }
+    @media(max-width:900px){ .related-grid { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:580px){ .related-grid { grid-template-columns:1fr; } }
+    .related-card { border:1.5px solid #e8eaf0; border-radius:14px; overflow:hidden; transition:transform .3s, box-shadow .3s; }
+    .related-card:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(0,0,0,.1); }
+    .related-card img { width:100%; height:130px; object-fit:cover; display:block; }
+    .related-card-body { padding:16px; }
+    .related-card-body h4 { font-family:'Poppins',sans-serif; font-size:0.9rem; font-weight:700; color:var(--navy); margin:0 0 6px; }
+    .related-card-body p { font-size:0.78rem; color:#888; margin:0 0 10px; line-height:1.5; }
+    .related-card-body a { font-family:'Poppins',sans-serif; font-size:0.78rem; font-weight:600; color:var(--red); text-decoration:none; }
+
+    /* Not found */
+    .not-found { text-align:center; padding:120px 20px; }
+    .not-found i { font-size:3.5rem; color:#ddd; margin-bottom:20px; }
+    .not-found h2 { font-family:'Poppins',sans-serif; color:var(--navy); margin-bottom:10px; }
+    .not-found p { color:#888; margin-bottom:24px; }
+  </style>
+</head>
+<body>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <p>🍪 We use cookies to improve your experience. <a href="#" style="color:var(--red)">Cookie Policy</a>.</p>
+  <button class="btn btn-primary" onclick="document.getElementById('cookie-banner').classList.add('hidden');localStorage.setItem('cookies','1')">Accept</button>
+  <button class="btn btn-outline" style="border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:9px 18px;" onclick="document.getElementById('cookie-banner').classList.add('hidden')">Decline</button>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a>
+        <a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a>
+      </div>
+      <div class="top-bar-right">
+        <div class="top-bar-tagline"><i class="fas fa-map-marker-alt"></i> Excellence in Global Consulting</div>
+        <div class="top-social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-nav">
+    <div class="main-nav-inner">
+      <a href="index.html" class="logo">
+        <img src="logo/Logo.jpeg" alt="Techsphere Logo" style="height:82px;width:82px;object-fit:contain;border-radius:50%;"/>
+        <div class="logo-text">
+          <span class="logo-title">TECHSPHERE</span>
+          <small>Digital Skills Academy</small>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li class="has-dropdown">
+          <a href="courses.html" class="active"><i class="fas fa-graduation-cap"></i> Courses <i class="fas fa-chevron-down chevron"></i></a>
+          <ul class="dropdown">
+            <li><a href="courses.html"><i class="fas fa-th-large"></i> All Courses</a></li>
+            <div class="dropdown-divider"></div>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-seedling"></i> Foundational <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-marketing"><i class="fas fa-bullhorn"></i> Digital Marketing</a></li>
+                <li><a href="course-detail.html?course=uiux-design"><i class="fas fa-pencil-ruler"></i> UI/UX Design</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-chart-line"></i> Proficiency <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=web-development"><i class="fas fa-code"></i> Web Development</a></li>
+                <li><a href="course-detail.html?course=data-analysis"><i class="fas fa-chart-bar"></i> Data Analysis</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-trophy"></i> Mastery <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=cybersecurity"><i class="fas fa-shield-alt"></i> Cybersecurity</a></li>
+                <li><a href="course-detail.html?course=ai-ml"><i class="fas fa-robot"></i> AI &amp; Machine Learning</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-building"></i> Corporate Training <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-transformation"><i class="fas fa-sync-alt"></i> Digital Transformation</a></li>
+                <li><a href="course-detail.html?course=data-leadership"><i class="fas fa-user-tie"></i> Data Leadership</a></li>
+                <li><a href="course-detail.html?course=cyber-awareness"><i class="fas fa-eye"></i> Cyber Awareness</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="ict-club.html"><i class="fas fa-laptop-code"></i> ICT Club</a></li>
+        <li><a href="contact_us.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="tel:+254748800500" class="btn-callus"><i class="fas fa-phone-alt"></i> Call us</a>
+        <div class="hamburger" onclick="toggleMenu()" id="ham"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="closeMenu()"><i class="fas fa-home"></i> Home</a>
+  <a href="index.html#about" onclick="closeMenu()"><i class="fas fa-info-circle"></i> About</a>
+  <a href="courses.html" onclick="closeMenu()"><i class="fas fa-graduation-cap"></i> Courses</a>
+  <a href="ict-club.html" onclick="closeMenu()"><i class="fas fa-laptop-code"></i> ICT Club</a>
+  <a href="contact_us.html" onclick="closeMenu()"><i class="fas fa-envelope"></i> Contact</a>
+</div>
+
+<!-- DYNAMIC CONTENT INJECTED HERE -->
+<div id="page-content"></div>
+
+<!-- ENROLL MODAL -->
+<div class="modal-overlay" id="modal-enroll">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeEnrollModal()"><i class="fas fa-times"></i></button>
+    <div class="modal-icon"><i class="fas fa-graduation-cap"></i></div>
+    <h2>Enroll in <span id="enrollCourseName" style="color:var(--red);"></span></h2>
+    <p style="color:#888;font-size:0.9rem;margin-bottom:16px;">Fill in your details and our team will contact you within 24 hours.</p>
+    <form style="display:flex;flex-direction:column;gap:10px;" onsubmit="submitEnroll(event)">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="John" required/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe" required/></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com" required/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+254 700 000 000" required/></div>
+      <div class="form-group">
+        <label>Preferred Start Date</label>
+        <select>
+          <option value="">Select a batch...</option>
+          <option>April 2026 – Intake</option>
+          <option>May 2026 – Intake</option>
+          <option>June 2026 – Intake</option>
+          <option>July 2026 – Intake</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px;">
+        <i class="fas fa-paper-plane"></i> Submit Enrollment
+      </button>
+      <div class="form-success" id="enroll-success" style="display:none;color:#86efac;">
+        <i class="fas fa-check-circle"></i> Enrollment submitted! We'll be in touch within 24 hours.
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+
+<script>
+if (localStorage.getItem('cookies')) document.getElementById('cookie-banner').classList.add('hidden');
+function toggleMenu(){ document.getElementById('mobile-menu').classList.toggle('open'); }
+function closeMenu(){ document.getElementById('mobile-menu').classList.remove('open'); }
+window.addEventListener('scroll',()=>{ document.getElementById('back-top').classList.toggle('visible',window.scrollY>400); });
+
+// ── Course Data ──
+const COURSES = {
+  'digital-marketing': {
+    title: 'Digital Marketing',
+    category: 'Foundational', categoryIcon: 'fas fa-seedling',
+    icon: 'fas fa-bullhorn', iconGradient: 'linear-gradient(135deg,#ef4444,#f97316)',
+    level: 'Beginner', duration: '10 weeks', students: 35, rating: 4.7, reviews: 156,
+    price: 'KES 9,999',
+    image: 'https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=1200&q=80',
+    tagline: 'Master the art of growing businesses online',
+    about: 'This comprehensive Digital Marketing course equips you with practical, in-demand skills to plan, execute and measure effective marketing campaigns. You will learn how to attract audiences online, convert them into customers, and build lasting brand presence — skills valued across every industry.',
+    outcomes: [
+      'Plan and execute SEO strategies to rank on Google',
+      'Run paid ads on Google, Facebook & Instagram',
+      'Build and grow social media channels for brands',
+      'Develop content marketing strategies that drive traffic',
+      'Create and send effective email marketing campaigns',
+      'Set up Google Analytics and interpret data reports',
+      'Understand consumer behaviour and digital funnels',
+      'Build a complete digital marketing portfolio project',
+    ],
+    curriculum: [
+      { week: 'Week 1–2', title: 'SEO & Search Marketing Fundamentals', topics: ['Keyword research and planning','On-page and off-page SEO','Google Search Console setup','Local SEO tactics'] },
+      { week: 'Week 3–4', title: 'Social Media Marketing', topics: ['Platform strategy (Facebook, Instagram, LinkedIn, TikTok)','Content calendars and scheduling','Community management','Paid social campaigns'] },
+      { week: 'Week 5–6', title: 'Google Ads & Paid Advertising', topics: ['Google Ads account setup','Search, Display & YouTube campaigns','Budgeting and bid strategies','Conversion tracking'] },
+      { week: 'Week 7–8', title: 'Content Marketing & Email Campaigns', topics: ['Content strategy and planning','Blog writing and copywriting','Mailchimp and email automation','Lead generation tactics'] },
+      { week: 'Week 9–10', title: 'Analytics, Reporting & Capstone Project', topics: ['Google Analytics 4 deep dive','Building dashboards and reports','Campaign auditing and optimisation','Final capstone project presentation'] },
+    ],
+    tags: ['SEO', 'Google Ads', 'Social Media', 'Content Marketing', 'Email Marketing', 'Analytics'],
+    instructor: { name: 'Sarah Kimani', title: 'Senior Digital Marketing Strategist', experience: '8 years industry experience', icon: 'fas fa-user-tie' },
+    related: ['uiux-design','web-development','data-analysis'],
+  },
+  'uiux-design': {
+    title: 'UI/UX Design',
+    category: 'Foundational', categoryIcon: 'fas fa-seedling',
+    icon: 'fas fa-pencil-ruler', iconGradient: 'linear-gradient(135deg,#10b981,#059669)',
+    level: 'Beginner', duration: '10 weeks', students: 28, rating: 4.8, reviews: 112,
+    price: 'KES 10,999',
+    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1200&q=80',
+    tagline: 'Design beautiful, user-centred digital products',
+    about: 'This UI/UX Design course teaches you to think like a designer and build like a professional. You will master the entire design process — from user research and wireframing to high-fidelity prototyping in Figma — and graduate with a strong portfolio ready for the job market.',
+    outcomes: [
+      'Conduct user research and create personas',
+      'Map user journeys and define design problems',
+      'Create low and high-fidelity wireframes',
+      'Build interactive prototypes in Figma',
+      'Apply colour theory, typography and layout principles',
+      'Design and document a reusable design system',
+      'Test designs with real users and iterate',
+      'Present a complete UI/UX portfolio project',
+    ],
+    curriculum: [
+      { week: 'Week 1–2', title: 'Design Thinking & User Research', topics: ['Introduction to design thinking','User interviews and surveys','Creating personas and empathy maps','Problem framing and definition'] },
+      { week: 'Week 3–4', title: 'Wireframing & Information Architecture', topics: ['Sketching and low-fi wireframes','Site maps and user flows','Card sorting and navigation design','Tools: Figma, FigJam'] },
+      { week: 'Week 5–6', title: 'Visual Design Principles', topics: ['Colour theory and typography','Grid systems and layout','Iconography and imagery','Accessibility in design'] },
+      { week: 'Week 7–8', title: 'Prototyping & Interaction Design', topics: ['High-fidelity UI design in Figma','Interactive prototyping','Micro-interactions and animations','Design system creation'] },
+      { week: 'Week 9–10', title: 'Usability Testing & Portfolio', topics: ['Usability testing methods','Iterating based on feedback','Portfolio case study writing','Final project presentation'] },
+    ],
+    tags: ['Figma', 'User Research', 'Prototyping', 'Wireframing', 'Design Systems', 'Accessibility'],
+    instructor: { name: 'James Mwangi', title: 'Lead Product Designer', experience: '6 years at top tech firms', icon: 'fas fa-palette' },
+    related: ['digital-marketing','web-development','ai-ml'],
+  },
+  'web-development': {
+    title: 'Web Development',
+    category: 'Proficiency', categoryIcon: 'fas fa-layer-group',
+    icon: 'fas fa-code', iconGradient: 'linear-gradient(135deg,#fe730c,#f59e0b)',
+    level: 'Intermediate', duration: '16 weeks', students: 30, rating: 4.9, reviews: 204,
+    price: 'KES 14,999',
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&q=80',
+    tagline: 'Build modern, full-stack web applications from scratch',
+    about: 'Our Web Development course takes you from zero to full-stack developer. You will build real websites and web applications using the most in-demand technologies — HTML, CSS, JavaScript, React and Node.js — and graduate with multiple live projects on your GitHub portfolio.',
+    outcomes: [
+      'Build responsive websites with HTML5 and CSS3',
+      'Write modern JavaScript (ES6+) confidently',
+      'Develop interactive UIs with React.js',
+      'Build RESTful APIs with Node.js and Express',
+      'Work with databases (MongoDB and SQL)',
+      'Deploy applications to the cloud',
+      'Use Git and GitHub for version control',
+      'Complete two full-stack capstone projects',
+    ],
+    curriculum: [
+      { week: 'Week 1–3', title: 'HTML, CSS & Responsive Design', topics: ['Semantic HTML5','CSS Flexbox and Grid','Responsive design and media queries','CSS animations and transitions'] },
+      { week: 'Week 4–7', title: 'JavaScript Fundamentals & DOM', topics: ['ES6+ syntax and features','DOM manipulation','Async JavaScript (Promises, async/await)','Fetch API and JSON'] },
+      { week: 'Week 8–11', title: 'React.js — Frontend Framework', topics: ['Components, props and state','React hooks','React Router','State management with Context API'] },
+      { week: 'Week 12–14', title: 'Node.js & Backend Development', topics: ['Node.js and Express setup','REST API design','Authentication with JWT','MongoDB with Mongoose'] },
+      { week: 'Week 15–16', title: 'Full-Stack Projects & Deployment', topics: ['Connecting frontend and backend','Deployment on Vercel and Render','Git workflow and GitHub','Capstone project presentation'] },
+    ],
+    tags: ['HTML/CSS', 'JavaScript', 'React', 'Node.js', 'MongoDB', 'Git', 'REST APIs'],
+    instructor: { name: 'Brian Ochieng', title: 'Full-Stack Engineer & Tech Lead', experience: '10 years building web apps', icon: 'fas fa-laptop-code' },
+    related: ['data-analysis','uiux-design','cybersecurity'],
+  },
+  'data-analysis': {
+    title: 'Data Analysis',
+    category: 'Proficiency', categoryIcon: 'fas fa-layer-group',
+    icon: 'fas fa-chart-bar', iconGradient: 'linear-gradient(135deg,#0ea5e9,#06b6d4)',
+    level: 'Intermediate', duration: '12 weeks', students: 25, rating: 4.9, reviews: 128,
+    price: 'KES 12,999',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+    tagline: 'Turn raw data into powerful business decisions',
+    about: 'This Data Analysis course gives you the skills to collect, clean, analyse and visualise data using industry-standard tools. You will learn to spot trends, build dashboards and communicate data-driven insights to business stakeholders — making you an invaluable asset in any organisation.',
+    outcomes: [
+      'Clean and prepare messy datasets for analysis',
+      'Analyse data using Excel and Python (Pandas)',
+      'Write SQL queries to extract data from databases',
+      'Build interactive dashboards in Power BI',
+      'Visualise data clearly with charts and graphs',
+      'Perform statistical analysis and hypothesis testing',
+      'Present insights to non-technical audiences',
+      'Complete a real-world data analysis capstone',
+    ],
+    curriculum: [
+      { week: 'Week 1–2', title: 'Excel for Data Analysis', topics: ['Advanced Excel formulas','Pivot tables and charts','Data cleaning techniques','Conditional formatting and dashboards'] },
+      { week: 'Week 3–5', title: 'Python for Data Analysis', topics: ['Python basics and Jupyter Notebooks','Pandas and NumPy','Data cleaning with Python','Exploratory data analysis'] },
+      { week: 'Week 6–8', title: 'SQL & Databases', topics: ['SQL syntax and queries','Joins, subqueries and aggregations','Working with real databases','Exporting data for analysis'] },
+      { week: 'Week 9–11', title: 'Power BI & Data Visualisation', topics: ['Power BI desktop setup','Building reports and dashboards','DAX formulas','Sharing and publishing reports'] },
+      { week: 'Week 12', title: 'Capstone Project & Presentation', topics: ['End-to-end data project','Stakeholder presentation skills','Portfolio documentation','Peer review and feedback'] },
+    ],
+    tags: ['Excel', 'Python', 'SQL', 'Power BI', 'Pandas', 'Statistics', 'Data Visualisation'],
+    instructor: { name: 'Grace Wanjiku', title: 'Senior Data Analyst — Fintech', experience: '7 years in data & BI', icon: 'fas fa-chart-line' },
+    related: ['ai-ml','web-development','data-leadership'],
+  },
+  'cybersecurity': {
+    title: 'Cybersecurity',
+    category: 'Mastery', categoryIcon: 'fas fa-crown',
+    icon: 'fas fa-shield-alt', iconGradient: 'linear-gradient(135deg,#081f4e,#1e40af)',
+    level: 'Advanced', duration: '14 weeks', students: 20, rating: 4.8, reviews: 97,
+    price: 'KES 17,999',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80',
+    tagline: 'Defend, detect and respond to cyber threats',
+    about: 'This advanced Cybersecurity course teaches you to think and act like both an attacker and a defender. You will learn ethical hacking, penetration testing, network security and incident response — equipping you for high-demand roles in cybersecurity across government, banking and tech sectors.',
+    outcomes: [
+      'Understand the cybersecurity threat landscape',
+      'Perform ethical hacking and penetration testing',
+      'Secure networks, systems and web applications',
+      'Detect and respond to security incidents',
+      'Use Kali Linux and professional security tools',
+      'Conduct vulnerability assessments and audits',
+      'Understand security compliance frameworks',
+      'Prepare for CompTIA Security+ exam readiness',
+    ],
+    curriculum: [
+      { week: 'Week 1–2', title: 'Security Fundamentals & Threat Landscape', topics: ['CIA triad and security principles','Types of cyber attacks and threat actors','Networking fundamentals for security','Security compliance and governance'] },
+      { week: 'Week 3–5', title: 'Ethical Hacking & Penetration Testing', topics: ['Kali Linux setup and tools','Reconnaissance and scanning','Exploitation techniques','Post-exploitation and reporting'] },
+      { week: 'Week 6–8', title: 'Network & System Security', topics: ['Firewalls, IDS/IPS and VPNs','Securing Linux and Windows systems','Wireless network security','Cloud security fundamentals'] },
+      { week: 'Week 9–11', title: 'Web Application Security', topics: ['OWASP Top 10 vulnerabilities','SQL injection and XSS attacks','Burp Suite for web testing','Secure coding practices'] },
+      { week: 'Week 12–14', title: 'Incident Response & Capstone', topics: ['Incident response procedures','Digital forensics basics','Security auditing','Capstone: full penetration test report'] },
+    ],
+    tags: ['Ethical Hacking', 'Kali Linux', 'Network Security', 'Penetration Testing', 'OWASP', 'Incident Response'],
+    instructor: { name: 'David Kamau', title: 'Certified Ethical Hacker (CEH)', experience: '9 years in cybersecurity', icon: 'fas fa-user-secret' },
+    related: ['ai-ml','cyber-awareness','web-development'],
+  },
+  'ai-ml': {
+    title: 'AI & Machine Learning',
+    category: 'Mastery', categoryIcon: 'fas fa-crown',
+    icon: 'fas fa-robot', iconGradient: 'linear-gradient(135deg,#8b5cf6,#a855f7)',
+    level: 'Advanced', duration: '20 weeks', students: 15, rating: 5.0, reviews: 73,
+    price: 'KES 22,999',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1200&q=80',
+    tagline: 'Build intelligent systems that learn and adapt',
+    about: 'Our AI & Machine Learning course is the most comprehensive technical programme we offer. You will develop a deep understanding of machine learning algorithms, neural networks, and real-world AI applications using Python, TensorFlow and PyTorch — preparing you for roles as an ML engineer or AI researcher.',
+    outcomes: [
+      'Understand core machine learning algorithms',
+      'Build and train neural networks from scratch',
+      'Work with image and text data (Computer Vision & NLP)',
+      'Use TensorFlow and PyTorch confidently',
+      'Deploy ML models as REST APIs',
+      'Apply deep learning to real-world datasets',
+      'Understand model evaluation and optimisation',
+      'Complete three end-to-end AI projects for portfolio',
+    ],
+    curriculum: [
+      { week: 'Week 1–3', title: 'Python & Maths for ML', topics: ['Python for data science review','Linear algebra and calculus basics','Probability and statistics','NumPy, Pandas, Matplotlib'] },
+      { week: 'Week 4–7', title: 'Machine Learning Algorithms', topics: ['Supervised learning (regression, classification)','Unsupervised learning (clustering, dimensionality reduction)','Model evaluation and cross-validation','Scikit-learn deep dive'] },
+      { week: 'Week 8–12', title: 'Deep Learning & Neural Networks', topics: ['Feedforward and convolutional neural networks','Recurrent networks and LSTMs','Transfer learning','TensorFlow and Keras'] },
+      { week: 'Week 13–17', title: 'NLP, Computer Vision & PyTorch', topics: ['Text preprocessing and word embeddings','Transformers and BERT','Image classification and object detection','PyTorch model building'] },
+      { week: 'Week 18–20', title: 'MLOps, Deployment & Capstone', topics: ['Model deployment with FastAPI','Docker containers for ML','MLflow for experiment tracking','Capstone: end-to-end AI product'] },
+    ],
+    tags: ['Python', 'TensorFlow', 'PyTorch', 'Deep Learning', 'NLP', 'Computer Vision', 'MLOps'],
+    instructor: { name: 'Dr. Amina Hassan', title: 'AI Research Scientist & Lecturer', experience: '11 years in AI/ML research', icon: 'fas fa-brain' },
+    related: ['data-analysis','cybersecurity','web-development'],
+  },
+  'digital-transformation': {
+    title: 'Corporate Digital Transformation',
+    category: 'Corporate Training', categoryIcon: 'fas fa-building',
+    icon: 'fas fa-rocket', iconGradient: 'linear-gradient(135deg,#081f4e,#1e40af)',
+    level: 'All Levels', duration: 'Flexible', students: null, rating: 5.0, reviews: 42,
+    price: 'Custom Quote',
+    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80',
+    tagline: 'Lead your organisation into the digital age',
+    about: 'Our Corporate Digital Transformation programme is fully tailored to your organisation\'s size, industry and maturity. We work with your leadership team to assess current capabilities, design a transformation roadmap, and upskill your workforce — driving measurable innovation and operational efficiency.',
+    outcomes: [
+      'Assess your organisation\'s digital maturity',
+      'Co-create a digital transformation roadmap',
+      'Adopt cloud tools and collaborative platforms',
+      'Automate repetitive workflows and processes',
+      'Build a data-driven decision-making culture',
+      'Manage change and drive staff adoption',
+      'Measure digital ROI and track KPIs',
+      'Sustain innovation beyond the training period',
+    ],
+    curriculum: [
+      { week: 'Phase 1', title: 'Digital Maturity Assessment', topics: ['Discovery workshops with leadership','Current-state analysis','Gap identification and prioritisation','Transformation readiness report'] },
+      { week: 'Phase 2', title: 'Strategy & Roadmap Design', topics: ['Digital vision and strategy setting','Technology selection and architecture','Change management planning','Stakeholder alignment sessions'] },
+      { week: 'Phase 3', title: 'Tools & Workforce Upskilling', topics: ['Cloud platforms (Google Workspace, Microsoft 365)','Collaboration tools (Slack, Notion, Asana)','Automation tools (Zapier, Power Automate)','Data literacy for all staff'] },
+      { week: 'Phase 4', title: 'Implementation & Measurement', topics: ['Pilot project rollout','KPI dashboard setup','Adoption tracking and support','Post-programme review and optimisation'] },
+    ],
+    tags: ['Digital Strategy', 'Change Management', 'Automation', 'Cloud Tools', 'Team Training', 'Data Culture'],
+    instructor: { name: 'Michael Otieno', title: 'Digital Transformation Consultant', experience: '14 years in enterprise transformation', icon: 'fas fa-sitemap' },
+    related: ['data-leadership','cyber-awareness','data-analysis'],
+  },
+  'data-leadership': {
+    title: 'Data-Driven Leadership',
+    category: 'Corporate Training', categoryIcon: 'fas fa-building',
+    icon: 'fas fa-chart-line', iconGradient: 'linear-gradient(135deg,#0ea5e9,#06b6d4)',
+    level: 'Intermediate', duration: '6 weeks', students: null, rating: 4.9, reviews: 31,
+    price: 'Custom Quote',
+    image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80',
+    tagline: 'Lead with data, decide with confidence',
+    about: 'Designed for managers and executives who want to harness the power of data without becoming data scientists. This programme teaches leaders how to ask the right questions, interpret dashboards, commission meaningful analyses, and build a data-driven culture within their teams.',
+    outcomes: [
+      'Understand key data concepts and terminology',
+      'Read and interrogate business dashboards',
+      'Define meaningful KPIs for your department',
+      'Commission data projects and guide analysts',
+      'Identify data quality issues and risks',
+      'Use data to support strategic decisions',
+      'Build a data-driven culture in your team',
+      'Present data insights persuasively to stakeholders',
+    ],
+    curriculum: [
+      { week: 'Week 1', title: 'Data Literacy for Leaders', topics: ['Key data concepts without the jargon','Types of data and analysis','Common data mistakes leaders make','Introduction to Power BI dashboards'] },
+      { week: 'Week 2–3', title: 'KPIs, Dashboards & Reporting', topics: ['Defining meaningful KPIs','Reading and questioning dashboards','Requesting the right reports','Spotting misleading visualisations'] },
+      { week: 'Week 4–5', title: 'Data-Driven Decision Making', topics: ['Evidence-based decision frameworks','A/B testing for business','Risk and uncertainty with data','Case studies from Kenyan businesses'] },
+      { week: 'Week 6', title: 'Building a Data Culture', topics: ['Championing data in your organisation','Managing data teams effectively','Data governance and ethics','Action plan for your department'] },
+    ],
+    tags: ['Data Literacy', 'Power BI', 'KPIs', 'Decision Making', 'Leadership', 'Data Culture'],
+    instructor: { name: 'Grace Wanjiku', title: 'Senior Data Analyst — Fintech', experience: '7 years in data & analytics', icon: 'fas fa-user-tie' },
+    related: ['digital-transformation','data-analysis','cyber-awareness'],
+  },
+  'cyber-awareness': {
+    title: 'Cybersecurity for Organisations',
+    category: 'Corporate Training', categoryIcon: 'fas fa-building',
+    icon: 'fas fa-user-shield', iconGradient: 'linear-gradient(135deg,#fe730c,#f59e0b)',
+    level: 'All Levels', duration: '4 weeks', students: null, rating: 4.8, reviews: 58,
+    price: 'Custom Quote',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80',
+    tagline: 'Protect your organisation from the inside out',
+    about: 'Human error is behind over 90% of cyber breaches. This organisation-wide awareness programme trains every member of your staff — from the CEO to the receptionist — to recognise threats, protect sensitive data, and respond correctly when incidents occur, dramatically reducing your organisation\'s cyber risk.',
+    outcomes: [
+      'Recognise phishing emails and social engineering attacks',
+      'Create and manage strong, unique passwords',
+      'Understand safe data handling and sharing practices',
+      'Know how to report a suspected security incident',
+      'Understand GDPR and local data protection obligations',
+      'Secure personal devices used for work (BYOD)',
+      'Identify insider threats and suspicious behaviour',
+      'Build a security-conscious organisational culture',
+    ],
+    curriculum: [
+      { week: 'Week 1', title: 'The Threat Landscape', topics: ['Common attack types targeting organisations','Phishing, vishing and smishing','Real case studies from Kenyan businesses','Why cybersecurity is everyone\'s responsibility'] },
+      { week: 'Week 2', title: 'Safe Digital Practices', topics: ['Password managers and MFA','Safe email and internet use','Recognising suspicious links and attachments','Secure use of cloud storage'] },
+      { week: 'Week 3', title: 'Data Protection & Compliance', topics: ['Kenya Data Protection Act overview','GDPR essentials for businesses','Handling personal and financial data','Incident reporting procedures'] },
+      { week: 'Week 4', title: 'Incident Response Drills & Certification', topics: ['Simulated phishing exercises','Incident response simulation','Debrief and lessons learned','Staff certification and reporting to management'] },
+    ],
+    tags: ['Phishing Awareness', 'Data Protection', 'Compliance', 'Password Security', 'BYOD', 'Incident Response'],
+    instructor: { name: 'David Kamau', title: 'Certified Ethical Hacker (CEH)', experience: '9 years in cybersecurity', icon: 'fas fa-user-secret' },
+    related: ['cybersecurity','digital-transformation','data-leadership'],
+  },
+};
+
+// ── Render page ──
+function renderStars(rating) {
+  const full = Math.floor(rating);
+  const half = rating % 1 >= 0.5;
+  let s = '';
+  for (let i = 0; i < full; i++) s += '<i class="fas fa-star"></i>';
+  if (half) s += '<i class="fas fa-star-half-alt"></i>';
+  return s;
+}
+
+function renderPage(course, key) {
+  const related = (course.related || []).slice(0, 3).map(r => COURSES[r]).filter(Boolean);
+
+  document.title = `${course.title} – Techsphere Digital Skills Academy`;
+
+  return `
+  <!-- HERO -->
+  <section class="course-hero">
+    <div class="course-hero-bg" style="background-image:url('${course.image}')"></div>
+    <div class="course-hero-overlay"></div>
+    <div class="course-hero-inner">
+      <div>
+        <div class="breadcrumb">
+          <a href="index.html"><i class="fas fa-home"></i> Home</a>
+          <i class="fas fa-chevron-right"></i>
+          <a href="courses.html">Courses</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>${course.title}</span>
+        </div>
+        <div class="course-cat-badge"><i class="${course.categoryIcon}"></i> ${course.category}</div>
+        <h1>${course.title}</h1>
+        <p class="course-hero-desc">${course.tagline}</p>
+        <div class="hero-stars">
+          ${renderStars(course.rating)}
+          <strong>${course.rating}</strong>
+          <span>(${course.reviews} reviews)</span>
+        </div>
+        <div class="hero-meta-pills" style="margin-top:14px;">
+          <span class="hero-pill"><i class="far fa-clock"></i> ${course.duration}</span>
+          ${course.students ? `<span class="hero-pill"><i class="fas fa-users"></i> ${course.students} students</span>` : '<span class="hero-pill"><i class="fas fa-users"></i> Open enrolment</span>'}
+          <span class="hero-pill"><i class="fas fa-signal"></i> ${course.level}</span>
+          <span class="hero-pill"><i class="fas fa-certificate"></i> Certificate included</span>
+        </div>
+        <div class="hero-meta-pills">
+          <a href="#" class="btn-enroll-big" onclick="openEnrollModal('${course.title.replace(/'/g,"\\'")}');return false;" style="max-width:220px;">
+            <i class="fas fa-graduation-cap"></i> Enroll Now
+          </a>
+          <a href="courses.html" class="btn-brochure" style="max-width:180px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:13px 20px;font-family:'Poppins',sans-serif;font-weight:600;font-size:0.9rem;text-decoration:none;">
+            <i class="fas fa-arrow-left"></i> All Courses
+          </a>
+        </div>
+      </div>
+      <!-- Hero enroll card (desktop) -->
+      <div class="hero-enroll-card">
+        <img src="${course.image}" alt="${course.title}" class="hero-enroll-img"/>
+        <div class="hero-enroll-body">
+          <div class="hero-enroll-price">${course.price}<small>${course.price === 'Custom Quote' ? 'Tailored for your organisation' : 'Complete program'}</small></div>
+          <a href="#" class="btn-enroll-big" onclick="openEnrollModal('${course.title.replace(/'/g,"\\'")}');return false;">
+            <i class="fas fa-graduation-cap"></i> ${course.price === 'Custom Quote' ? 'Get a Quote' : 'Enroll Now'}
+          </a>
+          <a href="courses.html" class="btn-brochure"><i class="fas fa-arrow-left"></i> Back to Courses</a>
+          <ul class="enroll-features">
+            <li><i class="fas fa-check-circle"></i> Industry-recognised certificate</li>
+            <li><i class="fas fa-check-circle"></i> Live, hands-on projects</li>
+            <li><i class="fas fa-check-circle"></i> Expert instructor support</li>
+            <li><i class="fas fa-check-circle"></i> Career placement assistance</li>
+            <li><i class="fas fa-check-circle"></i> Flexible payment options</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="course-content-section">
+    <div class="course-content-inner">
+      <!-- LEFT -->
+      <div>
+        <!-- About -->
+        <div class="content-block">
+          <h2><i class="fas fa-info-circle"></i> About This Course</h2>
+          <p style="font-size:0.92rem;color:#555;line-height:1.8;">${course.about}</p>
+          <div class="detail-tags" style="margin-top:16px;">
+            ${course.tags.map(t => `<span class="detail-tag">${t}</span>`).join('')}
+          </div>
+        </div>
+
+        <!-- Outcomes -->
+        <div class="content-block">
+          <h2><i class="fas fa-bullseye"></i> What You'll Learn</h2>
+          <div class="outcomes-grid">
+            ${course.outcomes.map(o => `
+              <div class="outcome-item">
+                <i class="fas fa-check-circle"></i>
+                <span>${o}</span>
+              </div>`).join('')}
+          </div>
+        </div>
+
+        <!-- Curriculum -->
+        <div class="content-block">
+          <h2><i class="fas fa-list-ul"></i> Course Curriculum</h2>
+          ${course.curriculum.map((c, i) => `
+            <div class="curriculum-week">
+              <div class="curriculum-header ${i === 0 ? 'open' : ''}" onclick="toggleCurriculum(this)">
+                <span><strong>${c.week}:</strong> ${c.title}</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="curriculum-body ${i === 0 ? 'open' : ''}">
+                ${c.topics.map(t => `<div class="curriculum-topic"><i class="fas fa-play-circle"></i><span>${t}</span></div>`).join('')}
+              </div>
+            </div>`).join('')}
+        </div>
+
+        <!-- Instructor -->
+        <div class="content-block">
+          <h2><i class="fas fa-chalkboard-teacher"></i> Your Instructor</h2>
+          <div class="instructor-card">
+            <div class="instructor-avatar"><i class="${course.instructor.icon}"></i></div>
+            <div>
+              <h3>${course.instructor.name}</h3>
+              <p>${course.instructor.title}</p>
+              <span class="instructor-exp"><i class="fas fa-briefcase"></i> ${course.instructor.experience}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar-card">
+        <div class="sidebar-inner">
+          <div class="sidebar-price">${course.price}<small>${course.price === 'Custom Quote' ? 'Tailored for your org' : 'Complete program'}</small></div>
+          <a href="#" class="sidebar-btn-enroll" onclick="openEnrollModal('${course.title.replace(/'/g,"\\'")}');return false;">
+            <i class="fas fa-graduation-cap"></i> ${course.price === 'Custom Quote' ? 'Get a Quote' : 'Enroll Now'}
+          </a>
+          <a href="courses.html" class="sidebar-btn-outline"><i class="fas fa-arrow-left"></i> Back to Courses</a>
+          <ul class="sidebar-features">
+            <li><i class="far fa-clock"></i> ${course.duration}</li>
+            <li><i class="fas fa-signal"></i> ${course.level}</li>
+            ${course.students ? `<li><i class="fas fa-users"></i> ${course.students} students enrolled</li>` : '<li><i class="fas fa-users"></i> Open enrolment</li>'}
+            <li><i class="fas fa-certificate"></i> Certificate on completion</li>
+            <li><i class="fas fa-laptop-code"></i> Live projects included</li>
+            <li><i class="fas fa-headset"></i> Career support</li>
+            <li><i class="fas fa-infinity"></i> Lifetime access to materials</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED COURSES -->
+  ${related.length ? `
+  <section class="related-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">Keep Learning</span>
+        <h2 class="section-title">You May Also <span>Like</span></h2>
+      </div>
+      <div class="related-grid">
+        ${related.map(r => `
+          <div class="related-card">
+            <img src="${r.image}" alt="${r.title}"/>
+            <div class="related-card-body">
+              <h4>${r.title}</h4>
+              <p>${r.tagline}</p>
+              <a href="course-detail.html?course=${Object.keys(COURSES).find(k => COURSES[k] === r)}">View Course <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+  </section>` : ''}
+  `;
+}
+
+// ── Load course from URL param ──
+const params = new URLSearchParams(window.location.search);
+const courseKey = params.get('course');
+const course = COURSES[courseKey];
+const pageContent = document.getElementById('page-content');
+
+if (course) {
+  pageContent.innerHTML = renderPage(course, courseKey);
+} else {
+  pageContent.innerHTML = `
+    <div class="not-found" style="margin-top:128px;">
+      <i class="fas fa-graduation-cap"></i>
+      <h2>Course not found</h2>
+      <p>The course you're looking for doesn't exist or has been moved.</p>
+      <a href="courses.html" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to Courses</a>
+    </div>`;
+}
+
+// ── Curriculum accordion ──
+function toggleCurriculum(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+// ── Enroll Modal ──
+function openEnrollModal(name) {
+  document.getElementById('enrollCourseName').textContent = name;
+  document.getElementById('modal-enroll').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeEnrollModal() {
+  document.getElementById('modal-enroll').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('modal-enroll').addEventListener('click', function(e) {
+  if (e.target === this) closeEnrollModal();
+});
+function submitEnroll(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type=submit]');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('enroll-success').style.display = 'block';
+    e.target.reset();
+    btn.innerHTML = '<i class="fas fa-check"></i> Submitted!';
+    setTimeout(() => { closeEnrollModal(); btn.innerHTML='<i class="fas fa-paper-plane"></i> Submit Enrollment'; btn.disabled=false; document.getElementById('enroll-success').style.display='none'; }, 3000);
+  }, 1500);
+}
+
+// ── Footer ──
+document.getElementById('page-content').insertAdjacentHTML('afterend', `
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="align-items:center;">
+          <img src="logo/Logo.jpeg" alt="Techsphere Logo" style="height:52px;width:52px;object-fit:contain;border-radius:50%;"/>
+          <div class="logo-text" style="color:#fff;">
+            <span class="logo-title">TECHSPHERE</span>
+            <small style="color:var(--red);">Digital Skills Academy</small>
+          </div>
+        </a>
+        <p>Empowering the next generation of tech professionals with practical, industry-led digital skills training.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Courses</h4><ul>
+        <li><a href="courses.html#data-analysis"><i class="fas fa-chevron-right"></i> Data Analysis</a></li>
+        <li><a href="courses.html#web-development"><i class="fas fa-chevron-right"></i> Web Development</a></li>
+        <li><a href="courses.html#cybersecurity"><i class="fas fa-chevron-right"></i> Cybersecurity</a></li>
+        <li><a href="courses.html#digital-marketing"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li>
+        <li><a href="courses.html#ai-ml"><i class="fas fa-chevron-right"></i> AI &amp; Machine Learning</a></li>
+        <li><a href="courses.html#uiux-design"><i class="fas fa-chevron-right"></i> UI/UX Design</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+        <li><a href="index.html#values"><i class="fas fa-chevron-right"></i> Our Values</a></li>
+        <li><a href="index.html#blog"><i class="fas fa-chevron-right"></i> Blog</a></li>
+        <li><a href="index.html#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Garden Estate, Nairobi</a></li>
+        <li><a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a></li>
+        <li><a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 <span>Techsphere Digital Skills Academy</span>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>`);
+</script>
+</body>
+</html>

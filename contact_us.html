@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us — Techsphere Digital Skills Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #081f4e;
+      --red: #fe730c;
+      --blue: #3b82f6;
+      --text: #4b5563;
+      --light: #f7f9fc;
+    }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; }
+
+
+    /* ===== PAGE BANNER ===== */
+    .page-banner {
+      position: relative;
+      height: 260px;
+      background: linear-gradient(135deg, #081f4e 0%, #0d2a6e 60%, #0b2060 100%);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .page-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=80');
+      background-size: cover;
+      background-position: center 35%;
+      opacity: 0.35;
+    }
+    .page-banner-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(5,15,50,0.75) 0%, rgba(5,15,50,0.50) 60%, rgba(5,15,50,0.30) 100%);
+    }
+    .page-banner-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .page-banner-left { display: flex; flex-direction: column; gap: 12px; }
+    .page-breadcrumb {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.83rem; font-family: 'Poppins', sans-serif;
+    }
+    .page-breadcrumb a {
+      color: rgba(255,255,255,0.78); text-decoration: none; transition: color 0.2s;
+    }
+    .page-breadcrumb a:hover { color: #fff; }
+    .page-breadcrumb .sep { color: var(--red); font-weight: 700; font-size: 1rem; }
+    .page-breadcrumb .current { color: var(--red); font-weight: 600; }
+    .page-banner-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+    }
+    .page-quicklinks {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 14px;
+      padding: 20px 28px;
+      min-width: 300px;
+      flex-shrink: 0;
+    }
+    .page-quicklinks h5 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #1ad1ff;
+      margin-bottom: 10px;
+    }
+    .page-quicklinks hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 14px;
+    }
+    .quicklinks-row { display: flex; gap: 28px; }
+    .quicklinks-row a {
+      display: flex; align-items: center; gap: 8px;
+      color: #fff; text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .quicklinks-row a i { color: var(--red); font-size: 0.7rem; }
+    .quicklinks-row a:hover { color: #1ad1ff; }
+    @media (max-width: 860px) {
+      .page-quicklinks { display: none; }
+      .page-banner-inner { padding: 0 24px; }
+      .page-banner-title { font-size: 1.6rem; }
+      .page-banner { height: 200px; }
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .contact-section {
+      padding: 70px 0 80px;
+      background: linear-gradient(160deg, #f0f5ff 0%, #fff 50%, #f0f5ff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(254,115,12,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-section::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -80px;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 36px;
+      align-items: start;
+      position: relative; z-index: 1;
+    }
+
+    /* ===== LEFT PANEL ===== */
+    .info-panel {
+      background: linear-gradient(145deg, var(--navy) 0%, #0d2a6e 100%);
+      border-radius: 24px;
+      padding: 40px 32px;
+      box-shadow: 0 20px 60px rgba(8,31,78,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .info-panel::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(254,115,12,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .info-panel::after {
+      content: '';
+      position: absolute; bottom: -60px; left: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(26,209,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .info-panel-title {
+      font-family: 'Poppins', sans-serif; font-size: 1.4rem;
+      font-weight: 700; color: #fff; margin-bottom: 6px;
+      position: relative; z-index: 1;
+    }
+    .info-panel-sub {
+      font-size: 0.87rem; color: rgba(255,255,255,0.6);
+      margin-bottom: 32px; line-height: 1.6;
+      position: relative; z-index: 1;
+    }
+    .info-stack { display: flex; flex-direction: column; gap: 6px; position: relative; z-index: 1; }
+    .info-card {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+    .info-card:hover {
+      background: rgba(255,255,255,0.11);
+      border-color: rgba(254,115,12,0.4);
+      transform: translateX(5px);
+    }
+    .info-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--red), #f97316);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.05rem;
+      box-shadow: 0 4px 14px rgba(254,115,12,0.4);
+    }
+    .info-card h4 {
+      font-family: 'Poppins', sans-serif; font-size: 0.78rem;
+      font-weight: 600; color: rgba(255,255,255,0.55);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;
+    }
+    .info-card p, .info-card a {
+      font-size: 0.9rem; color: #fff; font-weight: 500;
+      text-decoration: none; line-height: 1.55;
+    }
+    .info-card a:hover { color: #fe730c; }
+
+    /* ===== SOCIAL ===== */
+    .social-section { margin-top: 28px; position: relative; z-index: 1; }
+    .social-label {
+      font-family: 'Poppins', sans-serif; font-size: 0.75rem;
+      font-weight: 600; color: rgba(255,255,255,0.45);
+      text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px;
+    }
+    .social-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .social-pill {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      color: #fff; font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .social-pill:hover {
+      background: var(--red);
+      border-color: var(--red);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(254,115,12,0.4);
+    }
+
+    /* ===== FORM CARD ===== */
+    .form-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 44px 40px;
+      box-shadow: 0 12px 50px rgba(8,31,78,0.1);
+      border: 1px solid rgba(8,31,78,0.05);
+      position: relative; overflow: hidden;
+    }
+    .form-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--blue));
+    }
+    .form-card-header { margin-bottom: 30px; }
+    .form-card-header h3 {
+      font-family: 'Poppins', sans-serif; font-size: 1.5rem;
+      font-weight: 700; color: var(--navy); margin-bottom: 6px;
+    }
+    .form-card-header p { font-size: 0.88rem; color: var(--text); line-height: 1.6; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+    .form-group label {
+      font-family: 'Poppins', sans-serif; font-size: 0.8rem;
+      font-weight: 600; color: var(--navy); letter-spacing: 0.3px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 13px 16px;
+      border: 1.5px solid #e8ecf4;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif; font-size: 0.9rem;
+      color: var(--navy); background: #f8faff;
+      transition: all 0.25s ease;
+      outline: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #b0b8cc; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 4px rgba(254,115,12,0.1);
+      background: #fff;
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .btn-submit {
+      width: 100%; padding: 15px;
+      background: linear-gradient(135deg, var(--red) 0%, #f97316 100%);
+      color: #fff; border: none; border-radius: 12px;
+      font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 10px; transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(254,115,12,0.35);
+      letter-spacing: 0.3px;
+    }
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(254,115,12,0.48);
+    }
+    .form-success {
+      display: none; margin-top: 16px; padding: 14px 18px;
+      background: #ecfdf5; border: 1px solid #6ee7b7;
+      border-radius: 12px; color: #065f46;
+      font-size: 0.9rem; font-weight: 500; text-align: center;
+    }
+    .form-success i { margin-right: 8px; color: #10b981; }
+
+    /* ===== MAP ===== */
+    .map-section { padding: 0 0 80px; background: linear-gradient(160deg, #f0f5ff 0%, #fff 100%); }
+    .map-wrap {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(8,31,78,0.1);
+      border: 1px solid rgba(8,31,78,0.06);
+    }
+    .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 860px) {
+      .contact-wrap { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-card { padding: 28px 20px; }
+      .info-panel { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a>
+        <a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a>
+      </div>
+      <div class="top-bar-right">
+        <div class="top-bar-tagline"><i class="fas fa-map-marker-alt"></i> Excellence in Global Consulting</div>
+        <div class="top-social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAV -->
+  <div class="main-nav">
+    <div class="main-nav-inner">
+      <a href="index.html" class="logo">
+        <img src="logo/Logo.jpeg" alt="Techsphere Digital Skills Academy Logo" style="height:82px;width:82px;object-fit:contain;border-radius:50%;"/>
+        <div class="logo-text">
+          <span class="logo-title">TECHSPHERE</span>
+          <small>Digital Skills Academy</small>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li class="has-dropdown">
+          <a href="courses.html"><i class="fas fa-graduation-cap"></i> Courses <i class="fas fa-chevron-down chevron"></i></a>
+          <ul class="dropdown">
+            <li><a href="courses.html"><i class="fas fa-th-large"></i> All Courses</a></li>
+            <div class="dropdown-divider"></div>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-seedling"></i> Foundational <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-marketing"><i class="fas fa-bullhorn"></i> Digital Marketing</a></li>
+                <li><a href="course-detail.html?course=uiux-design"><i class="fas fa-pencil-ruler"></i> UI/UX Design</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-chart-line"></i> Proficiency <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=web-development"><i class="fas fa-code"></i> Web Development</a></li>
+                <li><a href="course-detail.html?course=data-analysis"><i class="fas fa-chart-bar"></i> Data Analysis</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-trophy"></i> Mastery <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=cybersecurity"><i class="fas fa-shield-alt"></i> Cybersecurity</a></li>
+                <li><a href="course-detail.html?course=ai-ml"><i class="fas fa-robot"></i> AI &amp; Machine Learning</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-building"></i> Corporate Training <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-transformation"><i class="fas fa-sync-alt"></i> Digital Transformation</a></li>
+                <li><a href="course-detail.html?course=data-leadership"><i class="fas fa-user-tie"></i> Data Leadership</a></li>
+                <li><a href="course-detail.html?course=cyber-awareness"><i class="fas fa-eye"></i> Cyber Awareness</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="ict-club.html"><i class="fas fa-laptop-code"></i> ICT Club</a></li>
+        <li><a href="contact_us.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="tel:+254748800500" class="btn-callus"><i class="fas fa-phone-alt"></i> Call us</a>
+        <div class="hamburger" onclick="toggleMenu()" id="ham">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="closeMenu()"><i class="fas fa-home"></i> Home</a>
+  <a href="index.html#about" onclick="closeMenu()"><i class="fas fa-info-circle"></i> About</a>
+  <a href="courses.html" onclick="closeMenu()"><i class="fas fa-graduation-cap"></i> Courses</a>
+  <a href="ict-club.html" onclick="closeMenu()"><i class="fas fa-laptop-code"></i> ICT Club</a>
+  <a href="contact_us.html" onclick="closeMenu()"><i class="fas fa-envelope"></i> Contact</a>
+</div>
+
+<!-- PAGE BANNER -->
+<div class="page-banner" style="padding-top:140px;">
+  <div class="page-banner-overlay"></div>
+  <div class="page-banner-inner">
+    <div class="page-banner-left">
+      <div class="page-breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <span class="current">Contacts</span>
+      </div>
+      <h1 class="page-banner-title">Contacts</h1>
+    </div>
+    <div class="page-quicklinks">
+      <h5>Quick Links</h5>
+      <hr/>
+      <div class="quicklinks-row">
+        <a href="courses.html"><i class="fas fa-chevron-right"></i> Our Courses</a>
+        <a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-wrap">
+
+      <!-- LEFT: Info Panel -->
+      <div class="info-panel">
+        <h3 class="info-panel-title">Contact Information</h3>
+        <p class="info-panel-sub">Reach out to us through any of the channels below and we'll get back to you shortly.</p>
+
+        <div class="info-stack">
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h4>Our Location</h4>
+              <p>Garden Estate, Nairobi, Kenya</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+            <div>
+              <h4>Phone Number</h4>
+              <a href="tel:+254748800500">+254 748-800-500</a>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <h4>Email Address</h4>
+              <a href="mailto:info@techsphereacademy.com">info@techsphereacademy.com</a>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-clock"></i></div>
+            <div>
+              <h4>Working Hours</h4>
+              <p>Mon – Fri: 8:00 AM – 6:00 PM<br/>Saturday: 9:00 AM – 1:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-section">
+          <p class="social-label">Follow Us</p>
+          <div class="social-row">
+            <a href="#" class="social-pill"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-pill"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-pill"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-pill"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-pill"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="form-card">
+        <div class="form-card-header">
+          <h3>Send Us a Message</h3>
+          <p>Fill in the form below and our team will get back to you within 24 hours.</p>
+        </div>
+        <form id="contact-form" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="John" required/>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Doe" required/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="john@company.com" required/>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="+254 700 000 000"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Training Program of Interest</label>
+            <select>
+              <option value="">Select a program...</option>
+              <option>Data Analysis</option>
+              <option>Web Development</option>
+              <option>Cybersecurity</option>
+              <option>Digital Marketing</option>
+              <option>AI & Machine Learning</option>
+              <option>UI/UX Design</option>
+              <option>Corporate Training</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Your Message</label>
+            <textarea placeholder="Tell us about your training needs and how we can help..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+          <div class="form-success" id="form-success">
+            <i class="fas fa-check-circle"></i> Thank you! Your message has been sent. We'll get back to you within 24 hours.
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="container">
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.6864661415!2d36.87!3d-1.245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTQnNDIuMCJTIDM2wrA1MicxMi4wIkU!5e0!3m2!1sen!2ske!4v1234567890"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Techsphere Location — Garden Estate, Nairobi">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="align-items:center;">
+          <img src="logo/Logo.jpeg" alt="Techsphere Logo" style="height:52px;width:52px;object-fit:contain;border-radius:50%;"/>
+          <div class="logo-text" style="color:#fff;">
+            <span class="logo-title">TECHSPHERE</span>
+            <small style="color:var(--red);">Digital Skills Academy</small>
+          </div>
+        </a>
+        <p>Providing expert holistic HR solutions to businesses, institutions, government and non-profit organizations. Excellence in every engagement.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Courses</h4><ul><li><a href="courses.html#data-analysis"><i class="fas fa-chevron-right"></i> Data Analysis</a></li><li><a href="courses.html#web-development"><i class="fas fa-chevron-right"></i> Web Development</a></li><li><a href="courses.html#cybersecurity"><i class="fas fa-chevron-right"></i> Cybersecurity</a></li><li><a href="courses.html#digital-marketing"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li><li><a href="courses.html#ai-ml"><i class="fas fa-chevron-right"></i> AI &amp; Machine Learning</a></li><li><a href="courses.html#uiux-design"><i class="fas fa-chevron-right"></i> UI/UX Design</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a></li><li><a href="index.html#values"><i class="fas fa-chevron-right"></i> Our Values</a></li><li><a href="index.html#how"><i class="fas fa-chevron-right"></i> How We Work</a></li><li><a href="index.html#blog"><i class="fas fa-chevron-right"></i> Blog</a></li><li><a href="contact_us.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fas fa-map-marker-alt"></i> Garden Estate, Nairobi</a></li><li><a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a></li><li><a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 <span>Techsphere Digital Skills Academy</span>. All rights reserved. Excellence in every engagement.</p>
+      <p><a href="#" style="color:rgba(255,255,255,.4); text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp; <a href="#" style="color:rgba(255,255,255,.4); text-decoration:none;">Terms of Service</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('form-success').style.display = 'block';
+    e.target.reset();
+    setTimeout(() => {
+      document.getElementById('form-success').style.display = 'none';
+    }, 5000);
+  }
+</script>
+
+</body>
+</html>

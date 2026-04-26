@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Courses – Techsphere Digital Skills Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* ===== PAGE-SPECIFIC STYLES ===== */
+
+    /* Page Banner */
+    .page-banner {
+      margin-top: 128px;
+      background: linear-gradient(135deg, #081f4e 0%, #0d2d6b 60%, #1a1a4e 100%);
+      padding: 36px 0 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&q=60') center/cover no-repeat;
+      opacity: 0.08;
+    }
+    .page-banner-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: center;
+      gap: 60px;
+    }
+    @media(max-width:960px){ .page-banner-inner { grid-template-columns:1fr; } .banner-carousel-wrap { display:none; } }
+
+    /* ── Banner Carousel ── */
+    .banner-carousel-wrap {
+      position: relative;
+    }
+    .banner-carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+    .banner-slide {
+      display: none;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 20px;
+      padding: 28px 28px 24px;
+      animation: bSlideIn .5s ease;
+    }
+    .banner-slide.active { display: block; }
+    @keyframes bSlideIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .bs-top-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+    .bs-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: #fff; flex-shrink: 0;
+    }
+    .bs-icon.teal   { background: linear-gradient(135deg,#0ea5e9,#06b6d4); }
+    .bs-icon.orange { background: linear-gradient(135deg,#fe730c,#f59e0b); }
+    .bs-icon.green  { background: linear-gradient(135deg,#10b981,#059669); }
+    .bs-icon.purple { background: linear-gradient(135deg,#8b5cf6,#a855f7); }
+    .bs-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.6rem; font-weight: 900;
+      color: #fff; line-height: 1; margin-bottom: 6px;
+    }
+    .bs-number span { color: var(--red); }
+    .banner-slide h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem; font-weight: 800;
+      color: #fff; margin: 0 0 10px;
+    }
+    .banner-slide p {
+      color: rgba(255,255,255,.68);
+      font-size: 0.9rem; line-height: 1.65;
+      max-width: 100%; margin: 0;
+    }
+    .bs-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+    .bs-tag {
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.85);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    /* Dots */
+    .banner-dots {
+      display: flex; gap: 8px; justify-content: center; margin-top: 18px;
+    }
+    .banner-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.3); border: none; cursor: pointer;
+      transition: all .3s; padding: 0;
+    }
+    .banner-dot.active { background: var(--red); width: 24px; border-radius: 4px; }
+    /* Progress bar */
+    .bs-progress {
+      height: 3px; background: rgba(255,255,255,.1);
+      border-radius: 2px; margin-top: 20px; overflow: hidden;
+    }
+    .bs-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--red), #f59e0b);
+      border-radius: 2px;
+      width: 0%;
+      transition: width linear;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,.55);
+      margin-bottom: 18px;
+    }
+    .breadcrumb a { color: rgba(255,255,255,.55); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--red); }
+    .breadcrumb i { font-size: 0.65rem; color: rgba(255,255,255,.3); }
+    .breadcrumb span { color: var(--red); font-weight: 600; }
+    .page-banner h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .page-banner h1 span { color: var(--red); }
+    .page-banner p {
+      color: rgba(255,255,255,.72);
+      font-size: 1.02rem;
+      max-width: 560px;
+      line-height: 1.72;
+    }
+    .banner-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .banner-stat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .banner-stat i {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(254,115,12,.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--red);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .banner-stat strong { display: block; color: #fff; font-size: 1rem; font-weight: 700; }
+    .banner-stat small { color: rgba(255,255,255,.55); font-size: 0.75rem; }
+
+    /* Filter Bar */
+    .filter-bar {
+      background: #f7f9fc;
+      border-bottom: 1px solid #e8eaf0;
+      padding: 16px 0;
+      position: sticky;
+      top: 128px;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(8,31,78,.08);
+    }
+    .filter-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-inner::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #555;
+      border: 1.5px solid #e2e5ec;
+      background: #fff;
+      border-radius: 50px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .25s;
+      box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    }
+    .filter-btn:hover {
+      color: var(--navy);
+      border-color: var(--navy);
+      background: #f0f3ff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(8,31,78,.12);
+    }
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e40af 100%);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(8,31,78,.28);
+      transform: translateY(-1px);
+    }
+    .filter-btn i { font-size: 0.78rem; }
+    .filter-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50px;
+      padding: 0 6px;
+      background: rgba(254,115,12,.15);
+      color: var(--red);
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .filter-btn.active .filter-count {
+      background: rgba(255,255,255,.22);
+      color: #fff;
+    }
+
+    /* Search Bar */
+    .search-section {
+      background: #fff;
+      padding: 20px 0;
+      border-bottom: 1px solid #e8eaf0;
+      box-shadow: 0 2px 8px rgba(8,31,78,.04);
+    }
+    .search-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+      max-width: 520px;
+    }
+    .search-box i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--red);
+      font-size: 0.95rem;
+      z-index: 1;
+    }
+    .search-box input {
+      width: 100%;
+      background: #f7f9fc;
+      border: 1.5px solid #e2e5ec;
+      border-radius: 50px;
+      color: #333;
+      padding: 13px 20px 13px 48px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      transition: all .25s;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,.04);
+    }
+    .search-box input:focus {
+      border-color: var(--red);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(254,115,12,.08), inset 0 2px 4px rgba(0,0,0,.02);
+    }
+    .search-box input::placeholder { color: #b0b8c8; }
+    .results-count {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      color: #888;
+      background: #f7f9fc;
+      border: 1.5px solid #e2e5ec;
+      border-radius: 50px;
+      padding: 9px 18px;
+      white-space: nowrap;
+    }
+    .results-count strong {
+      color: var(--navy);
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .results-count::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      flex-shrink: 0;
+    }
+
+    /* Courses Section */
+    .courses-page-section { background: #f7f9fc; padding: 48px 0 80px; }
+    .courses-page-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    @media(max-width:960px){ .courses-page-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:580px){ .courses-page-grid { grid-template-columns: 1fr; } }
+
+    /* Course card — extended version */
+    .course-card-ext {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      transition: transform .3s, box-shadow .3s;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .course-card-ext:hover { transform: translateY(-7px); box-shadow: 0 16px 40px rgba(0,0,0,.13); }
+    .course-card-ext .course-img-wrap { position: relative; height: 200px; overflow: hidden; }
+    .course-card-ext .course-img-wrap img { width:100%; height:100%; object-fit:cover; transition: transform .4s; }
+    .course-card-ext:hover .course-img-wrap img { transform: scale(1.06); }
+    .course-card-ext .course-badge { position:absolute; top:14px; right:14px; background:#e0f7ff; color:#0891b2; font-size:0.72rem; font-weight:700; font-family:'Poppins',sans-serif; padding:4px 12px; border-radius:20px; }
+    .course-card-ext .course-level { position:absolute; top:14px; left:14px; font-size:0.72rem; font-weight:700; font-family:'Poppins',sans-serif; padding:4px 12px; border-radius:20px; }
+    .level-beginner { background:rgba(16,185,129,.15); color:#059669; }
+    .level-intermediate { background:rgba(245,158,11,.15); color:#d97706; }
+    .level-advanced { background:rgba(139,92,246,.15); color:#7c3aed; }
+
+    .course-body-ext { padding: 22px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .course-title-row { display:flex; align-items:center; gap:12px; }
+    .course-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; color:#fff; flex-shrink:0; }
+    .course-icon.teal   { background:linear-gradient(135deg,#0ea5e9,#06b6d4); }
+    .course-icon.orange { background:linear-gradient(135deg,#fe730c,#f59e0b); }
+    .course-icon.purple { background:linear-gradient(135deg,#8b5cf6,#a855f7); }
+    .course-icon.green  { background:linear-gradient(135deg,#10b981,#059669); }
+    .course-icon.red    { background:linear-gradient(135deg,#ef4444,#f97316); }
+    .course-icon.navy   { background:linear-gradient(135deg,#081f4e,#1e40af); }
+    .course-title-row h3 { font-family:'Poppins',sans-serif; font-size:1.02rem; font-weight:700; color:var(--navy); margin:0; line-height:1.3; }
+    .course-desc-ext { font-size:0.88rem; color:#666; line-height:1.65; }
+    .read-more-link { display:inline-flex; align-items:center; gap:5px; font-family:'Poppins',sans-serif; font-size:0.82rem; font-weight:600; color:var(--red); text-decoration:none; margin-top:6px; transition:gap .2s; }
+    .read-more-link:hover { gap:9px; }
+    .course-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .course-tag { font-size:0.72rem; font-weight:600; font-family:'Poppins',sans-serif; padding:3px 10px; border-radius:20px; background:#f3f4f6; color:#555; }
+    .course-meta-ext { display:flex; align-items:center; gap:16px; padding:12px 0; border-top:1px solid #f0f0f0; border-bottom:1px solid #f0f0f0; flex-wrap:wrap; }
+    .course-meta-ext span { display:flex; align-items:center; gap:5px; font-size:0.8rem; color:#888; font-family:'Poppins',sans-serif; }
+    .course-meta-ext i { color:#bbb; font-size:0.78rem; }
+    .course-stars-ext { display:flex; align-items:center; gap:5px; }
+    .course-stars-ext i { color:#f59e0b; font-size:0.82rem; }
+    .course-stars-ext span { font-size:0.8rem; color:#888; font-family:'Poppins',sans-serif; }
+    .course-footer-ext { display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:4px; gap:10px; }
+    .course-price-ext strong { font-size:1.45rem; font-weight:800; font-family:'Poppins',sans-serif; background:linear-gradient(90deg,#fe730c,#0891b2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .course-price-ext small { display:block; font-size:0.73rem; color:#aaa; font-family:'Poppins',sans-serif; margin-top:-2px; }
+    .btn-enroll { background:linear-gradient(90deg,#fe730c,#0891b2); color:#fff; border:none; padding:10px 20px; border-radius:8px; font-family:'Poppins',sans-serif; font-size:0.82rem; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:7px; text-decoration:none; transition:opacity .25s, transform .25s; white-space:nowrap; }
+    .btn-enroll:hover { opacity:.88; transform:translateY(-2px); }
+
+    /* hidden card when filtered */
+    .course-card-ext.hidden { display: none; }
+    .section-divider.hidden { display: none; }
+
+    /* Category section divider inside grid */
+    .section-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 0 4px;
+      margin-top: 12px;
+    }
+    .section-divider:first-child { margin-top: 0; }
+    .section-divider-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; color: #fff; flex-shrink: 0;
+    }
+    .icon-foundational  { background: linear-gradient(135deg,#10b981,#059669); }
+    .icon-proficiency   { background: linear-gradient(135deg,#fe730c,#f59e0b); }
+    .icon-mastery       { background: linear-gradient(135deg,#8b5cf6,#a855f7); }
+    .icon-corporate     { background: linear-gradient(135deg,#081f4e,#1e40af); }
+    .section-divider-text h4 {
+      font-family: 'Poppins', sans-serif; font-size: 1.15rem;
+      font-weight: 800; color: var(--navy); margin: 0 0 2px;
+    }
+    .section-divider-text p {
+      font-size: 0.82rem; color: #888; margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    .section-divider-line {
+      flex: 1; height: 2px;
+      background: linear-gradient(90deg, #e5e7eb, transparent);
+    }
+    .section-divider-count {
+      font-family: 'Poppins', sans-serif; font-size: 0.78rem;
+      font-weight: 700; color: #aaa;
+    }
+
+    /* No results */
+    .no-results { display:none; text-align:center; padding:80px 20px; }
+    .no-results.visible { display:block; }
+    .no-results i { font-size:3rem; color:#ddd; margin-bottom:16px; }
+    .no-results h3 { font-family:'Poppins',sans-serif; color:var(--navy); font-size:1.3rem; margin-bottom:8px; }
+    .no-results p { color:#888; font-size:0.9rem; }
+
+    /* CTA Section */
+    .courses-cta {
+      background: linear-gradient(135deg, #081f4e 0%, #1a1a4e 100%);
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .courses-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(254,115,12,.12) 0%, transparent 70%);
+    }
+    .courses-cta-inner { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; padding: 0 20px; }
+    .courses-cta h2 { font-family:'Poppins',sans-serif; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:800; color:#fff; margin-bottom:16px; line-height:1.3; }
+    .courses-cta h2 span { color: var(--red); }
+    .courses-cta p { color:rgba(255,255,255,.72); font-size:1rem; line-height:1.75; margin-bottom:32px; }
+    .cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .btn-cta-primary { display:inline-flex; align-items:center; gap:8px; background:var(--red); color:#fff; padding:14px 32px; border-radius:8px; font-family:'Poppins',sans-serif; font-weight:700; font-size:0.95rem; text-decoration:none; transition:all .3s; }
+    .btn-cta-primary:hover { background:#e5630a; transform:translateY(-2px); box-shadow:0 8px 24px rgba(254,115,12,.4); }
+    .btn-cta-outline { display:inline-flex; align-items:center; gap:8px; background:transparent; color:#fff; border:2px solid rgba(255,255,255,.4); padding:14px 32px; border-radius:8px; font-family:'Poppins',sans-serif; font-weight:600; font-size:0.95rem; text-decoration:none; transition:all .3s; }
+    .btn-cta-outline:hover { background:rgba(255,255,255,.1); border-color:#fff; }
+
+    /* Why Us strip */
+    .why-strip { background:#fff; padding:42px 0; border-bottom:1px solid #eee; }
+    .why-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+    @media(max-width:768px){ .why-grid { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:480px){ .why-grid { grid-template-columns:1fr 1fr; } }
+    .why-item { display:flex; align-items:center; gap:14px; }
+    .why-icon { width:48px; height:48px; border-radius:12px; background:linear-gradient(135deg,rgba(254,115,12,.1),rgba(8,31,78,.1)); display:flex; align-items:center; justify-content:center; font-size:1.2rem; color:var(--red); flex-shrink:0; }
+    .why-item strong { display:block; font-family:'Poppins',sans-serif; font-weight:700; color:var(--navy); font-size:0.9rem; }
+    .why-item small { color:#888; font-size:0.78rem; }
+
+    /* Enroll Modal */
+    .enroll-modal-body { display:flex; flex-direction:column; gap:10px; }
+    .enroll-modal-body .form-group label { color:#555; }
+    .enroll-modal-body input, .enroll-modal-body select { background:#f9fafb; border:1.5px solid #e5e7eb; color:#333; }
+    .enroll-modal-body input::placeholder { color:#bbb; }
+    .enroll-modal-body input:focus, .enroll-modal-body select:focus { border-color:var(--red); }
+    .enroll-modal-body select option { background:#fff; color:#333; }
+  </style>
+</head>
+<body>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <p>🍪 We use cookies to improve your experience on our website. By continuing to browse, you agree to our <a href="#" style="color:var(--red)">Cookie Policy</a>.</p>
+  <button class="btn btn-primary" onclick="document.getElementById('cookie-banner').classList.add('hidden');localStorage.setItem('cookies','1')">Accept</button>
+  <button class="btn btn-outline" style="border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:9px 18px;" onclick="document.getElementById('cookie-banner').classList.add('hidden')">Decline</button>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a>
+        <a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a>
+      </div>
+      <div class="top-bar-right">
+        <div class="top-bar-tagline"><i class="fas fa-map-marker-alt"></i> Excellence in Global Consulting</div>
+        <div class="top-social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-nav">
+    <div class="main-nav-inner">
+      <a href="index.html" class="logo">
+        <img src="logo/Logo.jpeg" alt="Techsphere Digital Skills Academy Logo" style="height:82px;width:82px;object-fit:contain;border-radius:50%;"/>
+        <div class="logo-text">
+          <span class="logo-title">TECHSPHERE</span>
+          <small>Digital Skills Academy</small>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li class="has-dropdown">
+          <a href="courses.html" class="active"><i class="fas fa-graduation-cap"></i> Courses <i class="fas fa-chevron-down chevron"></i></a>
+          <ul class="dropdown">
+            <li><a href="courses.html"><i class="fas fa-th-large"></i> All Courses</a></li>
+            <div class="dropdown-divider"></div>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-seedling"></i> Foundational <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-marketing"><i class="fas fa-bullhorn"></i> Digital Marketing</a></li>
+                <li><a href="course-detail.html?course=uiux-design"><i class="fas fa-pencil-ruler"></i> UI/UX Design</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-chart-line"></i> Proficiency <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=web-development"><i class="fas fa-code"></i> Web Development</a></li>
+                <li><a href="course-detail.html?course=data-analysis"><i class="fas fa-chart-bar"></i> Data Analysis</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-trophy"></i> Mastery <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=cybersecurity"><i class="fas fa-shield-alt"></i> Cybersecurity</a></li>
+                <li><a href="course-detail.html?course=ai-ml"><i class="fas fa-robot"></i> AI &amp; Machine Learning</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-building"></i> Corporate Training <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-transformation"><i class="fas fa-sync-alt"></i> Digital Transformation</a></li>
+                <li><a href="course-detail.html?course=data-leadership"><i class="fas fa-user-tie"></i> Data Leadership</a></li>
+                <li><a href="course-detail.html?course=cyber-awareness"><i class="fas fa-eye"></i> Cyber Awareness</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="ict-club.html"><i class="fas fa-laptop-code"></i> ICT Club</a></li>
+        <li><a href="contact_us.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="tel:+254748800500" class="btn-callus"><i class="fas fa-phone-alt"></i> Call us</a>
+        <div class="hamburger" onclick="toggleMenu()" id="ham"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" onclick="closeMenu()"><i class="fas fa-home"></i> Home</a>
+  <a href="index.html#about" onclick="closeMenu()"><i class="fas fa-info-circle"></i> About</a>
+  <a href="courses.html" onclick="closeMenu()"><i class="fas fa-graduation-cap"></i> Courses</a>
+  <a href="ict-club.html" onclick="closeMenu()"><i class="fas fa-laptop-code"></i> ICT Club</a>
+  <a href="contact_us.html" onclick="closeMenu()"><i class="fas fa-envelope"></i> Contact</a>
+</div>
+
+<!-- PAGE BANNER -->
+<div class="page-banner">
+  <div class="page-banner-inner">
+
+    <!-- LEFT: Text -->
+    <div class="banner-left">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Our Courses</span>
+      </div>
+      <h1>Explore Our <span>Tech Courses</span></h1>
+      <p>Master in-demand digital skills with hands-on training led by industry experts. Choose a course that aligns with your career goals and start building today.</p>
+      <div class="banner-stats">
+        <div class="banner-stat">
+          <i class="fas fa-graduation-cap"></i>
+          <div><strong>1,000+</strong><small>Graduates</small></div>
+        </div>
+        <div class="banner-stat">
+          <i class="fas fa-briefcase"></i>
+          <div><strong>95%</strong><small>Job Placement</small></div>
+        </div>
+        <div class="banner-stat">
+          <i class="fas fa-building"></i>
+          <div><strong>50+</strong><small>Industry Partners</small></div>
+        </div>
+        <div class="banner-stat">
+          <i class="fas fa-book-open"></i>
+          <div><strong>9</strong><small>Active Courses</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Carousel -->
+    <div class="banner-carousel-wrap">
+      <div class="banner-carousel" id="bannerCarousel">
+
+        <!-- Slide 1: Expert Instructors -->
+        <div class="banner-slide active">
+          <div class="bs-top-row">
+            <div class="bs-icon teal"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div><div class="bs-number">50<span>+</span></div><h3>Expert Instructors</h3></div>
+          </div>
+          <p>Learn directly from seasoned industry practitioners with real-world experience in their fields — not just theory.</p>
+          <div class="bs-tags">
+            <span class="bs-tag">Industry Veterans</span>
+            <span class="bs-tag">Mentorship</span>
+            <span class="bs-tag">1-on-1 Support</span>
+          </div>
+          <div class="bs-progress"><div class="bs-progress-bar" id="bsBar"></div></div>
+        </div>
+
+        <!-- Slide 2: Live Projects -->
+        <div class="banner-slide">
+          <div class="bs-top-row">
+            <div class="bs-icon orange"><i class="fas fa-laptop-code"></i></div>
+            <div><div class="bs-number">100<span>%</span></div><h3>Live Projects</h3></div>
+          </div>
+          <p>Every course includes hands-on projects using real tools and real data — so you graduate with a portfolio, not just a certificate.</p>
+          <div class="bs-tags">
+            <span class="bs-tag">Portfolio Ready</span>
+            <span class="bs-tag">Real Tools</span>
+            <span class="bs-tag">Team Work</span>
+          </div>
+          <div class="bs-progress"><div class="bs-progress-bar" id="bsBar"></div></div>
+        </div>
+
+        <!-- Slide 3: Certification -->
+        <div class="banner-slide">
+          <div class="bs-top-row">
+            <div class="bs-icon green"><i class="fas fa-certificate"></i></div>
+            <div><div class="bs-number">1,000<span>+</span></div><h3>Industry Certification</h3></div>
+          </div>
+          <p>Earn a recognised certificate upon completion — valued by top employers across Kenya and beyond.</p>
+          <div class="bs-tags">
+            <span class="bs-tag">Recognised</span>
+            <span class="bs-tag">Verifiable</span>
+            <span class="bs-tag">Shareable on LinkedIn</span>
+          </div>
+          <div class="bs-progress"><div class="bs-progress-bar" id="bsBar"></div></div>
+        </div>
+
+        <!-- Slide 4: Career Support -->
+        <div class="banner-slide">
+          <div class="bs-top-row">
+            <div class="bs-icon purple"><i class="fas fa-headset"></i></div>
+            <div><div class="bs-number">95<span>%</span></div><h3>Career Support</h3></div>
+          </div>
+          <p>From CV writing to mock interviews and job placement, our career team walks with you until you land your dream role.</p>
+          <div class="bs-tags">
+            <span class="bs-tag">Job Placement</span>
+            <span class="bs-tag">CV Review</span>
+            <span class="bs-tag">Interview Prep</span>
+          </div>
+          <div class="bs-progress"><div class="bs-progress-bar" id="bsBar"></div></div>
+        </div>
+
+      </div><!-- /banner-carousel -->
+
+      <!-- Dots -->
+      <div class="banner-dots" id="bannerDots">
+        <button class="banner-dot active" onclick="goToBannerSlide(0)"></button>
+        <button class="banner-dot" onclick="goToBannerSlide(1)"></button>
+        <button class="banner-dot" onclick="goToBannerSlide(2)"></button>
+        <button class="banner-dot" onclick="goToBannerSlide(3)"></button>
+      </div>
+    </div><!-- /banner-carousel-wrap -->
+
+  </div>
+</div>
+
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+<button class="filter-btn" data-filter="foundational" onclick="filterCourses('foundational',this)">
+      <i class="fas fa-seedling"></i> Foundational <span class="filter-count">2</span>
+    </button>
+    <button class="filter-btn" data-filter="proficiency" onclick="filterCourses('proficiency',this)">
+      <i class="fas fa-layer-group"></i> Proficiency <span class="filter-count">2</span>
+    </button>
+    <button class="filter-btn" data-filter="mastery" onclick="filterCourses('mastery',this)">
+      <i class="fas fa-crown"></i> Mastery <span class="filter-count">2</span>
+    </button>
+    <button class="filter-btn" data-filter="corporate" onclick="filterCourses('corporate',this)">
+      <i class="fas fa-building"></i> Corporate Training <span class="filter-count">3</span>
+    </button>
+  </div>
+</div>
+
+<!-- SEARCH BAR -->
+<div class="search-section">
+  <div class="search-inner">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="courseSearch" placeholder="Search courses..." oninput="searchCourses(this.value)"/>
+    </div>
+    <p class="results-count"><strong id="visibleCount">9</strong> courses found</p>
+  </div>
+</div>
+
+<!-- COURSES GRID -->
+<section class="courses-page-section">
+  <div class="container">
+    <div class="courses-page-grid" id="coursesGrid">
+
+      <!-- ══════════ FOUNDATIONAL ══════════ -->
+
+      <!-- 1. DIGITAL MARKETING -->
+      <div class="course-card-ext" id="digital-marketing" data-category="foundational" data-name="digital marketing seo social media content advertising analytics ppc">
+        <div class="course-img-wrap">
+          <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=700&q=80" alt="Digital Marketing"/>
+          <span class="course-badge">Popular</span>
+          <span class="course-level level-beginner">Beginner</span>
+        </div>
+        <div class="course-body-ext">
+          <div class="course-title-row">
+            <div class="course-icon red"><i class="fas fa-bullhorn"></i></div>
+            <h3>Digital Marketing</h3>
+          </div>
+          <p class="course-desc-ext">Master SEO, social media strategy, paid advertising, content marketing and analytics to grow businesses online. <a href="course-detail.html?course=digital-marketing" class="read-more-link">Read more <i class="fas fa-arrow-right"></i></a></p>
+          <div class="course-tags">
+            <span class="course-tag">SEO</span><span class="course-tag">Google Ads</span>
+            <span class="course-tag">Social Media</span><span class="course-tag">Analytics</span>
+          </div>
+          <div class="course-meta-ext">
+            <span><i class="far fa-clock"></i> 10 weeks</span>
+            <span><i class="fas fa-users"></i> 35 students</span>
+            <span><i class="fas fa-signal"></i> Beginner</span>
+          </div>
+          <div class="course-stars-ext">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            <span>(4.7) · 156 reviews</span>
+          </div>
+          <div class="course-footer-ext">
+            <div class="course-price-ext"><strong>KES 9,999</strong><small>Complete program</small></div>
+            <a href="#" class="btn-enroll" onclick="openEnrollModal('Digital Marketing')">Enroll Now <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. UI/UX DESIGN -->
+      <div class="course-card-ext" id="uiux-design" data-category="foundational" data-name="ui ux design figma wireframing prototyping user research interface">
+        <div class="course-img-wrap">
+          <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=700&q=80" alt="UI/UX Design"/>
+          <span class="course-badge">Popular</span>
+          <span class="course-level level-beginner">Beginner</span>
+        </div>
+        <div class="course-body-ext">
+          <div class="course-title-row">
+            <div class="course-icon green"><i class="fas fa-pencil-ruler"></i></div>
+            <h3>UI/UX Design</h3>
+          </div>
+          <p class="course-desc-ext">Learn user research, wireframing, prototyping and design systems using Figma to craft beautiful, user-centred digital products. <a href="course-detail.html?course=uiux-design" class="read-more-link">Read more <i class="fas fa-arrow-right"></i></a></p>
+          <div class="course-tags">
+            <span class="course-tag">Figma</span><span class="course-tag">User Research</span><span class="course-tag">Prototyping</span>
+          </div>
+          <div class="course-meta-ext">
+            <span><i class="far fa-clock"></i> 10 weeks</span>
+            <span><i class="fas fa-users"></i> 28 students</span>
+            <span><i class="fas fa-signal"></i> Beginner</span>
+          </div>
+          <div class="course-stars-ext">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            <span>(4.8) · 112 reviews</span>
+          </div>
+          <div class="course-footer-ext">
+            <div class="course-price-ext"><strong>KES 10,999</strong><small>Complete program</small></div>
+            <a href="#" class="btn-enroll" onclick="openEnrollModal('UI/UX Design')">Enroll Now <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ PROFICIENCY ══════════ -->
+
+      <!-- 3. WEB DEVELOPMENT -->
+      <div class="course-card-ext" id="web-development" data-category="proficiency" data-name="web development html css javascript react nodejs frontend backend">
+        <div class="course-img-wrap">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=700&q=80" alt="Web Development"/>
+          <span class="course-badge">Popular</span>
+          <span class="course-level level-intermediate">Intermediate</span>
+        </div>
+        <div class="course-body-ext">
+          <div class="course-title-row">
+            <div class="course-icon orange"><i class="fas fa-code"></i></div>
+            <h3>Web Development</h3>
+          </div>
+          <p class="course-desc-ext">Build modern, responsive websites and web applications using HTML, CSS, JavaScript, React and Node.js from scratch. <a href="course-detail.html?course=web-development" class="read-more-link">Read more <i class="fas fa-arrow-right"></i></a></p>
+          <div class="course-tags">
+            <span class="course-tag">HTML/CSS</span><span class="course-tag">JavaScript</span>
+            <span class="course-tag">React</span><span class="course-tag">Node.js</span>
+          </div>
+          <div class="course-meta-ext">
+            <span><i class="far fa-clock"></i> 16 weeks</span>
+            <span><i class="fas fa-users"></i> 30 students</span>
+            <span><i class="fas fa-signal"></i> Intermediate</span>
+          </div>
+          <div class="course-stars-ext">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <span>(4.9) · 204 reviews</span>
+          </div>
+          <div class="course-footer-ext">
+            <div class="course-price-ext"><strong>KES 14,999</strong><small>Complete program</small></div>
+            <a href="#" class="btn-enroll" onclick="openEnrollModal('Web Development')">Enroll Now <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. DATA ANALYSIS -->
+      <div class="course-card-ext" id="data-analysis" data-category="proficiency" data-name="data analysis visualization statistics business intelligence excel power bi sql">
+        <div class="course-img-wrap">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80" alt="Data Analysis"/>
+          <span class="course-badge">Popular</span>
+          <span class="course-level level-intermediate">Intermediate</span>
+        </div>
+        <div class="course-body-ext">
+          <div class="course-title-row">
+            <div class="course-icon teal"><i class="fas fa-chart-bar"></i></div>
+            <h3>Data Analysis</h3>
+          </div>
+          <p class="course-desc-ext">Master data visualization, statistical analysis, and business intelligence tools to make data-driven decisions with confidence. <a href="course-detail.html?course=data-analysis" class="read-more-link">Read more <i class="fas fa-arrow-right"></i></a></p>
+          <div class="course-tags">
+            <span class="course-tag">Excel</span><span class="course-tag">Power BI</span>
+            <span class="course-tag">Python</span><span class="course-tag">SQL</span>
+          </div>
+          <div class="course-meta-ext">
+            <span><i class="far fa-clock"></i> 12 weeks</span>
+            <span><i class="fas fa-users"></i> 25 students</span>
+            <span><i class="fas fa-signal"></i> Intermediate</span>
+          </div>
+          <div class="course-stars-ext">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <span>(4.9) · 128 reviews</span>
+          </div>
+          <div class="course-footer-ext">
+            <div class="course-price-ext"><strong>KES 12,999</strong><small>Complete program</small></div>
+            <a href="#" class="btn-enroll" onclick="openEnrollModal('Data Analysis')">Enroll Now <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ MASTERY ══════════ -->
+
+      <!-- 5. CYBERSECURITY -->
+      <div class="course-card-ext" id="cybersecurity" data-category="mastery" data-name="cybersecurity ethical hacking network security threat detection penetration testing kali linux">
+        <div class="course-img-wrap">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=700&q=80" alt="Cybersecurity"/>
+          <span class="course-badge">Popular</span>
+          <span class="course-level level-advanced">Advanced</span>
+        </div>
+        <div class="course-body-ext">
+          <div class="course-title-row">
+            <div class="course-icon navy"><i class="fas fa-shield-alt"></i></div>
+            <h3>Cybersecurity</h3>
+          </div>
+          <p class="course-desc-ext">Learn ethical hacking, network security, threat detection, and how to protect digital systems from cyber attacks. <a href="course-detail.html?course=cybersecurity" class="read-more-link">Read more <i class="fas fa-arrow-right"></i></a></p>
+          <div class="course-tags">
+            <span class="course-tag">Ethical Hacking</span>
+            <span class="course-tag">Network Security</span><span class="course-tag">Kali Linux</span>
+          </div>
+          <div class="course-meta-ext">
+            <span><i class="far fa-clock"></i> 14 weeks</span>
+            <span><i class="fas fa-users"></i> 20 students</span>
+            <span><i class="fas fa-signal"></i> Advanced</span>
+          </div>
+          <div class="course-stars-ext">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <span>(4.8) · 97 reviews</span>
+          </div>
+          <div class="course-footer-ext">
+            <div class="course-price-ext"><strong>KES 17,999</strong><small>Complete program</small></div>
+            <a href="#" class="btn-enroll" onclick="openEnrollModal('Cybersecurity')">Enroll Now <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. AI & MACHINE LEARNING -->
+      <div class="course-card-ext" id="ai-ml" data-category="mastery" data-name="artificial intelligence machine learning deep learning neural networks python tensorflow pytorch nlp">
+        <div class="course-img-wrap">
+          <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=80" alt="AI & Machine Learning"/>
+          <span class="course-badge">Popular</span>
+          <span class="course-level level-advanced">Advanced</span>
+        </div>
+        <div class="course-body-ext">
+          <div class="course-title-row">
+            <div class="course-icon purple"><i class="fas fa-robot"></i></div>
+            <h3>AI &amp; Machine Learning</h3>
+          </div>
+          <p class="course-desc-ext">Deep dive into AI algorithms, neural networks, and deep learning frameworks to build intelligent, data-powered applications. <a href="course-detail.html?course=ai-ml" class="read-more-link">Read more <i class="fas fa-arrow-right"></i></a></p>
+          <div class="course-tags">
+            <span class="course-tag">Python</span><span class="course-tag">TensorFlow</span>
+            <span class="course-tag">PyTorch</span><span class="course-tag">NLP</span>
+          </div>
+          <div class="course-meta-ext">
+            <span><i class="far fa-clock"></i> 20 weeks</span>
+            <span><i class="fas fa-users"></i> 15 students</span>
+            <span><i class="fas fa-signal"></i> Advanced</span>
+          </div>
+          <div class="course-stars-ext">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <span>(5.0) · 73 reviews</span>
+          </div>
+          <div class="course-footer-ext">
+            <div class="course-price-ext"><strong>KES 22,999</strong><small>Complete program</small></div>
+            <a href="#" class="btn-enroll" onclick="openEnrollModal('AI & Machine Learning')">Enroll Now <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ CORPORATE TRAINING ══════════ -->
+
+      <!-- 7. CORPORATE DIGITAL TRANSFORMATION -->
+      <div class="course-card-ext" id="digital-transformation" data-category="corporate" data-name="corporate digital transformation teams enterprise strategy technology">
+        <div class="course-img-wrap">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&q=80" alt="Corporate Digital Transformation"/>
+          <span class="course-badge" style="background:#fef3c7;color:#b45309;">Custom</span>
+          <span class="course-level" style="background:rgba(8,31,78,.12);color:#081f4e;">Corporate</span>
+        </div>
+        <div class="course-body-ext">
+          <div class="course-title-row">
+            <div class="course-icon navy"><i class="fas fa-rocket"></i></div>
+            <h3>Corporate Digital Transformation</h3>
+          </div>
+          <p class="course-desc-ext">Equip your entire team with the digital mindset and tools to drive innovation, automate processes and stay ahead in a fast-evolving market. <a href="course-detail.html?course=digital-transformation" class="read-more-link">Read more <i class="fas fa-arrow-right"></i></a></p>
+          <div class="course-tags">
+            <span class="course-tag">Team Training</span><span class="course-tag">Strategy</span>
+            <span class="course-tag">Automation</span><span class="course-tag">Change Mgmt</span>
+          </div>
+          <div class="course-meta-ext">
+            <span><i class="far fa-clock"></i> Flexible</span>
+            <span><i class="fas fa-users"></i> 10–50 staff</span>
+            <span><i class="fas fa-signal"></i> All levels</span>
+          </div>
+          <div class="course-stars-ext">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <span>(5.0) · 42 reviews</span>
+          </div>
+          <div class="course-footer-ext">
+            <div class="course-price-ext"><strong>Custom Quote</strong><small>Per organisation</small></div>
+            <a href="index.html#contact" class="btn-enroll">Get a Quote <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. DATA-DRIVEN LEADERSHIP -->
+      <div class="course-card-ext" id="data-leadership" data-category="corporate" data-name="data driven leadership management executives strategy decisions business intelligence">
+        <div class="course-img-wrap">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=700&q=80" alt="Data-Driven Leadership"/>
+          <span class="course-badge" style="background:#fef3c7;color:#b45309;">Custom</span>
+          <span class="course-level" style="background:rgba(8,31,78,.12);color:#081f4e;">Corporate</span>
+        </div>
+        <div class="course-body-ext">
+          <div class="course-title-row">
+            <div class="course-icon teal"><i class="fas fa-chart-line"></i></div>
+            <h3>Data-Driven Leadership</h3>
+          </div>
+          <p class="course-desc-ext">Empower managers and executives to harness data insights for smarter decision-making, KPI tracking and strategic planning. <a href="course-detail.html?course=data-leadership" class="read-more-link">Read more <i class="fas fa-arrow-right"></i></a></p>
+          <div class="course-tags">
+            <span class="course-tag">Executives</span><span class="course-tag">Dashboards</span>
+            <span class="course-tag">KPIs</span><span class="course-tag">Power BI</span>
+          </div>
+          <div class="course-meta-ext">
+            <span><i class="far fa-clock"></i> 6 weeks</span>
+            <span><i class="fas fa-users"></i> 5–20 staff</span>
+            <span><i class="fas fa-signal"></i> Intermediate</span>
+          </div>
+          <div class="course-stars-ext">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            <span>(4.9) · 31 reviews</span>
+          </div>
+          <div class="course-footer-ext">
+            <div class="course-price-ext"><strong>Custom Quote</strong><small>Per organisation</small></div>
+            <a href="index.html#contact" class="btn-enroll">Get a Quote <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. CYBERSECURITY AWARENESS FOR ORGANISATIONS -->
+      <div class="course-card-ext" id="cyber-awareness" data-category="corporate" data-name="cybersecurity awareness organisations staff training security compliance phishing">
+        <div class="course-img-wrap">
+          <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=700&q=80" alt="Cybersecurity for Organisations"/>
+          <span class="course-badge" style="background:#fef3c7;color:#b45309;">Custom</span>
+          <span class="course-level" style="background:rgba(8,31,78,.12);color:#081f4e;">Corporate</span>
+        </div>
+        <div class="course-body-ext">
+          <div class="course-title-row">
+            <div class="course-icon orange"><i class="fas fa-user-shield"></i></div>
+            <h3>Cybersecurity for Organisations</h3>
+          </div>
+          <p class="course-desc-ext">Train your entire workforce to identify cyber threats, avoid phishing, safeguard company data and maintain compliance with security standards. <a href="course-detail.html?course=cyber-awareness" class="read-more-link">Read more <i class="fas fa-arrow-right"></i></a></p>
+          <div class="course-tags">
+            <span class="course-tag">All Staff</span><span class="course-tag">Compliance</span>
+            <span class="course-tag">Phishing</span><span class="course-tag">Data Privacy</span>
+          </div>
+          <div class="course-meta-ext">
+            <span><i class="far fa-clock"></i> 4 weeks</span>
+            <span><i class="fas fa-users"></i> Unlimited staff</span>
+            <span><i class="fas fa-signal"></i> All levels</span>
+          </div>
+          <div class="course-stars-ext">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <span>(4.8) · 58 reviews</span>
+          </div>
+          <div class="course-footer-ext">
+            <div class="course-price-ext"><strong>Custom Quote</strong><small>Per organisation</small></div>
+            <a href="index.html#contact" class="btn-enroll">Get a Quote <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /courses-page-grid -->
+
+    <!-- No results message -->
+    <div class="no-results" id="noResults">
+      <i class="fas fa-search"></i>
+      <h3>No courses found</h3>
+      <p>Try a different keyword or select another category.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="courses-cta">
+  <div class="courses-cta-inner">
+    <span class="badge" style="background:rgba(254,115,12,.2); margin-bottom:20px;">Ready to Begin?</span>
+    <h2>Not Sure Which Course to <span>Choose?</span></h2>
+    <p>Talk to one of our academic advisors and we'll help you pick the right path based on your goals, experience, and timeline.</p>
+    <div class="cta-btns">
+      <a href="index.html#contact" class="btn-cta-primary"><i class="fas fa-headset"></i> Talk to an Advisor</a>
+      <a href="tel:+254748800500" class="btn-cta-outline"><i class="fas fa-phone-alt"></i> Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLL MODAL -->
+<div class="modal-overlay" id="modal-enroll">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeEnrollModal()"><i class="fas fa-times"></i></button>
+    <div class="modal-icon"><i class="fas fa-graduation-cap"></i></div>
+    <h2>Enroll in <span id="enrollCourseName" style="color:var(--red);"></span></h2>
+    <p style="color:#888; font-size:0.9rem; margin-bottom:20px;">Fill in your details and our team will contact you within 24 hours to complete your enrollment.</p>
+    <form class="enroll-modal-body" onsubmit="submitEnroll(event)">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="John" required/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe" required/></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com" required/></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+254 700 000 000" required/></div>
+      <div class="form-group">
+        <label>Preferred Start Date</label>
+        <select>
+          <option value="">Select a batch...</option>
+          <option>April 2026 – Intake</option>
+          <option>May 2026 – Intake</option>
+          <option>June 2026 – Intake</option>
+          <option>July 2026 – Intake</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:4px;">
+        <i class="fas fa-paper-plane"></i> Submit Enrollment
+      </button>
+      <div class="form-success" id="enroll-success" style="color:#86efac;">
+        <i class="fas fa-check-circle"></i> Enrollment submitted! We'll be in touch within 24 hours.
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="align-items:center;">
+          <img src="logo/Logo.jpeg" alt="Techsphere Logo" style="height:52px;width:52px;object-fit:contain;border-radius:50%;"/>
+          <div class="logo-text" style="color:#fff;">
+            <span class="logo-title">TECHSPHERE</span>
+            <small style="color:var(--red);">Digital Skills Academy</small>
+          </div>
+        </a>
+        <p>Empowering the next generation of tech professionals with practical, industry-led digital skills training. Excellence in every engagement.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Courses</h4>
+        <ul>
+          <li><a href="courses.html#data-analysis"><i class="fas fa-chevron-right"></i> Data Analysis</a></li>
+          <li><a href="courses.html#web-development"><i class="fas fa-chevron-right"></i> Web Development</a></li>
+          <li><a href="courses.html#cybersecurity"><i class="fas fa-chevron-right"></i> Cybersecurity</a></li>
+          <li><a href="courses.html#digital-marketing"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li>
+          <li><a href="courses.html#ai-ml"><i class="fas fa-chevron-right"></i> AI &amp; Machine Learning</a></li>
+          <li><a href="courses.html#uiux-design"><i class="fas fa-chevron-right"></i> UI/UX Design</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="index.html#values"><i class="fas fa-chevron-right"></i> Our Values</a></li>
+          <li><a href="index.html#how"><i class="fas fa-chevron-right"></i> How We Work</a></li>
+          <li><a href="index.html#blog"><i class="fas fa-chevron-right"></i> Blog</a></li>
+          <li><a href="index.html#contact"><i class="fas fa-chevron-right"></i> Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Garden Estate, Nairobi</a></li>
+          <li><a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a></li>
+          <li><a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 <span>Techsphere Digital Skills Academy</span>. All rights reserved. Excellence in every engagement.</p>
+      <p><a href="#" style="color:rgba(255,255,255,.4); text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp; <a href="#" style="color:rgba(255,255,255,.4); text-decoration:none;">Terms of Service</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+
+<script>
+  // Cookie banner
+  if (localStorage.getItem('cookies')) document.getElementById('cookie-banner').classList.add('hidden');
+
+  // ── Banner Carousel ──
+  let bsCurrent = 0;
+  const bsDuration = 4000;
+  let bsTimer = null;
+  let bsProgressTimer = null;
+
+  function goToBannerSlide(index) {
+    const slides = document.querySelectorAll('.banner-slide');
+    const dots   = document.querySelectorAll('.banner-dot');
+    slides[bsCurrent].classList.remove('active');
+    dots[bsCurrent].classList.remove('active');
+    bsCurrent = (index + slides.length) % slides.length;
+    slides[bsCurrent].classList.add('active');
+    dots[bsCurrent].classList.add('active');
+    startBsProgress();
+  }
+
+  function startBsProgress() {
+    clearInterval(bsProgressTimer);
+    // reset all bars
+    document.querySelectorAll('.bs-progress-bar').forEach(b => {
+      b.style.transition = 'none';
+      b.style.width = '0%';
+    });
+    // animate the active slide's bar
+    const activeBar = document.querySelectorAll('.banner-slide.active .bs-progress-bar')[0];
+    if (!activeBar) return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        activeBar.style.transition = `width ${bsDuration}ms linear`;
+        activeBar.style.width = '100%';
+      });
+    });
+  }
+
+  function startBsAuto() {
+    clearInterval(bsTimer);
+    bsTimer = setInterval(() => goToBannerSlide(bsCurrent + 1), bsDuration);
+  }
+
+  // Pause on hover
+  document.getElementById('bannerCarousel').addEventListener('mouseenter', () => clearInterval(bsTimer));
+  document.getElementById('bannerCarousel').addEventListener('mouseleave', startBsAuto);
+
+  // Kick off
+  startBsProgress();
+  startBsAuto();
+
+  // Mobile menu
+  function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+  function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+  // Back to top visibility
+  window.addEventListener('scroll', () => {
+    document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // Filter courses by category
+  function filterCourses(category, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cards = document.querySelectorAll('.course-card-ext');
+    const dividers = document.querySelectorAll('.section-divider');
+    let visible = 0;
+
+    cards.forEach(card => {
+      const match = category === 'all' || card.dataset.category === category;
+      card.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+
+    // Show/hide section dividers
+    dividers.forEach(div => {
+      if (category === 'all') {
+        div.classList.remove('hidden');
+      } else {
+        const sectionMatch = div.dataset.divider === category;
+        div.classList.toggle('hidden', !sectionMatch);
+      }
+    });
+
+    document.getElementById('visibleCount').textContent = visible;
+    document.getElementById('noResults').classList.toggle('visible', visible === 0);
+  }
+
+  // Search courses
+  function searchCourses(query) {
+    const q = query.toLowerCase().trim();
+    const cards = document.querySelectorAll('.course-card-ext');
+    const dividers = document.querySelectorAll('.section-divider');
+    let visible = 0;
+
+    cards.forEach(card => {
+      const name = card.dataset.name || '';
+      const match = q === '' || name.includes(q);
+      card.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+
+    // When searching, hide all dividers for cleaner results; show all when cleared
+    dividers.forEach(div => div.classList.toggle('hidden', q !== ''));
+
+    document.getElementById('visibleCount').textContent = visible;
+    document.getElementById('noResults').classList.toggle('visible', visible === 0);
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  }
+
+  // Enroll Modal
+  function openEnrollModal(courseName) {
+    document.getElementById('enrollCourseName').textContent = courseName;
+    document.getElementById('modal-enroll').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeEnrollModal() {
+    document.getElementById('modal-enroll').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modal-enroll').addEventListener('click', function(e) {
+    if (e.target === this) closeEnrollModal();
+  });
+
+  // Enroll form submit
+  function submitEnroll(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=submit]');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('enroll-success').style.display = 'block';
+      e.target.reset();
+      btn.innerHTML = '<i class="fas fa-check"></i> Submitted!';
+      setTimeout(() => {
+        closeEnrollModal();
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Enrollment';
+        btn.disabled = false;
+        document.getElementById('enroll-success').style.display = 'none';
+      }, 3000);
+    }, 1500);
+  }
+
+  // Scroll reveal for course cards
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.course-card-ext').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = `opacity .5s ease ${i * 0.08}s, transform .5s ease ${i * 0.08}s`;
+    revealObs.observe(el);
+  });
+
+  // Handle anchor scroll from dropdown links (e.g. courses.html#web-development)
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      if (target) {
+        setTimeout(() => {
+          const offset = 220;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+          target.style.outline = '3px solid var(--red)';
+          target.style.outlineOffset = '4px';
+          target.style.borderRadius = '16px';
+          setTimeout(() => { target.style.outline = ''; target.style.outlineOffset = ''; }, 2500);
+        }, 400);
+      }
+    }
+  });
+</script>
+</body>
+</html>

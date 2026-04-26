@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:atarahsolutions.co.ke)",
+      "Bash(echo $HOME)",
+      "Read(//c/Users/Nyachomo/**)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm run:*)",
+      "Bash(composer show *)",
+      "Bash(php artisan *)"
+    ]
+  }
+}

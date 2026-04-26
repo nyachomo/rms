@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Techsphere Digital Skills Academy – Excellence in Global Consulting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <p>🍪 We use cookies to improve your experience on our website. By continuing to browse, you agree to our <a href="#" style="color:var(--red)">Cookie Policy</a>.</p>
+  <button class="btn btn-primary" onclick="document.getElementById('cookie-banner').classList.add('hidden');localStorage.setItem('cookies','1')">Accept</button>
+  <button class="btn btn-outline" style="border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7);padding:9px 18px;" onclick="document.getElementById('cookie-banner').classList.add('hidden')">Decline</button>
+</div>
+
+<!-- HEADER -->
+<header>
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a>
+        <a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a>
+      </div>
+      <div class="top-bar-right">
+        <div class="top-bar-tagline"><i class="fas fa-map-marker-alt"></i> Excellence in Global Consulting</div>
+        <div class="top-social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAV -->
+  <div class="main-nav">
+    <div class="main-nav-inner">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <img src="logo/Logo.jpeg" alt="Techsphere Digital Skills Academy Logo" style="height:82px;width:82px;object-fit:contain;border-radius:50%;"/>
+        <div class="logo-text">
+          <span class="logo-title">TECHSPHERE</span>
+          <small>Digital Skills Academy</small>
+        </div>
+      </a>
+
+      <!-- Nav Links -->
+      <ul class="nav-links">
+        <li><a href="#hero" class="active"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li class="has-dropdown">
+          <a href="courses.html"><i class="fas fa-graduation-cap"></i> Courses <i class="fas fa-chevron-down chevron"></i></a>
+          <ul class="dropdown">
+            <li><a href="courses.html"><i class="fas fa-th-large"></i> All Courses</a></li>
+            <div class="dropdown-divider"></div>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-seedling"></i> Foundational <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-marketing"><i class="fas fa-bullhorn"></i> Digital Marketing</a></li>
+                <li><a href="course-detail.html?course=uiux-design"><i class="fas fa-pencil-ruler"></i> UI/UX Design</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-chart-line"></i> Proficiency <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=web-development"><i class="fas fa-code"></i> Web Development</a></li>
+                <li><a href="course-detail.html?course=data-analysis"><i class="fas fa-chart-bar"></i> Data Analysis</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-trophy"></i> Mastery <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=cybersecurity"><i class="fas fa-shield-alt"></i> Cybersecurity</a></li>
+                <li><a href="course-detail.html?course=ai-ml"><i class="fas fa-robot"></i> AI &amp; Machine Learning</a></li>
+              </ul>
+            </li>
+            <li class="has-submenu">
+              <a href="#"><i class="fas fa-building"></i> Corporate Training <i class="fas fa-chevron-right sub-chevron"></i></a>
+              <ul class="submenu">
+                <li><a href="course-detail.html?course=digital-transformation"><i class="fas fa-sync-alt"></i> Digital Transformation</a></li>
+                <li><a href="course-detail.html?course=data-leadership"><i class="fas fa-user-tie"></i> Data Leadership</a></li>
+                <li><a href="course-detail.html?course=cyber-awareness"><i class="fas fa-eye"></i> Cyber Awareness</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="ict-club.html"><i class="fas fa-laptop-code"></i> ICT Club</a></li>
+        <li><a href="contact_us.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+
+      <!-- CTA + Hamburger -->
+      <div style="display:flex;align-items:center;gap:14px;">
+        <a href="tel:+254748800500" class="btn-callus"><i class="fas fa-phone-alt"></i> Call us</a>
+        <div class="hamburger" onclick="toggleMenu()" id="ham">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#hero" onclick="closeMenu()"><i class="fas fa-home"></i> Home</a>
+  <a href="#about" onclick="closeMenu()"><i class="fas fa-info-circle"></i> About</a>
+  <a href="courses.html" onclick="closeMenu()"><i class="fas fa-graduation-cap"></i> Courses</a>
+  <a href="ict-club.html" onclick="closeMenu()"><i class="fas fa-laptop-code"></i> ICT Club</a>
+  <a href="contact_us.html" onclick="closeMenu()"><i class="fas fa-envelope"></i> Contact</a>
+</div>
+
+<!-- HERO SECTION -->
+<section id="hero">
+  <div class="slide slide-1 active"></div>
+  <div class="slide slide-2"></div>
+  <div class="slide slide-3"></div>
+
+  <div class="hero-content">
+
+    <!-- LEFT: Text -->
+    <div class="hero-left">
+      <div class="hero-badge">
+        <i class="fas fa-star" style="color:#ffe066;font-size:.75rem;"></i> New batch starting soon!
+      </div>
+      <h1 class="hero-title">
+        Launch Your <span class="text-teal">Tech</span><br>
+        <span class="text-orange">Career</span> Today
+      </h1>
+      <p class="hero-sub">Join Techsphere Digital Skills Academy and master cutting-edge technologies with industry experts. Transform your future with our comprehensive tech programs.</p>
+      <div class="hero-btns">
+        <a href="courses.html" class="btn-hero-primary">Explore Courses <i class="fas fa-arrow-right"></i></a>
+        <a href="#" class="btn-hero-secondary"><i class="fas fa-download"></i> Download Brochure</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>1,000+</strong><span>Graduates</span></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><strong>95%</strong><span>Job Placement</span></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><strong>50+</strong><span>Industry Partners</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Image carousel -->
+    <div class="hero-right">
+      <div class="hero-img-wrap">
+        <div class="rcarousel" id="heroRCarousel">
+          <div class="rcarousel-track" id="heroRTrack">
+            <div class="rcarousel-slide"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Students collaborating"/></div>
+            <div class="rcarousel-slide"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" alt="Tech training"/></div>
+            <div class="rcarousel-slide"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80" alt="Online learning"/></div>
+            <div class="rcarousel-slide"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80" alt="Coding class"/></div>
+          </div>
+          <!-- Dots -->
+          <div class="rcarousel-dots" id="heroRDots"></div>
+        </div>
+        <!-- Sparkle top-right -->
+        <div class="hero-img-sparkle"><i class="fas fa-star"></i></div>
+        <!-- Floating card bottom-left -->
+        <div class="hero-float-card">
+          <div class="hero-float-icon"><i class="fas fa-code"></i></div>
+          <div>
+            <strong>Live Projects</strong>
+            <p>Real-world experience</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Carousel controls -->
+  <button class="slide-arrow slide-prev" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+  <button class="slide-arrow slide-next" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
+  <div class="slide-nav" id="slide-nav"></div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item"><h3><span class="counter" data-target="12">0</span>+</h3><p>Years of Experience</p></div>
+      <div class="stat-item"><h3><span class="counter" data-target="500">0</span>+</h3><p>Clients Served</p></div>
+      <div class="stat-item"><h3><span class="counter" data-target="40">0</span>+</h3><p>Expert Consultants</p></div>
+      <div class="stat-item"><h3><span class="counter" data-target="98">0</span>%</h3><p>Client Satisfaction</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=800&q=80" alt="About Techsphere Digital Skills Academy" class="about-img"/>
+        <div class="about-badge"><h3>12+</h3><p>Years of Excellence</p></div>
+      </div>
+      <div class="about-content">
+        <span class="badge">Who We Are</span>
+        <h2 class="section-title">Empowering Growth Through <span>World-Class Training</span></h2>
+        <p class="section-subtitle">We deliver transformative training programs that equip professionals, teams, and organizations with the skills needed to thrive in today's dynamic world.</p>
+        <blockquote>"Learning is the foundation of progress. We design every program to spark real change — in people, teams, and organizations."<cite>— CEO, Techsphere Digital Skills Academy</cite></blockquote>
+        <div class="about-features">
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Industry-Relevant Curriculum</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Certified Expert Facilitators</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Hands-On Practical Learning</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Flexible Online & In-Person</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Recognized Certifications</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Tailored Corporate Programs</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Continuous Skills Development</div>
+          <div class="about-feat"><i class="fas fa-check-circle"></i> Measurable Learning Outcomes</div>
+        </div>
+        <a href="contact_us.html" class="btn btn-navy"><i class="fas fa-paper-plane"></i> Start Your Training Journey</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES -->
+<section id="values" class="section">
+  <div class="container">
+    <div class="section-header" style="text-align:center;">
+      <span class="badge" style="background:rgba(254,115,12,.2);">Our</span>
+      <h2 class="section-title">Core <span>Values</span></h2>
+      <p class="section-subtitle" style="margin:0 auto;">The principles that shape every course, every facilitator, and every learning experience we create.</p>
+    </div>
+    <div class="values-carousel-wrap">
+      <button class="values-btn values-btn-prev" id="valuesPrev"><i class="fas fa-chevron-left"></i></button>
+      <div class="values-carousel-viewport">
+        <div class="values-carousel-track" id="valuesTrack">
+          <div class="value-card"><div class="value-icon">📚</div><h4>Learner-Centred</h4><p>Every program is designed around the learner's needs, pace, and real-world context for maximum impact.</p></div>
+          <div class="value-card"><div class="value-icon">🎓</div><h4>Academic Rigour</h4><p>Our curricula are built on proven methodologies, current research, and industry best practices.</p></div>
+          <div class="value-card"><div class="value-icon">💡</div><h4>Practical Application</h4><p>We bridge theory and practice through hands-on exercises, case studies, and real-world simulations.</p></div>
+          <div class="value-card"><div class="value-icon">🌍</div><h4>Inclusivity</h4><p>We create welcoming, accessible learning environments where every participant can grow and thrive.</p></div>
+          <div class="value-card"><div class="value-icon">🔄</div><h4>Continuous Improvement</h4><p>We constantly update our programs to reflect evolving industry trends, technologies, and learner feedback.</p></div>
+          <div class="value-card"><div class="value-icon">🤝</div><h4>Collaboration</h4><p>Learning thrives in community — we foster peer interaction, group work, and knowledge sharing.</p></div>
+          <div class="value-card"><div class="value-icon">🎯</div><h4>Outcome Focus</h4><p>Success is measured by what learners can do after training — skills gained, certifications earned, careers advanced.</p></div>
+          <div class="value-card"><div class="value-icon">🌱</div><h4>Lifelong Growth</h4><p>We inspire a culture of continuous learning that extends far beyond the classroom or course completion.</p></div>
+        </div>
+      </div>
+      <button class="values-btn values-btn-next" id="valuesNext"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <div class="values-dots" id="valuesDots"></div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section id="how" class="section">
+  <div class="container">
+    <div class="section-header" style="text-align:center;">
+      <span class="badge">Our Methodology</span>
+      <h2 class="section-title">Our Training <span>Process</span></h2>
+      <p class="section-subtitle" style="margin:0 auto;">A proven four-step learning journey designed to equip every participant with practical skills and lasting impact.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">01</div><h4>Assess</h4><p>We identify your learning needs, skill gaps, and goals through a thorough pre-training needs analysis and consultation.</p></div>
+      <div class="step-card"><div class="step-num">02</div><h4>Design</h4><p>Our facilitators craft a customized, industry-relevant curriculum with hands-on activities tailored to your context and objectives.</p></div>
+      <div class="step-card"><div class="step-num">03</div><h4>Train</h4><p>Participants engage in interactive, practical sessions — online or in-person — guided by certified expert facilitators.</p></div>
+      <div class="step-card"><div class="step-num">04</div><h4>Evaluate</h4><p>We measure learning outcomes, gather feedback, and provide post-training support to ensure skills are applied on the job.</p></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="align-items:center;">
+          <img src="logo/Logo.jpeg" alt="Techsphere Logo" style="height:52px;width:52px;object-fit:contain;border-radius:50%;"/>
+          <div class="logo-text" style="color:#fff;">
+            <span class="logo-title">TECHSPHERE</span>
+            <small style="color:var(--red);">Digital Skills Academy</small>
+          </div>
+        </a>
+        <p>Providing expert holistic HR solutions to businesses, institutions, government and non-profit organizations. Excellence in every engagement.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Courses</h4><ul><li><a href="courses.html#data-analysis"><i class="fas fa-chevron-right"></i> Data Analysis</a></li><li><a href="courses.html#web-development"><i class="fas fa-chevron-right"></i> Web Development</a></li><li><a href="courses.html#cybersecurity"><i class="fas fa-chevron-right"></i> Cybersecurity</a></li><li><a href="courses.html#digital-marketing"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li><li><a href="courses.html#ai-ml"><i class="fas fa-chevron-right"></i> AI &amp; Machine Learning</a></li><li><a href="courses.html#uiux-design"><i class="fas fa-chevron-right"></i> UI/UX Design</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li><li><a href="#values"><i class="fas fa-chevron-right"></i> Our Values</a></li><li><a href="#how"><i class="fas fa-chevron-right"></i> How We Work</a></li><li><a href="#blog"><i class="fas fa-chevron-right"></i> Blog</a></li><li><a href="contact_us.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fas fa-map-marker-alt"></i> Garden Estate, Nairobi</a></li><li><a href="tel:+254748800500"><i class="fas fa-phone-alt"></i> +254 748-800-500</a></li><li><a href="mailto:info@techsphereademy.com"><i class="fas fa-envelope"></i> info@techsphereademy.com</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 <span>Techsphere Digital Skills Academy</span>. All rights reserved. Excellence in every engagement.</p>
+      <p><a href="#" style="color:rgba(255,255,255,.4); text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp; <a href="#" style="color:rgba(255,255,255,.4); text-decoration:none;">Terms of Service</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+
+<script src="script.js"></script>
+</body>
+</html>
