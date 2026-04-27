@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import DashboardSidebar from '../components/DashboardSidebar';
-import DashboardNavbar  from '../components/DashboardNavbar';
+import DashboardSidebar   from '../components/DashboardSidebar';
+import DashboardNavbar    from '../components/DashboardNavbar';
+import RichTextEditor     from '../components/RichTextEditor';
 
 const TYPE_ICON  = { text: 'fas fa-file-alt', video: 'fas fa-play-circle', mixed: 'fas fa-layer-group' };
 const TYPE_COLOR = { text: '#2563eb', video: '#7c3aed', mixed: '#0d9488' };
@@ -147,8 +148,15 @@ function LessonModal({ mode, lesson, courseId, module, token, onSaved, onClose }
                         )}
                         {(form.type === 'text' || form.type === 'mixed') && (
                             <div>
-                                <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}>Lesson Content <span style={{ color: '#9ca3af', fontWeight: 400 }}>(HTML supported)</span></label>
-                                <textarea name="content" value={form.content ?? ''} onChange={handle} rows={10} placeholder="Write your lesson content here." style={{ ...inp, fontFamily: 'monospace', resize: 'vertical', lineHeight: 1.6 }} />
+                                <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 8 }}>
+                                    Lesson Content
+                                </label>
+                                <RichTextEditor
+                                    value={form.content ?? ''}
+                                    onChange={html => setForm(f => ({ ...f, content: html }))}
+                                    placeholder="Write your lesson content here. You can paste images directly!"
+                                    minHeight={240}
+                                />
                             </div>
                         )}
                     </div>
@@ -335,7 +343,7 @@ function ExamModal({ lesson, token, onClose }) {
                                             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
                                                 <span style={{ width: 24, height: 24, borderRadius: 7, background: '#e0e7ff', color: '#4f46e5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '.72rem', fontWeight: 800, flexShrink: 0, marginTop: 1 }}>{qi + 1}</span>
                                                 <div style={{ flex: 1, minWidth: 0 }}>
-                                                    <p style={{ margin: '0 0 8px', fontWeight: 600, color: '#1e1b4b', fontSize: '.87rem', lineHeight: 1.4 }}>{q.question}</p>
+                                                    <div className="exam-q-render" dangerouslySetInnerHTML={{ __html: q.question }} style={{ margin: '0 0 8px', fontWeight: 600, color: '#1e1b4b', fontSize: '.87rem', lineHeight: 1.4 }} />
                                                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                                                         {q.options?.map(opt => (
                                                             <span key={opt.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 50, fontSize: '.72rem', fontWeight: 600, background: opt.is_correct ? '#f0fdf4' : '#f1f5f9', color: opt.is_correct ? '#16a34a' : '#6b7280', border: `1.5px solid ${opt.is_correct ? '#bbf7d0' : '#e2e8f0'}` }}>
@@ -406,8 +414,11 @@ function QuestionForm({ question, lessonId, token, onSaved, onCancel }) {
     const addOption    = () => setOptions(prev => prev.length < 6 ? [...prev, { option_text: '', is_correct: false }] : prev);
     const removeOption = i  => setOptions(prev => prev.length > 2 ? prev.filter((_, idx) => idx !== i) : prev);
 
+    const isEmptyHtml = html => html.replace(/<[^>]*>/g, '').trim() === '';
+
     const submit = async e => {
         e.preventDefault(); setError('');
+        if (isEmptyHtml(text)) { setError('Question text cannot be empty.'); return; }
         if (!options.some(o => o.is_correct)) { setError('Mark one option as correct.'); return; }
         if (options.some(o => !o.option_text.trim())) { setError('All options must have text.'); return; }
         setSaving(true);
@@ -429,9 +440,13 @@ function QuestionForm({ question, lessonId, token, onSaved, onCancel }) {
                 <i className="fas fa-pencil-alt" style={{ marginRight: 6 }}></i>{isEdit ? 'Edit Question' : 'New Question'}
             </p>
             <div style={{ marginBottom: 12 }}>
-                <label style={{ fontSize: '.78rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 4 }}>Question *</label>
-                <textarea value={text} onChange={e => setText(e.target.value)} required rows={2} placeholder="e.g. What does HTML stand for?"
-                    style={{ ...inp, borderColor: '#c7d2fe', resize: 'vertical', lineHeight: 1.5 }} />
+                <label style={{ fontSize: '.78rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Question *</label>
+                <RichTextEditor
+                    value={text}
+                    onChange={setText}
+                    placeholder="Type your question here. You can paste images directly!"
+                    minHeight={80}
+                />
             </div>
             <div style={{ marginBottom: 10 }}>
                 <label style={{ fontSize: '.78rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Answer Options <span style={{ color: '#9ca3af', fontWeight: 400 }}>(select the correct one)</span></label>

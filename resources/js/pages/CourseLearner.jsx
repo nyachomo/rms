@@ -101,8 +101,11 @@ function ExamModal({ lesson, token, onPassed, onClose }) {
                                 {result.results.map((r, i) => (
                                     <div key={r.question_id} style={{ background: r.is_correct ? '#f0fdf4' : '#fff5f5', border: `1.5px solid ${r.is_correct ? '#bbf7d0' : '#fca5a5'}`, borderRadius: 10, padding: '12px 14px' }}>
                                         <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 6 }}>
-                                            <i className={`fas fa-${r.is_correct ? 'check-circle' : 'times-circle'}`} style={{ color: r.is_correct ? '#16a34a' : '#dc2626', marginTop: 2, flexShrink: 0 }}></i>
-                                            <span style={{ fontSize: '.85rem', fontWeight: 600, color: '#374151' }}>Q{i + 1}. {r.question}</span>
+                                            <i className={`fas fa-${r.is_correct ? 'check-circle' : 'times-circle'}`} style={{ color: r.is_correct ? '#16a34a' : '#dc2626', marginTop: 3, flexShrink: 0 }}></i>
+                                            <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start', flex: 1 }}>
+                                                <span style={{ fontSize: '.8rem', fontWeight: 800, color: '#64748b', flexShrink: 0, marginTop: 2 }}>Q{i + 1}.</span>
+                                                <div className="exam-q-render" dangerouslySetInnerHTML={{ __html: r.question }} style={{ flex: 1, fontSize: '.85rem', fontWeight: 600, color: '#374151', lineHeight: 1.5 }} />
+                                            </div>
                                         </div>
                                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, paddingLeft: 22 }}>
                                             {r.options?.map(opt => {
@@ -137,10 +140,10 @@ function ExamModal({ lesson, token, onPassed, onClose }) {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                                 {examData?.questions?.map((q, qi) => (
                                     <div key={q.id} style={{ background: '#f8fafc', border: `1.5px solid ${answers[q.id] ? '#c7d2fe' : '#e2e8f0'}`, borderRadius: 12, padding: '14px 16px', transition: 'border-color .2s' }}>
-                                        <p style={{ margin: '0 0 12px', fontWeight: 600, color: '#1e1b4b', fontSize: '.87rem', lineHeight: 1.5 }}>
-                                            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 22, height: 22, borderRadius: 6, background: '#e0e7ff', color: '#4f46e5', fontSize: '.7rem', fontWeight: 800, marginRight: 8, verticalAlign: 'middle', flexShrink: 0 }}>{qi + 1}</span>
-                                            {q.question}
-                                        </p>
+                                        <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 12 }}>
+                                            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 22, height: 22, borderRadius: 6, background: '#e0e7ff', color: '#4f46e5', fontSize: '.7rem', fontWeight: 800, flexShrink: 0, marginTop: 2 }}>{qi + 1}</span>
+                                            <div className="exam-q-render" dangerouslySetInnerHTML={{ __html: q.question }} style={{ flex: 1, fontWeight: 600, color: '#1e1b4b', fontSize: '.87rem', lineHeight: 1.5 }} />
+                                        </div>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                             {q.options?.map(opt => {
                                                 const selected = answers[q.id] === opt.id;
