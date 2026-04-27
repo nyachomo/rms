@@ -7,6 +7,8 @@ import DashboardNavbar  from '../components/DashboardNavbar';
 const TYPE_ICON  = { text: 'fas fa-file-alt', video: 'fas fa-play-circle', mixed: 'fas fa-layer-group' };
 const TYPE_COLOR = { text: '#2563eb', video: '#7c3aed', mixed: '#0d9488' };
 
+const inp = { width: '100%', padding: '9px 12px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: '.85rem', fontFamily: 'Poppins,sans-serif', outline: 'none', boxSizing: 'border-box' };
+
 /* ── Module Modal ── */
 function ModuleModal({ mode, module, courseId, token, onSaved, onClose }) {
     const [form, setForm]     = useState(mode === 'edit'
@@ -48,19 +50,16 @@ function ModuleModal({ mode, module, courseId, token, onSaved, onClose }) {
                 <form onSubmit={submit} style={{ padding: '22px 24px' }}>
                     <div style={{ marginBottom: 14 }}>
                         <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}>Module Title *</label>
-                        <input name="title" value={form.title} onChange={handle} required placeholder="e.g. HTML Fundamentals"
-                            style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: '.87rem', fontFamily: 'Poppins,sans-serif', outline: 'none', boxSizing: 'border-box' }} />
+                        <input name="title" value={form.title} onChange={handle} required placeholder="e.g. HTML Fundamentals" style={inp} />
                         {errors.title && <span style={{ color: '#dc2626', fontSize: '.76rem' }}>{errors.title[0]}</span>}
                     </div>
                     <div style={{ marginBottom: 14 }}>
                         <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}>Description</label>
-                        <textarea name="description" value={form.description} onChange={handle} rows={2} placeholder="Short description of what this module covers"
-                            style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: '.87rem', fontFamily: 'Poppins,sans-serif', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }} />
+                        <textarea name="description" value={form.description} onChange={handle} rows={2} placeholder="Short description" style={{ ...inp, resize: 'vertical' }} />
                     </div>
                     <div style={{ marginBottom: 20 }}>
                         <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}>Status</label>
-                        <select name="status" value={form.status} onChange={handle}
-                            style={{ width: '100%', padding: '9px 12px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: '.87rem', fontFamily: 'Poppins,sans-serif', outline: 'none' }}>
+                        <select name="status" value={form.status} onChange={handle} style={inp}>
                             <option value="active">Active</option>
                             <option value="draft">Draft</option>
                         </select>
@@ -110,23 +109,17 @@ function LessonModal({ mode, lesson, courseId, module, token, onSaved, onClose }
                             <i className={TYPE_ICON[form.type] ?? 'fas fa-book'}></i>
                         </div>
                         <div>
-                            <p style={{ margin: 0, fontSize: '.68rem', color: 'rgba(255,255,255,.4)', textTransform: 'uppercase', letterSpacing: '.1em' }}>
-                                {mode === 'edit' ? 'Edit Lesson' : 'New Lesson'} — {module.title}
-                            </p>
-                            <h3 style={{ margin: 0, color: '#fff', fontFamily: 'Poppins,sans-serif', fontSize: '.95rem', fontWeight: 700 }}>
-                                {mode === 'edit' ? lesson.title : 'Add Lesson'}
-                            </h3>
+                            <p style={{ margin: 0, fontSize: '.68rem', color: 'rgba(255,255,255,.4)', textTransform: 'uppercase', letterSpacing: '.1em' }}>{mode === 'edit' ? 'Edit Lesson' : 'New Lesson'} — {module.title}</p>
+                            <h3 style={{ margin: 0, color: '#fff', fontFamily: 'Poppins,sans-serif', fontSize: '.95rem', fontWeight: 700 }}>{mode === 'edit' ? lesson.title : 'Add Lesson'}</h3>
                         </div>
                     </div>
                     <button onClick={onClose} style={{ background: 'rgba(255,255,255,.12)', border: 'none', color: '#fff', width: 30, height: 30, borderRadius: 8, cursor: 'pointer', fontSize: '.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><i className="fas fa-times"></i></button>
                 </div>
-
                 <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
                     <div style={{ padding: '20px 24px', overflowY: 'auto', flex: 1 }}>
                         <div style={{ marginBottom: 14 }}>
                             <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}>Lesson Title *</label>
-                            <input name="title" value={form.title} onChange={handle} required placeholder="e.g. Introduction to HTML"
-                                style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: '.87rem', fontFamily: 'Poppins,sans-serif', outline: 'none', boxSizing: 'border-box' }} />
+                            <input name="title" value={form.title} onChange={handle} required placeholder="e.g. Introduction to HTML" style={inp} />
                             {errors.title && <span style={{ color: '#dc2626', fontSize: '.76rem' }}>{errors.title[0]}</span>}
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 12, marginBottom: 14 }}>
@@ -139,32 +132,23 @@ function LessonModal({ mode, lesson, courseId, module, token, onSaved, onClose }
                                 <div key={f.name}>
                                     <label style={{ fontSize: '.78rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}>{f.label}</label>
                                     {f.as === 'select'
-                                        ? <select name={f.name} value={form[f.name]} onChange={handle} style={{ width: '100%', padding: '9px 10px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: '.85rem', fontFamily: 'Poppins,sans-serif', outline: 'none', boxSizing: 'border-box' }}>
-                                            {f.opts.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-                                          </select>
-                                        : <input name={f.name} type={f.type} value={form[f.name] ?? 0} onChange={handle} style={{ width: '100%', padding: '9px 10px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: '.85rem', fontFamily: 'Poppins,sans-serif', outline: 'none', boxSizing: 'border-box' }} />
+                                        ? <select name={f.name} value={form[f.name]} onChange={handle} style={inp}>{f.opts.map(([v, l]) => <option key={v} value={v}>{l}</option>)}</select>
+                                        : <input name={f.name} type={f.type} value={form[f.name] ?? 0} onChange={handle} style={inp} />
                                     }
                                 </div>
                             ))}
                         </div>
                         {(form.type === 'video' || form.type === 'mixed') && (
                             <div style={{ marginBottom: 14 }}>
-                                <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}>
-                                    <i className="fab fa-youtube" style={{ color: '#dc2626', marginRight: 6 }}></i>Video URL (YouTube / Vimeo)
-                                </label>
-                                <input name="video_url" value={form.video_url ?? ''} onChange={handle} placeholder="https://www.youtube.com/watch?v=..."
-                                    style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: '.87rem', fontFamily: 'Poppins,sans-serif', outline: 'none', boxSizing: 'border-box' }} />
+                                <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}><i className="fab fa-youtube" style={{ color: '#dc2626', marginRight: 6 }}></i>Video URL (YouTube / Vimeo)</label>
+                                <input name="video_url" value={form.video_url ?? ''} onChange={handle} placeholder="https://www.youtube.com/watch?v=..." style={inp} />
                                 {errors.video_url && <span style={{ color: '#dc2626', fontSize: '.76rem' }}>{errors.video_url[0]}</span>}
                             </div>
                         )}
                         {(form.type === 'text' || form.type === 'mixed') && (
                             <div>
-                                <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}>
-                                    Lesson Content <span style={{ color: '#9ca3af', fontWeight: 400 }}>(HTML supported)</span>
-                                </label>
-                                <textarea name="content" value={form.content ?? ''} onChange={handle} rows={10}
-                                    placeholder="Write your lesson content here. Basic HTML tags are supported."
-                                    style={{ width: '100%', padding: '10px 14px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: '.85rem', fontFamily: 'monospace', outline: 'none', resize: 'vertical', boxSizing: 'border-box', lineHeight: 1.6 }} />
+                                <label style={{ fontSize: '.8rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 5 }}>Lesson Content <span style={{ color: '#9ca3af', fontWeight: 400 }}>(HTML supported)</span></label>
+                                <textarea name="content" value={form.content ?? ''} onChange={handle} rows={10} placeholder="Write your lesson content here." style={{ ...inp, fontFamily: 'monospace', resize: 'vertical', lineHeight: 1.6 }} />
                             </div>
                         )}
                     </div>
@@ -180,6 +164,308 @@ function LessonModal({ mode, lesson, courseId, module, token, onSaved, onClose }
     );
 }
 
+/* ── Exam Modal ── */
+function ExamModal({ lesson, token, onClose }) {
+    const [passMark,   setPassMark]   = useState('');
+    const [savedMark,  setSavedMark]  = useState('');   // tracks what's persisted
+    const [questions,  setQuestions]  = useState([]);
+    const [loading,    setLoading]    = useState(true);
+    const [savingPM,   setSavingPM]   = useState(false);
+    const [pmSaved,    setPmSaved]    = useState(false);
+    const [editingQ,   setEditingQ]   = useState(null);
+    const [delQId,     setDelQId]     = useState(null);
+    const [deleting,   setDeleting]   = useState(false);
+
+    useEffect(() => {
+        fetch(`/api/admin/lessons/${lesson.id}/exam`, { headers: { Authorization: `Bearer ${token}` } })
+            .then(r => r.json())
+            .then(d => {
+                const pm = d.pass_mark ?? '';
+                setPassMark(pm);
+                setSavedMark(String(pm));
+                setQuestions(d.questions ?? []);
+            })
+            .finally(() => setLoading(false));
+    }, [lesson.id]);
+
+    const savePassMark = async (value) => {
+        const val = value !== undefined ? value : passMark;
+        setSavingPM(true); setPmSaved(false);
+        await fetch(`/api/admin/lessons/${lesson.id}/exam/settings`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+            body: JSON.stringify({ pass_mark: val === '' ? null : Number(val) }),
+        });
+        setSavedMark(String(val));
+        setSavingPM(false); setPmSaved(true);
+        setTimeout(() => setPmSaved(false), 2500);
+    };
+
+    // Auto-save when input loses focus and value changed
+    const handlePassMarkBlur = () => {
+        if (String(passMark) !== savedMark) savePassMark(passMark);
+    };
+
+    // Save pass mark on close if it changed
+    const handleClose = async () => {
+        if (String(passMark) !== savedMark) await savePassMark(passMark);
+        onClose();
+    };
+
+    const onQuestionSaved = (q, isNew) => {
+        setQuestions(prev => isNew ? [...prev, q] : prev.map(x => x.id === q.id ? q : x));
+        setEditingQ(null);
+    };
+
+    const confirmDeleteQ = async () => {
+        setDeleting(true);
+        await fetch(`/api/admin/lessons/${lesson.id}/exam/questions/${delQId}`, {
+            method: 'DELETE', headers: { Authorization: `Bearer ${token}` },
+        });
+        setQuestions(prev => prev.filter(q => q.id !== delQId));
+        setDelQId(null); setDeleting(false);
+    };
+
+    const examActive = passMark !== '' && Number(passMark) >= 1;
+    const hasUnsaved = String(passMark) !== savedMark;
+
+    return (
+        <div className="modal-overlay" onClick={e => e.target === e.currentTarget && handleClose()}>
+            <div className="modal-box" style={{ maxWidth: 760, borderRadius: 16, overflow: 'hidden', display: 'flex', flexDirection: 'column', maxHeight: '94vh' }}>
+
+                {/* Header */}
+                <div style={{ background: 'linear-gradient(135deg,#0f766e,#0d9488)', padding: '18px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                        <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(255,255,255,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '.95rem' }}>
+                            <i className="fas fa-clipboard-list"></i>
+                        </div>
+                        <div>
+                            <p style={{ margin: 0, fontSize: '.68rem', color: 'rgba(255,255,255,.6)', textTransform: 'uppercase', letterSpacing: '.1em' }}>Exam Manager</p>
+                            <h3 style={{ margin: 0, color: '#fff', fontFamily: 'Poppins,sans-serif', fontSize: '.95rem', fontWeight: 700 }}>{lesson.title}</h3>
+                        </div>
+                    </div>
+                    <button onClick={handleClose} style={{ background: 'rgba(255,255,255,.15)', border: 'none', color: '#fff', width: 30, height: 30, borderRadius: 8, cursor: 'pointer', fontSize: '.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><i className="fas fa-times"></i></button>
+                </div>
+
+                <div style={{ flex: 1, overflowY: 'auto', padding: '22px 24px' }}>
+                    {loading ? (
+                        <div style={{ textAlign: 'center', padding: '40px 0', color: '#9ca3af' }}><i className="fas fa-spinner fa-spin" style={{ fontSize: '1.5rem' }}></i></div>
+                    ) : (
+                        <>
+                            {/* Warning: questions exist but no pass mark */}
+                            {questions.length > 0 && !examActive && (
+                                <div style={{ background: '#fff7ed', border: '1.5px solid #fed7aa', borderRadius: 10, padding: '12px 16px', marginBottom: 16, display: 'flex', gap: 10, alignItems: 'center' }}>
+                                    <i className="fas fa-exclamation-triangle" style={{ color: '#ea580c', flexShrink: 0 }}></i>
+                                    <span style={{ fontSize: '.82rem', color: '#7c2d12' }}>
+                                        <strong>Exam not active.</strong> You have {questions.length} question{questions.length > 1 ? 's' : ''} but no pass mark is set. Enter a pass mark below to activate the exam for students.
+                                    </span>
+                                </div>
+                            )}
+
+                            {/* Pass Mark */}
+                            <div style={{ background: examActive ? '#f0fdf4' : '#f8fafc', border: `1.5px solid ${examActive ? '#bbf7d0' : '#e2e8f0'}`, borderRadius: 12, padding: '16px 18px', marginBottom: 22, transition: 'all .2s' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+                                    <i className="fas fa-bullseye" style={{ color: examActive ? '#16a34a' : '#9ca3af' }}></i>
+                                    <span style={{ fontWeight: 700, color: examActive ? '#166534' : '#374151', fontSize: '.88rem', fontFamily: 'Poppins,sans-serif' }}>Pass Mark</span>
+                                    <span style={{ fontSize: '.75rem', color: '#6b7280', marginLeft: 4 }}>— minimum % students must score to pass (leave blank to disable exam)</span>
+                                </div>
+                                <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                                    <input
+                                        type="number" min="1" max="100"
+                                        value={passMark}
+                                        onChange={e => { setPassMark(e.target.value); setPmSaved(false); }}
+                                        onBlur={handlePassMarkBlur}
+                                        placeholder="e.g. 70"
+                                        style={{ ...inp, width: 120, borderColor: examActive ? '#86efac' : hasUnsaved ? '#fde68a' : '#e2e8f0', background: examActive ? '#fff' : hasUnsaved ? '#fffbeb' : '#fff' }}
+                                    />
+                                    <span style={{ fontSize: '.85rem', color: '#374151' }}>%</span>
+                                    <button onClick={() => savePassMark(passMark)} disabled={savingPM}
+                                        style={{ padding: '8px 18px', borderRadius: 9, border: 'none', background: pmSaved ? '#16a34a' : '#0f766e', color: '#fff', cursor: savingPM ? 'not-allowed' : 'pointer', opacity: savingPM ? .7 : 1, fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '.83rem', display: 'flex', alignItems: 'center', gap: 6, transition: 'background .2s' }}>
+                                        {savingPM ? <><i className="fas fa-spinner fa-spin"></i> Saving…</> : pmSaved ? <><i className="fas fa-check"></i> Saved!</> : <><i className="fas fa-save"></i> Save</>}
+                                    </button>
+                                    {examActive && !hasUnsaved && !savingPM && (
+                                        <span style={{ fontSize: '.75rem', color: '#16a34a', display: 'flex', alignItems: 'center', gap: 4 }}>
+                                            <i className="fas fa-check-circle"></i> Exam active at {savedMark}%
+                                        </span>
+                                    )}
+                                    {hasUnsaved && !savingPM && (
+                                        <span style={{ fontSize: '.75rem', color: '#d97706', display: 'flex', alignItems: 'center', gap: 4 }}>
+                                            <i className="fas fa-circle" style={{ fontSize: '.5rem' }}></i> Unsaved — click Save or click away
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Questions */}
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                    <i className="fas fa-question-circle" style={{ color: '#6366f1' }}></i>
+                                    <span style={{ fontWeight: 700, color: '#1e1b4b', fontSize: '.88rem', fontFamily: 'Poppins,sans-serif' }}>Questions</span>
+                                    <span style={{ background: '#e0e7ff', color: '#4f46e5', borderRadius: 50, padding: '2px 9px', fontSize: '.72rem', fontWeight: 700 }}>{questions.length}</span>
+                                </div>
+                                {editingQ === null && (
+                                    <button onClick={() => setEditingQ('new')}
+                                        style={{ padding: '7px 15px', borderRadius: 9, border: 'none', background: 'linear-gradient(135deg,#6366f1,#4f46e5)', color: '#fff', cursor: 'pointer', fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '.8rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+                                        <i className="fas fa-plus"></i> Add Question
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* Question form (inline) */}
+                            {editingQ !== null && (
+                                <QuestionForm
+                                    question={editingQ === 'new' ? null : editingQ}
+                                    lessonId={lesson.id}
+                                    token={token}
+                                    onSaved={onQuestionSaved}
+                                    onCancel={() => setEditingQ(null)}
+                                />
+                            )}
+
+                            {/* Questions list */}
+                            {questions.length === 0 && editingQ === null ? (
+                                <div style={{ background: '#f8fafc', border: '1.5px dashed #e2e8f0', borderRadius: 12, padding: '32px 20px', textAlign: 'center', color: '#9ca3af' }}>
+                                    <i className="fas fa-question" style={{ fontSize: '1.8rem', marginBottom: 8, display: 'block', opacity: .2 }}></i>
+                                    <p style={{ margin: 0, fontWeight: 600, color: '#6b7280', fontSize: '.87rem' }}>No questions yet — click "Add Question" to create the first one.</p>
+                                </div>
+                            ) : (
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                                    {questions.map((q, qi) => (
+                                        <div key={q.id} style={{ background: '#f8fafc', border: '1.5px solid #e8edf5', borderRadius: 12, padding: '14px 16px' }}>
+                                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                                                <span style={{ width: 24, height: 24, borderRadius: 7, background: '#e0e7ff', color: '#4f46e5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '.72rem', fontWeight: 800, flexShrink: 0, marginTop: 1 }}>{qi + 1}</span>
+                                                <div style={{ flex: 1, minWidth: 0 }}>
+                                                    <p style={{ margin: '0 0 8px', fontWeight: 600, color: '#1e1b4b', fontSize: '.87rem', lineHeight: 1.4 }}>{q.question}</p>
+                                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                                                        {q.options?.map(opt => (
+                                                            <span key={opt.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 50, fontSize: '.72rem', fontWeight: 600, background: opt.is_correct ? '#f0fdf4' : '#f1f5f9', color: opt.is_correct ? '#16a34a' : '#6b7280', border: `1.5px solid ${opt.is_correct ? '#bbf7d0' : '#e2e8f0'}` }}>
+                                                                {opt.is_correct && <i className="fas fa-check" style={{ fontSize: '.6rem' }}></i>}
+                                                                {opt.option_text}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                                <div style={{ display: 'flex', gap: 5, flexShrink: 0 }}>
+                                                    <button onClick={() => setEditingQ(q)} title="Edit"
+                                                        style={{ width: 28, height: 28, borderRadius: 7, border: '1.5px solid #e2e8f0', background: '#f8fafc', color: '#374151', cursor: 'pointer', fontSize: '.73rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                        <i className="fas fa-pen"></i>
+                                                    </button>
+                                                    <button onClick={() => setDelQId(q.id)} title="Delete"
+                                                        style={{ width: 28, height: 28, borderRadius: 7, border: '1.5px solid #fee2e2', background: '#fff5f5', color: '#dc2626', cursor: 'pointer', fontSize: '.73rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                        <i className="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+
+                            {/* Delete question confirm */}
+                            {delQId && (
+                                <div style={{ marginTop: 14, background: '#fff5f5', border: '1.5px solid #fee2e2', borderRadius: 12, padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
+                                    <i className="fas fa-exclamation-triangle" style={{ color: '#dc2626' }}></i>
+                                    <span style={{ flex: 1, fontSize: '.85rem', color: '#374151' }}>Delete this question?</span>
+                                    <button onClick={() => setDelQId(null)} style={{ padding: '6px 14px', borderRadius: 8, border: '1.5px solid #e2e8f0', background: '#fff', color: '#374151', cursor: 'pointer', fontFamily: 'Poppins,sans-serif', fontSize: '.82rem' }}>Cancel</button>
+                                    <button onClick={confirmDeleteQ} disabled={deleting} style={{ padding: '6px 14px', borderRadius: 8, border: 'none', background: '#dc2626', color: '#fff', cursor: deleting ? 'not-allowed' : 'pointer', fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '.82rem', display: 'flex', alignItems: 'center', gap: 5 }}>
+                                        {deleting ? <><i className="fas fa-spinner fa-spin"></i></> : <><i className="fas fa-trash"></i> Delete</>}
+                                    </button>
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
+
+                <div style={{ padding: '12px 24px', borderTop: '1px solid #f1f5f9', background: '#fafbfc', display: 'flex', justifyContent: 'flex-end', flexShrink: 0 }}>
+                    <button onClick={onClose} style={{ padding: '9px 22px', borderRadius: 9, border: '1.5px solid #e2e8f0', background: '#fff', color: '#374151', cursor: 'pointer', fontFamily: 'Poppins,sans-serif', fontWeight: 600, fontSize: '.86rem' }}>Close</button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+/* ── Question Form (inline inside ExamModal) ── */
+function QuestionForm({ question, lessonId, token, onSaved, onCancel }) {
+    const isEdit = Boolean(question);
+    const [text, setText] = useState(question?.question ?? '');
+    const [options, setOptions] = useState(
+        question?.options?.length
+            ? question.options.map(o => ({ option_text: o.option_text, is_correct: o.is_correct }))
+            : [{ option_text: '', is_correct: true }, { option_text: '', is_correct: false }]
+    );
+    const [saving, setSaving] = useState(false);
+    const [error,  setError]  = useState('');
+
+    const setOption = (i, field, val) =>
+        setOptions(prev => prev.map((o, idx) =>
+            idx === i
+                ? { ...o, [field]: field === 'is_correct' ? true : val }
+                : field === 'is_correct' ? { ...o, is_correct: false } : o
+        ));
+
+    const addOption    = () => setOptions(prev => prev.length < 6 ? [...prev, { option_text: '', is_correct: false }] : prev);
+    const removeOption = i  => setOptions(prev => prev.length > 2 ? prev.filter((_, idx) => idx !== i) : prev);
+
+    const submit = async e => {
+        e.preventDefault(); setError('');
+        if (!options.some(o => o.is_correct)) { setError('Mark one option as correct.'); return; }
+        if (options.some(o => !o.option_text.trim())) { setError('All options must have text.'); return; }
+        setSaving(true);
+        const url  = isEdit
+            ? `/api/admin/lessons/${lessonId}/exam/questions/${question.id}`
+            : `/api/admin/lessons/${lessonId}/exam/questions`;
+        const meth = isEdit ? 'PUT' : 'POST';
+        try {
+            const res  = await fetch(url, { method: meth, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify({ question: text, options }) });
+            const data = await res.json();
+            if (!res.ok) { setError(data.message ?? 'Error saving question.'); return; }
+            onSaved(data.question, !isEdit);
+        } finally { setSaving(false); }
+    };
+
+    return (
+        <form onSubmit={submit} style={{ background: '#f0f0ff', border: '1.5px solid #c7d2fe', borderRadius: 12, padding: '16px 18px', marginBottom: 14 }}>
+            <p style={{ margin: '0 0 10px', fontWeight: 700, color: '#3730a3', fontSize: '.83rem', fontFamily: 'Poppins,sans-serif' }}>
+                <i className="fas fa-pencil-alt" style={{ marginRight: 6 }}></i>{isEdit ? 'Edit Question' : 'New Question'}
+            </p>
+            <div style={{ marginBottom: 12 }}>
+                <label style={{ fontSize: '.78rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 4 }}>Question *</label>
+                <textarea value={text} onChange={e => setText(e.target.value)} required rows={2} placeholder="e.g. What does HTML stand for?"
+                    style={{ ...inp, borderColor: '#c7d2fe', resize: 'vertical', lineHeight: 1.5 }} />
+            </div>
+            <div style={{ marginBottom: 10 }}>
+                <label style={{ fontSize: '.78rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>Answer Options <span style={{ color: '#9ca3af', fontWeight: 400 }}>(select the correct one)</span></label>
+                {options.map((opt, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 7 }}>
+                        <input type="radio" name="correct" checked={opt.is_correct} onChange={() => setOption(i, 'is_correct', true)}
+                            style={{ accentColor: '#16a34a', width: 16, height: 16, flexShrink: 0, cursor: 'pointer' }} title="Mark as correct" />
+                        <input value={opt.option_text} onChange={e => setOption(i, 'option_text', e.target.value)}
+                            placeholder={`Option ${i + 1}`} required
+                            style={{ ...inp, flex: 1, borderColor: opt.is_correct ? '#86efac' : '#e2e8f0', background: opt.is_correct ? '#f0fdf4' : '#fff' }} />
+                        {options.length > 2 && (
+                            <button type="button" onClick={() => removeOption(i)} style={{ width: 26, height: 26, borderRadius: 6, border: '1.5px solid #fee2e2', background: '#fff5f5', color: '#dc2626', cursor: 'pointer', fontSize: '.7rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                <i className="fas fa-times"></i>
+                            </button>
+                        )}
+                    </div>
+                ))}
+                {options.length < 6 && (
+                    <button type="button" onClick={addOption} style={{ marginTop: 4, background: 'none', border: '1.5px dashed #c7d2fe', borderRadius: 8, color: '#6366f1', cursor: 'pointer', fontSize: '.78rem', fontFamily: 'Poppins,sans-serif', padding: '5px 12px', display: 'flex', alignItems: 'center', gap: 5 }}>
+                        <i className="fas fa-plus"></i> Add Option
+                    </button>
+                )}
+            </div>
+            {error && <p style={{ color: '#dc2626', fontSize: '.78rem', margin: '0 0 8px' }}><i className="fas fa-exclamation-circle" style={{ marginRight: 4 }}></i>{error}</p>}
+            <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
+                <button type="button" onClick={onCancel} style={{ padding: '7px 14px', borderRadius: 8, border: '1.5px solid #c7d2fe', background: '#fff', color: '#374151', cursor: 'pointer', fontFamily: 'Poppins,sans-serif', fontSize: '.82rem' }}>Cancel</button>
+                <button type="submit" disabled={saving} style={{ padding: '7px 16px', borderRadius: 8, border: 'none', background: 'linear-gradient(135deg,#6366f1,#4f46e5)', color: '#fff', cursor: saving ? 'not-allowed' : 'pointer', opacity: saving ? .7 : 1, fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '.82rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    {saving ? <><i className="fas fa-spinner fa-spin"></i> Saving…</> : <><i className="fas fa-save"></i> {isEdit ? 'Update' : 'Add Question'}</>}
+                </button>
+            </div>
+        </form>
+    );
+}
+
 /* ═══════════════════════════════ MAIN PAGE */
 export default function AdminCourseLessons() {
     const { courseId } = useParams();
@@ -188,10 +474,10 @@ export default function AdminCourseLessons() {
     const [course,  setCourse]  = useState(null);
     const [modules, setModules] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [expanded, setExpanded] = useState({});     // moduleId → bool
+    const [expanded, setExpanded] = useState({});
 
-    const [modal,    setModal]    = useState(null);   // { type:'addModule'|'editModule'|'addLesson'|'editLesson', module?, lesson? }
-    const [delTarget, setDel]     = useState(null);   // { kind:'module'|'lesson', item, moduleId? }
+    const [modal,    setModal]    = useState(null);
+    const [delTarget, setDel]     = useState(null);
     const [deleting,  setDeleting] = useState(false);
 
     const load = useCallback(async () => {
@@ -206,7 +492,6 @@ export default function AdminCourseLessons() {
             const found = (cData.data ?? []).find(c => String(c.id) === String(courseId));
             setCourse(found ?? null);
             setModules(mData);
-            // Expand all modules by default
             const exp = {};
             mData.forEach(m => { exp[m.id] = true; });
             setExpanded(exp);
@@ -215,19 +500,17 @@ export default function AdminCourseLessons() {
 
     useEffect(() => { load(); }, [load]);
 
-    /* Helpers */
     const totalLessons   = modules.reduce((s, m) => s + (m.lessons?.length ?? 0), 0);
     const totalPublished = modules.reduce((s, m) => s + (m.lessons?.filter(l => l.status === 'published').length ?? 0), 0);
     const totalMins      = modules.reduce((s, m) => s + (m.lessons?.reduce((ss, l) => ss + (l.duration_minutes || 0), 0) ?? 0), 0);
+    const totalExams     = modules.reduce((s, m) => s + (m.lessons?.filter(l => l.pass_mark != null).length ?? 0), 0);
 
-    /* Module callbacks */
     const onModuleSaved = (mod, mode) => {
         if (mode === 'edit') setModules(prev => prev.map(m => m.id === mod.id ? { ...m, ...mod } : m));
         else { setModules(prev => [...prev, { ...mod, lessons: [] }]); setExpanded(e => ({ ...e, [mod.id]: true })); }
         setModal(null);
     };
 
-    /* Lesson callbacks */
     const onLessonSaved = (lesson, moduleId, mode) => {
         setModules(prev => prev.map(m => {
             if (m.id !== moduleId) return m;
@@ -239,7 +522,6 @@ export default function AdminCourseLessons() {
         setModal(null);
     };
 
-    /* Delete */
     const confirmDelete = async () => {
         setDeleting(true);
         const { kind, item, moduleId } = delTarget;
@@ -252,6 +534,12 @@ export default function AdminCourseLessons() {
         setDel(null); setDeleting(false);
     };
 
+    // After exam modal closes, re-fetch to get updated pass_mark on lessons
+    const onExamClose = () => {
+        setModal(null);
+        load();
+    };
+
     return (
         <div className="db-wrap">
             <DashboardSidebar />
@@ -259,7 +547,7 @@ export default function AdminCourseLessons() {
                 <DashboardNavbar page="Course Modules & Lessons" />
                 <div className="db-content">
 
-                    {/* ── Header banner ── */}
+                    {/* Header banner */}
                     <div style={{ background: 'linear-gradient(135deg,#081f4e,#0d2d6b 60%,#1e1b4b)', borderRadius: 18, padding: '24px 28px', marginBottom: 24, position: 'relative', overflow: 'hidden' }}>
                         <div style={{ position: 'absolute', top: -30, right: 40, width: 160, height: 160, borderRadius: '50%', background: 'rgba(124,58,237,.12)', pointerEvents: 'none' }}></div>
                         <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap' }}>
@@ -277,10 +565,11 @@ export default function AdminCourseLessons() {
                             </div>
                             <div style={{ display: 'flex', gap: 9, alignItems: 'center', flexWrap: 'wrap' }}>
                                 {[
-                                    { icon: 'fa-layer-group', val: modules.length,  label: 'Modules',   bg: 'rgba(124,58,237,.2)', col: '#c4b5fd' },
-                                    { icon: 'fa-book',        val: totalLessons,    label: 'Lessons',   bg: 'rgba(255,255,255,.1)', col: '#fff' },
-                                    { icon: 'fa-check-circle',val: totalPublished,  label: 'Published', bg: 'rgba(16,185,129,.2)', col: '#6ee7b7' },
-                                    { icon: 'fa-clock',       val: `${totalMins}m`, label: 'Duration',  bg: 'rgba(254,115,12,.18)', col: '#fdba74' },
+                                    { icon: 'fa-layer-group',    val: modules.length,  label: 'Modules',   bg: 'rgba(124,58,237,.2)',  col: '#c4b5fd' },
+                                    { icon: 'fa-book',           val: totalLessons,    label: 'Lessons',   bg: 'rgba(255,255,255,.1)', col: '#fff' },
+                                    { icon: 'fa-check-circle',   val: totalPublished,  label: 'Published', bg: 'rgba(16,185,129,.2)',  col: '#6ee7b7' },
+                                    { icon: 'fa-clipboard-list', val: totalExams,      label: 'With Exam', bg: 'rgba(20,184,166,.2)',  col: '#5eead4' },
+                                    { icon: 'fa-clock',          val: `${totalMins}m`, label: 'Duration',  bg: 'rgba(254,115,12,.18)', col: '#fdba74' },
                                 ].map(s => (
                                     <div key={s.label} style={{ background: s.bg, borderRadius: 50, padding: '5px 13px', display: 'flex', alignItems: 'center', gap: 6 }}>
                                         <i className={`fas ${s.icon}`} style={{ color: s.col, fontSize: '.72rem' }}></i>
@@ -296,7 +585,7 @@ export default function AdminCourseLessons() {
                         </div>
                     </div>
 
-                    {/* ── Content ── */}
+                    {/* Content */}
                     {loading ? (
                         <div style={{ textAlign: 'center', padding: '60px 0', color: '#9ca3af' }}>
                             <i className="fas fa-spinner fa-spin" style={{ fontSize: '2rem', marginBottom: 12, display: 'block', color: '#7c3aed' }}></i>
@@ -321,18 +610,11 @@ export default function AdminCourseLessons() {
                                         {/* Module header */}
                                         <div style={{ padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12, background: '#f8f9fc', borderBottom: isOpen ? '1.5px solid #e8edf5' : 'none', cursor: 'pointer' }}
                                             onClick={() => setExpanded(e => ({ ...e, [mod.id]: !isOpen }))}>
-                                            <div style={{ width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '.8rem', fontWeight: 800, flexShrink: 0 }}>
-                                                {mi + 1}
-                                            </div>
+                                            <div style={{ width: 36, height: 36, borderRadius: 10, background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '.8rem', fontWeight: 800, flexShrink: 0 }}>{mi + 1}</div>
                                             <div style={{ flex: 1, minWidth: 0 }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                                     <span style={{ fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '.95rem', color: '#081f4e' }}>{mod.title}</span>
-                                                    <span style={{ fontSize: '.72rem', fontWeight: 700, padding: '2px 9px', borderRadius: 50,
-                                                        background: mod.status === 'active' ? '#f0fdf4' : '#fafafa',
-                                                        color: mod.status === 'active' ? '#16a34a' : '#9ca3af',
-                                                        border: `1.5px solid ${mod.status === 'active' ? '#bbf7d0' : '#e2e8f0'}` }}>
-                                                        {mod.status}
-                                                    </span>
+                                                    <span style={{ fontSize: '.72rem', fontWeight: 700, padding: '2px 9px', borderRadius: 50, background: mod.status === 'active' ? '#f0fdf4' : '#fafafa', color: mod.status === 'active' ? '#16a34a' : '#9ca3af', border: `1.5px solid ${mod.status === 'active' ? '#bbf7d0' : '#e2e8f0'}` }}>{mod.status}</span>
                                                 </div>
                                                 {mod.description && <p style={{ margin: '2px 0 0', fontSize: '.78rem', color: '#6b7280' }}>{mod.description}</p>}
                                             </div>
@@ -370,16 +652,17 @@ export default function AdminCourseLessons() {
                                                     </div>
                                                 ) : (
                                                     <>
-                                                        <div style={{ display: 'grid', gridTemplateColumns: '40px 1fr 110px 80px 80px 80px 100px', padding: '9px 20px', background: 'linear-gradient(90deg,#f8f9fc,#f1f5f9)', gap: 8, borderBottom: '1px solid #e8edf5' }}>
-                                                            {['#', 'Lesson Title', 'Type', 'Duration', 'Sort', 'Status', 'Actions'].map(h => (
+                                                        <div style={{ display: 'grid', gridTemplateColumns: '40px 1fr 110px 80px 70px 80px 90px 130px', padding: '9px 20px', background: 'linear-gradient(90deg,#f8f9fc,#f1f5f9)', gap: 8, borderBottom: '1px solid #e8edf5' }}>
+                                                            {['#', 'Lesson Title', 'Type', 'Duration', 'Sort', 'Status', 'Exam', 'Actions'].map(h => (
                                                                 <span key={h} style={{ fontSize: '.68rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '.07em' }}>{h}</span>
                                                             ))}
                                                         </div>
                                                         {mod.lessons.map((lesson, li) => {
                                                             const tc = TYPE_COLOR[lesson.type] ?? '#6b7280';
+                                                            const hasExam = lesson.pass_mark != null;
                                                             return (
                                                                 <div key={lesson.id}
-                                                                    style={{ display: 'grid', gridTemplateColumns: '40px 1fr 110px 80px 80px 80px 100px', padding: '12px 20px', gap: 8, alignItems: 'center', borderBottom: li < mod.lessons.length - 1 ? '1px solid #f1f5f9' : 'none', transition: 'background .15s' }}
+                                                                    style={{ display: 'grid', gridTemplateColumns: '40px 1fr 110px 80px 70px 80px 90px 130px', padding: '12px 20px', gap: 8, alignItems: 'center', borderBottom: li < mod.lessons.length - 1 ? '1px solid #f1f5f9' : 'none', transition: 'background .15s' }}
                                                                     onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
                                                                     onMouseLeave={e => e.currentTarget.style.background = ''}>
                                                                     <span style={{ width: 26, height: 26, borderRadius: 7, background: '#f1f5f9', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '.75rem', fontWeight: 700, color: '#6b7280' }}>{li + 1}</span>
@@ -392,13 +675,19 @@ export default function AdminCourseLessons() {
                                                                     </span>
                                                                     <span style={{ fontSize: '.82rem', color: '#6b7280' }}>{lesson.duration_minutes}m</span>
                                                                     <span style={{ fontSize: '.82rem', color: '#9ca3af' }}>#{lesson.sort_order}</span>
-                                                                    <span style={{ fontSize: '.73rem', fontWeight: 700, padding: '3px 9px', borderRadius: 50,
-                                                                        background: lesson.status === 'published' ? '#f0fdf4' : '#fafafa',
-                                                                        color:      lesson.status === 'published' ? '#16a34a' : '#9ca3af',
-                                                                        border:     `1.5px solid ${lesson.status === 'published' ? '#bbf7d0' : '#e2e8f0'}` }}>
+                                                                    <span style={{ fontSize: '.73rem', fontWeight: 700, padding: '3px 9px', borderRadius: 50, background: lesson.status === 'published' ? '#f0fdf4' : '#fafafa', color: lesson.status === 'published' ? '#16a34a' : '#9ca3af', border: `1.5px solid ${lesson.status === 'published' ? '#bbf7d0' : '#e2e8f0'}` }}>
                                                                         <i className={`fas fa-${lesson.status === 'published' ? 'eye' : 'eye-slash'}`} style={{ marginRight: 4, fontSize: '.65rem' }}></i>{lesson.status}
                                                                     </span>
+                                                                    {/* Exam badge */}
+                                                                    <span style={{ fontSize: '.72rem', fontWeight: 700, padding: '3px 9px', borderRadius: 50, background: hasExam ? '#f0fdfa' : '#fafafa', color: hasExam ? '#0f766e' : '#d1d5db', border: `1.5px solid ${hasExam ? '#99f6e4' : '#e2e8f0'}`, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                                                                        <i className={`fas ${hasExam ? 'fa-clipboard-check' : 'fa-clipboard'}`}></i>
+                                                                        {hasExam ? `${lesson.pass_mark}%` : 'None'}
+                                                                    </span>
                                                                     <div style={{ display: 'flex', gap: 5 }}>
+                                                                        <button onClick={() => setModal({ type: 'exam', lesson })} title="Manage Exam"
+                                                                            style={{ width: 28, height: 28, borderRadius: 7, border: `1.5px solid ${hasExam ? '#99f6e4' : '#e2e8f0'}`, background: hasExam ? '#f0fdfa' : '#f8fafc', color: hasExam ? '#0f766e' : '#374151', cursor: 'pointer', fontSize: '.73rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                                            <i className="fas fa-clipboard-list"></i>
+                                                                        </button>
                                                                         <button onClick={() => setModal({ type: 'editLesson', module: mod, lesson })} title="Edit"
                                                                             style={{ width: 28, height: 28, borderRadius: 7, border: '1.5px solid #e2e8f0', background: '#f8fafc', color: '#374151', cursor: 'pointer', fontSize: '.73rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                                             <i className="fas fa-pen"></i>
@@ -423,34 +712,22 @@ export default function AdminCourseLessons() {
                 </div>
             </div>
 
-            {/* Module modals */}
-            {modal?.type === 'addModule' && <ModuleModal mode="add" courseId={courseId} token={token} onSaved={onModuleSaved} onClose={() => setModal(null)} />}
+            {modal?.type === 'addModule'  && <ModuleModal mode="add" courseId={courseId} token={token} onSaved={onModuleSaved} onClose={() => setModal(null)} />}
             {modal?.type === 'editModule' && <ModuleModal mode="edit" module={modal.module} courseId={courseId} token={token} onSaved={onModuleSaved} onClose={() => setModal(null)} />}
-
-            {/* Lesson modals */}
             {modal?.type === 'addLesson'  && <LessonModal mode="add"  module={modal.module} courseId={courseId} token={token} onSaved={onLessonSaved} onClose={() => setModal(null)} />}
             {modal?.type === 'editLesson' && <LessonModal mode="edit" module={modal.module} lesson={modal.lesson} courseId={courseId} token={token} onSaved={onLessonSaved} onClose={() => setModal(null)} />}
+            {modal?.type === 'exam'       && <ExamModal lesson={modal.lesson} token={token} onClose={onExamClose} />}
 
-            {/* Delete confirm */}
             {delTarget && (
                 <div className="modal-overlay" onClick={e => e.target === e.currentTarget && setDel(null)}>
                     <div className="modal-box" style={{ maxWidth: 400, borderRadius: 16, overflow: 'hidden' }}>
                         <div style={{ background: 'linear-gradient(135deg,#dc2626,#b91c1c)', padding: '18px 22px', display: 'flex', alignItems: 'center', gap: 12 }}>
                             <div style={{ width: 38, height: 38, borderRadius: '50%', background: 'rgba(255,255,255,.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '.95rem' }}><i className="fas fa-trash"></i></div>
-                            <h3 style={{ margin: 0, color: '#fff', fontFamily: 'Poppins,sans-serif', fontSize: '.95rem', fontWeight: 700 }}>
-                                Delete {delTarget.kind === 'module' ? 'Module' : 'Lesson'}
-                            </h3>
+                            <h3 style={{ margin: 0, color: '#fff', fontFamily: 'Poppins,sans-serif', fontSize: '.95rem', fontWeight: 700 }}>Delete {delTarget.kind === 'module' ? 'Module' : 'Lesson'}</h3>
                         </div>
                         <div style={{ padding: '20px 22px' }}>
-                            <p style={{ color: '#374151', fontSize: '.9rem', marginBottom: 6 }}>
-                                Delete <strong>"{delTarget.item.title}"</strong>?
-                            </p>
-                            {delTarget.kind === 'module' && (
-                                <p style={{ color: '#dc2626', fontSize: '.83rem', marginBottom: 18 }}>
-                                    <i className="fas fa-exclamation-triangle" style={{ marginRight: 6 }}></i>
-                                    This will also delete all lessons inside this module.
-                                </p>
-                            )}
+                            <p style={{ color: '#374151', fontSize: '.9rem', marginBottom: 6 }}>Delete <strong>"{delTarget.item.title}"</strong>?</p>
+                            {delTarget.kind === 'module' && <p style={{ color: '#dc2626', fontSize: '.83rem', marginBottom: 18 }}><i className="fas fa-exclamation-triangle" style={{ marginRight: 6 }}></i>This will also delete all lessons inside this module.</p>}
                             <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
                                 <button onClick={() => setDel(null)} style={{ padding: '8px 16px', borderRadius: 9, border: '1.5px solid #e2e8f0', background: '#fff', color: '#374151', cursor: 'pointer', fontFamily: 'Poppins,sans-serif', fontWeight: 600, fontSize: '.85rem' }}>Cancel</button>
                                 <button onClick={confirmDelete} disabled={deleting} style={{ padding: '8px 18px', borderRadius: 9, border: 'none', background: 'linear-gradient(135deg,#dc2626,#b91c1c)', color: '#fff', cursor: deleting ? 'not-allowed' : 'pointer', opacity: deleting ? .7 : 1, fontFamily: 'Poppins,sans-serif', fontWeight: 700, fontSize: '.85rem', display: 'flex', alignItems: 'center', gap: 7 }}>

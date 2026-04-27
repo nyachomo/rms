@@ -23,6 +23,8 @@ use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\CourseLessonController;
 use App\Http\Controllers\CourseModuleController;
 use App\Http\Controllers\LearningController;
+use App\Http\Controllers\LessonExamController;
+use App\Http\Controllers\LessonExamAttemptController;
 
 // Public routes
 Route::post('/contact',           [ContactController::class, 'send']);
@@ -181,6 +183,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/learning/courses/{slug}',                           [LearningController::class, 'courseLessons']);
     Route::post('/learning/lessons/{lesson}/complete',               [LearningController::class, 'markComplete']);
     Route::delete('/learning/lessons/{lesson}/complete',             [LearningController::class, 'unmarkComplete']);
+    Route::get('/learning/lessons/{lesson}/exam',                    [LessonExamAttemptController::class, 'show']);
+    Route::post('/learning/lessons/{lesson}/exam/submit',            [LessonExamAttemptController::class, 'submit']);
+
+    // Lesson exam management (admin)
+    Route::get('/admin/lessons/{lesson}/exam',                       [LessonExamController::class, 'show']);
+    Route::put('/admin/lessons/{lesson}/exam/settings',              [LessonExamController::class, 'updateSettings']);
+    Route::post('/admin/lessons/{lesson}/exam/questions',            [LessonExamController::class, 'storeQuestion']);
+    Route::put('/admin/lessons/{lesson}/exam/questions/{question}',  [LessonExamController::class, 'updateQuestion']);
+    Route::delete('/admin/lessons/{lesson}/exam/questions/{question}',[LessonExamController::class, 'destroyQuestion']);
 
     // Intakes
     Route::get('/intakes',                          [IntakeController::class, 'index']);

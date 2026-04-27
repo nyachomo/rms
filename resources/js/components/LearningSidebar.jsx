@@ -1,9 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 
 const NAV = [
-    { icon: 'fa-book-open',   label: 'My Courses',     to: '/learn' },
-    { icon: 'fa-compass',     label: 'Browse Courses', to: '/courses' },
-    { icon: 'fa-user-circle', label: 'My Profile',     to: '/learn/profile' },
+    { icon: 'fa-book-open',   label: 'My Courses',      to: '/learn' },
+    { icon: 'fa-compass',     label: 'Browse Courses',  to: '/courses' },
+    { icon: 'fa-code',        label: 'Code Playground', to: '/learn/code-practice' },
+    { icon: 'fa-user-circle', label: 'My Profile',      to: '/learn/profile' },
 ];
 
 export default function LearningSidebar({ user, onLogout, collapsed = false, onToggle }) {
@@ -69,7 +70,7 @@ export default function LearningSidebar({ user, onLogout, collapsed = false, onT
 
                 {NAV.map(item => {
                     const isActive = item.to === '/learn'
-                        ? pathname === '/learn' || (pathname.startsWith('/learn/') && pathname !== '/learn/profile')
+                        ? pathname === '/learn' || (pathname.startsWith('/learn/') && pathname !== '/learn/profile' && pathname !== '/learn/code-practice')
                         : pathname === item.to;
                     return (
                         <Link key={item.to} to={item.to} title={collapsed ? item.label : undefined} style={{

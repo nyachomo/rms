@@ -8,7 +8,7 @@ class CourseLesson extends Model
 {
     protected $fillable = [
         'course_id', 'module_id', 'title', 'content', 'video_url',
-        'type', 'duration_minutes', 'sort_order', 'status',
+        'type', 'duration_minutes', 'sort_order', 'status', 'pass_mark',
     ];
 
     public function course()
@@ -24,5 +24,10 @@ class CourseLesson extends Model
     public function progress()
     {
         return $this->hasMany(StudentProgress::class, 'lesson_id');
+    }
+
+    public function examQuestions()
+    {
+        return $this->hasMany(LessonExamQuestion::class, 'lesson_id')->orderBy('sort_order');
     }
 }

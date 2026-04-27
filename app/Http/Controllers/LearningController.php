@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\CourseLesson;
 use App\Models\Enrollment;
+use App\Models\LessonExamAttempt;
+use App\Models\LessonExamQuestion;
 use App\Models\StudentProgress;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -67,16 +69,30 @@ class LearningController extends Controller
             ->where('status', 'active')
             ->orderBy('sort_order')
             ->with(['lessons' => fn($q) => $q->where('status', 'published')->orderBy('sort_order')
-                ->select('id', 'module_id', 'course_id', 'title', 'type', 'duration_minutes', 'sort_order', 'status', 'video_url', 'content')])
+                ->select('id', 'module_id', 'course_id', 'title', 'type', 'duration_minutes', 'sort_order', 'status', 'video_url', 'content', 'pass_mark')])
             ->get(['id', 'course_id', 'title', 'description', 'sort_order']);
 
-        // Collect all lesson IDs to fetch completed ones in one query
         $allLessonIds = $modules->flatMap(fn($m) => $m->lessons->pluck('id'));
 
+        // Completed lessons
         $completedIds = StudentProgress::where('user_id', $userId)
             ->whereIn('lesson_id', $allLessonIds)
             ->whereNotNull('completed_at')
             ->pluck('lesson_id')
+            ->toArray();
+
+        // Exam question counts per lesson
+        $examQuestionCounts = LessonExamQuestion::whereIn('lesson_id', $allLessonIds)
+            ->selectRaw('lesson_id, count(*) as cnt')
+            ->groupBy('lesson_id')
+            ->pluck('cnt', 'lesson_id');
+
+        // Lessons where this student has a passing attempt
+        $passedLessonIds = LessonExamAttempt::where('user_id', $userId)
+            ->whereIn('lesson_id', $allLessonIds)
+            ->where('passed', true)
+            ->pluck('lesson_id')
+            ->unique()
             ->toArray();
 
         $modules = $modules->map(fn($m) => [
@@ -84,7 +100,12 @@ class LearningController extends Controller
             'title'       => $m->title,
             'description' => $m->description,
             'sort_order'  => $m->sort_order,
-            'lessons'     => $m->lessons->map(fn($l) => array_merge($l->toArray(), ['completed' => in_array($l->id, $completedIds)])),
+            'lessons'     => $m->lessons->map(fn($l) => array_merge($l->toArray(), [
+                'completed'   => in_array($l->id, $completedIds),
+                // has_exam = pass_mark is set AND at least one question exists
+                'has_exam'    => !is_null($l->pass_mark) && ($examQuestionCounts[$l->id] ?? 0) > 0,
+                'exam_passed' => in_array($l->id, $passedLessonIds),
+            ])),
         ]);
 
         return response()->json([
@@ -93,10 +114,22 @@ class LearningController extends Controller
         ]);
     }
 
-    /** Mark a lesson complete */
+    /** Mark a lesson complete (manual, only allowed when no exam or exam is passed) */
     public function markComplete(CourseLesson $lesson): JsonResponse
     {
         $userId = Auth::id();
+
+        // Block manual completion if lesson has an exam the student hasn't passed yet
+        if (!is_null($lesson->pass_mark)) {
+            $passed = LessonExamAttempt::where('user_id', $userId)
+                ->where('lesson_id', $lesson->id)
+                ->where('passed', true)
+                ->exists();
+
+            if (!$passed) {
+                return response()->json(['message' => 'You must pass the lesson exam before marking it complete.'], 403);
+            }
+        }
 
         StudentProgress::updateOrCreate(
             ['user_id' => $userId, 'lesson_id' => $lesson->id],

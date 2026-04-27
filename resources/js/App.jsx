@@ -51,6 +51,7 @@ import AdminCourseLessons from './pages/AdminCourseLessons';
 import Learning from './pages/Learning';
 import CourseLearner from './pages/CourseLearner';
 import LearnerProfile from './pages/LearnerProfile';
+import CodePractice from './pages/CodePractice';
 
 import '../css/app.css';
 
@@ -98,6 +99,7 @@ function App() {
                     {/* Learning portal — student-facing, no public navbar */}
                     <Route path="/learn" element={<ProtectedRoute><Learning /></ProtectedRoute>} />
                     <Route path="/learn/profile" element={<ProtectedRoute><LearnerProfile /></ProtectedRoute>} />
+                    <Route path="/learn/code-practice" element={<ProtectedRoute><CodePractice /></ProtectedRoute>} />
                     <Route path="/learn/:courseSlug" element={<ProtectedRoute><CourseLearner /></ProtectedRoute>} />
 
                     {/* Public site — with navbar/footer */}
