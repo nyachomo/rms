@@ -1,3 +1,8 @@
+# Pass Authorization header through FastCGI/PHP-FPM (required on most cPanel hosts)
+<IfModule mod_setenvif.c>
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
@@ -5,7 +10,7 @@
 
     RewriteEngine On
 
-    # Handle Authorization Header
+    # Handle Authorization Header — fallback for mod_php setups
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
